@@ -1,12 +1,14 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Script from "next/script";
+import { CookieBanner } from "./cookie-banner";
 
 interface AnalyticsProviderProps {
   gaId?: string;
   gtmId?: string;
   metaPixelId?: string;
+  tiktokPixelId?: string;
+  linkedinInsightTagId?: string;
+  microsoftClarityId?: string;
   googleVerification?: string;
   bingVerification?: string;
   yandexVerification?: string;
@@ -20,6 +22,9 @@ export function AnalyticsProvider({
   gaId,
   gtmId,
   metaPixelId,
+  tiktokPixelId,
+  linkedinInsightTagId,
+  microsoftClarityId,
   googleVerification,
   bingVerification,
   yandexVerification,
@@ -28,54 +33,23 @@ export function AnalyticsProvider({
   customBodyScripts,
   cookieConsentEnabled = true,
 }: AnalyticsProviderProps) {
-  const [cookieAccepted, setCookieAccepted] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("nexus_cookie_consent");
-    if (saved) {
-      setCookieAccepted(saved === "accepted");
-    } else {
-      setCookieAccepted(false);
-    }
-  }, []);
-
-  const handleAccept = () => {
-    localStorage.setItem("nexus_cookie_consent", "accepted");
-    setCookieAccepted(true);
-  };
-
-  const handleReject = () => {
-    localStorage.setItem("nexus_cookie_consent", "rejected");
-    setCookieAccepted(false);
-  };
-
-  const activeGaId = gaId || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-  const activeGtmId = gtmId || process.env.NEXT_PUBLIC_GTM_ID;
-  const activeMetaPixelId = metaPixelId || process.env.NEXT_PUBLIC_META_PIXEL_ID;
-
   return (
     <>
       {/* Search Engine Site Verifications */}
-      {(googleVerification || process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION) && (
-        <meta
-          name="google-site-verification"
-          content={googleVerification || process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION}
-        />
+      {googleVerification && (
+        <meta name="google-site-verification" content={googleVerification} />
       )}
-      {(bingVerification || process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION) && (
-        <meta
-          name="msvalidate.01"
-          content={bingVerification || process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION}
-        />
+      {bingVerification && (
+        <meta name="msvalidate.01" content={bingVerification} />
       )}
       {yandexVerification && <meta name="yandex-verification" content={yandexVerification} />}
       {fbDomainVerification && <meta name="facebook-domain-verification" content={fbDomainVerification} />}
 
       {/* Google Analytics 4 */}
-      {activeGaId && (
+      {gaId && (
         <>
           <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${activeGaId}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
             strategy="lazyOnload"
           />
           <Script id="google-analytics" strategy="lazyOnload">
@@ -83,7 +57,7 @@ export function AnalyticsProvider({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${activeGaId}', {
+              gtag('config', '${gaId}', {
                 page_path: window.location.pathname,
               });
             `}
@@ -92,20 +66,20 @@ export function AnalyticsProvider({
       )}
 
       {/* Google Tag Manager */}
-      {activeGtmId && (
+      {gtmId && (
         <Script id="google-tag-manager" strategy="lazyOnload">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${activeGtmId}');
+            })(window,document,'script','dataLayer','${gtmId}');
           `}
         </Script>
       )}
 
       {/* Meta Pixel */}
-      {activeMetaPixelId && (
+      {metaPixelId && (
         <Script id="meta-pixel" strategy="lazyOnload">
           {`
             !function(f,b,e,v,n,t,s)
@@ -116,8 +90,53 @@ export function AnalyticsProvider({
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '${activeMetaPixelId}');
+            fbq('init', '${metaPixelId}');
             fbq('track', 'PageView');
+          `}
+        </Script>
+      )}
+
+      {/* TikTok Pixel */}
+      {tiktokPixelId && (
+        <Script id="tiktok-pixel" strategy="lazyOnload">
+          {`
+            !function (w, d, t) {
+              w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+              ttq.load('${tiktokPixelId}');
+              ttq.page();
+            }(window, document, 'ttq');
+          `}
+        </Script>
+      )}
+
+      {/* LinkedIn Insight Tag */}
+      {linkedinInsightTagId && (
+        <Script id="linkedin-insight" strategy="lazyOnload">
+          {`
+            _linkedin_partner_id = "${linkedinInsightTagId}";
+            window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+            window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+            (function(l) {
+            if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+            window.lintrk.q=[]}
+            var s = document.getElementsByTagName("script")[0];
+            var b = document.createElement("script");
+            b.type = "text/javascript";b.async = true;
+            b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+            s.parentNode.insertBefore(b, s);})(window.lintrk);
+          `}
+        </Script>
+      )}
+
+      {/* Microsoft Clarity */}
+      {microsoftClarityId && (
+        <Script id="microsoft-clarity" strategy="lazyOnload">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "${microsoftClarityId}");
           `}
         </Script>
       )}
@@ -132,33 +151,7 @@ export function AnalyticsProvider({
         <div dangerouslySetInnerHTML={{ __html: customBodyScripts }} />
       )}
 
-      {/* Cookie Consent Banner */}
-      {cookieConsentEnabled && cookieAccepted === false && (
-        <div className="fixed bottom-6 right-6 left-6 md:left-auto md:max-w-md z-[100] p-6 bg-primary-navy text-white shadow-2xl border border-primary-gold/30 rounded-sm" role="region" aria-label="Cookie preferences">
-          <h4 className="font-label-md text-label-md text-primary-gold uppercase tracking-wider mb-2">
-            Privacy & Cookie Preferences
-          </h4>
-          <p className="font-body-md text-xs opacity-80 mb-4">
-            Nexus uses essential cookies and consent tracking to optimize performance and comply with regulatory security standards.
-          </p>
-          <div className="flex space-x-3">
-            <button
-              onClick={handleAccept}
-              type="button"
-              className="px-4 py-2 bg-primary-gold text-white font-label-md text-xs uppercase tracking-widest hover:bg-white hover:text-primary-navy transition-colors"
-            >
-              Accept All
-            </button>
-            <button
-              onClick={handleReject}
-              type="button"
-              className="px-4 py-2 border border-white/20 text-white font-label-md text-xs uppercase tracking-widest hover:bg-white/10 transition-colors"
-            >
-              Reject Optional
-            </button>
-          </div>
-        </div>
-      )}
+      <CookieBanner cookieConsentEnabled={cookieConsentEnabled} />
     </>
   );
 }

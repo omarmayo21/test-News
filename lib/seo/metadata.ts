@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Locale } from "@/i18n-config";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
 interface GenerateMetadataOptions {
   title?: string;
@@ -11,9 +12,10 @@ interface GenerateMetadataOptions {
   noFollow?: boolean;
   locale: Locale;
   path?: string;
+  siteUrl?: string;
 }
 
-export function constructMetadata({
+export async function constructMetadata({
   title = "Nexus Resources - Engineering the Future of Egyptian Mining",
   description = "Delivering structural excellence and strategic resource management through precision engineering and sustainable practices in the Arabian-Nubian shield.",
   keywords = ["Nexus Resources", "Egyptian Mining", "Arabian-Nubian Shield", "Structural Engineering", "Resource Exploration"],
@@ -23,9 +25,11 @@ export function constructMetadata({
   noFollow = false,
   locale,
   path = "",
-}: GenerateMetadataOptions): Metadata {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nexus-resources.com";
-  const fullCanonical = canonicalUrl || `${siteUrl}/${locale}${path}`;
+  siteUrl,
+}: GenerateMetadataOptions): Promise<Metadata> {
+  const settings = await getSiteSettings();
+  const finalSiteUrl = siteUrl || settings?.siteUrl || "https://nexus-resources.com";
+  const fullCanonical = canonicalUrl || `${finalSiteUrl}/${locale}${path}`;
 
   return {
     title: {
@@ -34,12 +38,12 @@ export function constructMetadata({
     },
     description,
     keywords,
-    metadataBase: new URL(siteUrl),
+    metadataBase: new URL(finalSiteUrl),
     alternates: {
       canonical: fullCanonical,
       languages: {
-        en: `${siteUrl}/en${path}`,
-        fr: `${siteUrl}/fr${path}`,
+        en: `${finalSiteUrl}/en${path}`,
+        fr: `${finalSiteUrl}/fr${path}`,
       },
     },
     robots: {
@@ -59,7 +63,7 @@ export function constructMetadata({
       type: "website",
       images: [
         {
-          url: ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`,
+          url: ogImage.startsWith("http") ? ogImage : `${finalSiteUrl}${ogImage}`,
           width: 1200,
           height: 630,
           alt: title,
@@ -70,7 +74,7 @@ export function constructMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`],
+      images: [ogImage.startsWith("http") ? ogImage : `${finalSiteUrl}${ogImage}`],
     },
   };
 }

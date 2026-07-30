@@ -56,6 +56,9 @@ export default async function RootLayout({
           gaId={siteSettings?.gaMeasurementId}
           gtmId={siteSettings?.gtmContainerId}
           metaPixelId={siteSettings?.metaPixelId}
+          tiktokPixelId={siteSettings?.tiktokPixelId}
+          linkedinInsightTagId={siteSettings?.linkedinInsightTagId}
+          microsoftClarityId={siteSettings?.microsoftClarityId}
           googleVerification={siteSettings?.googleSearchConsoleVerification}
           bingVerification={siteSettings?.bingVerificationToken}
           yandexVerification={siteSettings?.yandexVerificationToken}

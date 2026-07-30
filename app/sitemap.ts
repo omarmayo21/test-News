@@ -1,7 +1,9 @@
 import { MetadataRoute } from "next";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nexus-resources.com";
+  const settings = await getSiteSettings();
+  const baseUrl = settings?.siteUrl || "https://nexus-resources.com";
   const locales = ["en", "fr"];
 
   const routes = [

@@ -1,9 +1,11 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
-import { CapabilitiesGrid } from "@/components/sections/capabilities-grid";
-import { WhyEgyptTeaser } from "@/components/sections/why-egypt-teaser";
-import { CtaBanner } from "@/components/sections/cta-banner";
+import dynamic from "next/dynamic";
+
+const CapabilitiesGrid = dynamic(() => import("@/components/sections/capabilities-grid").then((mod) => mod.CapabilitiesGrid));
+const WhyEgyptTeaser = dynamic(() => import("@/components/sections/why-egypt-teaser").then((mod) => mod.WhyEgyptTeaser));
+const CtaBanner = dynamic(() => import("@/components/sections/cta-banner").then((mod) => mod.CtaBanner));
 import { getHomePageData } from "@/lib/sanity/queries";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { Locale } from "@/i18n-config";

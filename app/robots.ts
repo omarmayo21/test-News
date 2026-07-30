@@ -1,7 +1,9 @@
 import { MetadataRoute } from "next";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
-export default function robots(): MetadataRoute.Robots {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nexus-resources.com";
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const settings = await getSiteSettings();
+  const siteUrl = settings?.siteUrl || "https://nexus-resources.com";
 
   return {
     rules: {

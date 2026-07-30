@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { urlForImage } from "@/lib/sanity/image";
 
 interface HeroProps {
   locale: Locale;
@@ -11,6 +12,7 @@ interface HeroProps {
     subtitle?: { en?: string; fr?: string };
     ctaLabel?: { en?: string; fr?: string };
     ctaLink?: string;
+    backgroundImage?: any;
   };
 }
 
@@ -21,21 +23,24 @@ export function Hero({ locale, data }: HeroProps) {
   const subtitle = data?.subtitle?.[locale] || data?.subtitle?.en || dict.hero.subtitle;
   const ctaText = data?.ctaLabel?.[locale] || data?.ctaLabel?.en || dict.hero.ctaPrimary;
   const ctaHref = data?.ctaLink || `/${locale}/services`;
+  const bgImageUrl = data?.backgroundImage ? urlForImage(data.backgroundImage)?.url() : null;
 
   return (
     <section className="relative h-[819px] min-h-[600px] flex items-center px-margin-mobile md:px-section-padding overflow-hidden">
       {/* Background Image & Editorial Gradient */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-        <Image
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_raxG9n-LtRD_UiXztE5ChPc4obDFJhh8tIA25nI4mGc618f71KF0OUtGVszoZofpUu1yO5nn19c-eubyJ3uNfH8TtsHB3qZSV8TIwb14NdquLHQbC9y_31YrOQdO3Fe47szIS_VWR_rGd-K1xRTD29uO2gVMEssFb9QBIrWOX_GuHjh7A-3bUTaHIzz2J4IBOH3gwSjN38Spr_euaIJJsVR-ts1SEfdDjhCcRaSq9tMPKbov8FVazPk5mEzb-g9LgEvaFQ1ZnNc6"
-          alt="Industrial landscape"
-          fill
-          className="object-cover object-center grayscale-[10%]"
-          priority
-          fetchPriority="high"
-          sizes="100vw"
-        />
+        {bgImageUrl && (
+          <Image
+            src={bgImageUrl}
+            alt="Industrial landscape"
+            fill
+            className="object-cover object-center grayscale-[10%]"
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+          />
+        )}
       </div>
 
       {/* Hero Content */}

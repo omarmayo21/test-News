@@ -44,6 +44,21 @@ export const siteSettings = defineType({
       placeholder: "123456789012345",
     }),
     defineField({
+      name: "tiktokPixelId",
+      title: "TikTok Pixel ID",
+      type: "string",
+    }),
+    defineField({
+      name: "linkedinInsightTagId",
+      title: "LinkedIn Insight Tag ID",
+      type: "string",
+    }),
+    defineField({
+      name: "microsoftClarityId",
+      title: "Microsoft Clarity Project ID",
+      type: "string",
+    }),
+    defineField({
       name: "googleSearchConsoleVerification",
       title: "Google Search Console Verification Token",
       type: "string",
