@@ -1,0 +1,110 @@
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
+import { Compass, Cpu, Layers } from "lucide-react";
+import { Locale } from "@/i18n-config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+
+interface CapabilitiesGridProps {
+  locale: Locale;
+  data?: {
+    sectionTitle?: { en?: string; fr?: string };
+    sectionDescription?: { en?: string; fr?: string };
+    cards?: Array<{
+      icon?: string;
+      title?: { en?: string; fr?: string };
+      description?: { en?: string; fr?: string };
+    }>;
+  };
+}
+
+export function CapabilitiesGrid({ locale, data }: CapabilitiesGridProps) {
+  const dict = getDictionary(locale);
+
+  const title = data?.sectionTitle?.[locale] || data?.sectionTitle?.en || dict.capabilities.title;
+  const description = data?.sectionDescription?.[locale] || data?.sectionDescription?.en || dict.capabilities.subtitle;
+
+  const defaultCards = [
+    {
+      icon: "architecture",
+      title: dict.capabilities.card1Title,
+      description: dict.capabilities.card1Desc,
+      lucideIcon: Compass,
+    },
+    {
+      icon: "terrain",
+      title: dict.capabilities.card2Title,
+      description: dict.capabilities.card2Desc,
+      lucideIcon: Layers,
+    },
+    {
+      icon: "precision_manufacturing",
+      title: dict.capabilities.card3Title,
+      description: dict.capabilities.card3Desc,
+      lucideIcon: Cpu,
+    },
+  ];
+
+  const cards = data?.cards && data.cards.length > 0
+    ? data.cards.map((c, idx) => ({
+        icon: c.icon || "architecture",
+        title: c.title?.[locale] || c.title?.en || `Capability ${idx + 1}`,
+        description: c.description?.[locale] || c.description?.en || "",
+        lucideIcon: idx === 0 ? Compass : idx === 1 ? Layers : Cpu,
+      }))
+    : defaultCards;
+
+  return (
+    <section className="py-section-padding px-margin-mobile md:px-section-padding bg-white">
+      <div className="max-w-container-max mx-auto">
+        <div className="mb-20 max-w-2xl">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="font-headline font-headline-lg text-headline-lg text-primary-navy mb-6"
+          >
+            {title}
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-body text-body-lg text-on-surface opacity-80"
+          >
+            {description}
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+          {cards.map((card, idx) => {
+            const IconComponent = card.lucideIcon;
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
+                className="p-8 bg-surface-container-low border-l-2 border-primary-gold hover:shadow-xl transition-all duration-300 group cursor-pointer"
+              >
+                <div className="mb-8 text-primary-gold transition-transform group-hover:scale-110 duration-300">
+                  <IconComponent className="w-10 h-10" />
+                </div>
+                <h3 className="font-headline text-headline-md text-primary-navy mb-4">
+                  {card.title}
+                </h3>
+                <p className="font-body text-body-md text-on-surface opacity-70">
+                  {card.description}
+                </p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
