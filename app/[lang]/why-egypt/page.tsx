@@ -95,6 +95,7 @@ export default async function WhyEgyptPage({
             alt="Infrastructure map"
             fill
             className="object-cover object-center"
+            sizes="(max-width: 767px) 100vw, 50vw"
           />
         </div>
       </div>

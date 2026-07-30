@@ -42,36 +42,40 @@ export function SearchModal({ isOpen, onClose, locale }: SearchModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-start justify-center pt-24 px-4 bg-primary-navy/80 backdrop-blur-md">
-      <div className="w-full max-w-2xl bg-white shadow-2xl border border-surface-container-high p-6 relative rounded-sm">
+    <div className="fixed inset-0 z-[200] flex items-start justify-center pt-24 px-4 bg-primary-navy/80 backdrop-blur-md" role="presentation">
+      <div className="w-full max-w-2xl bg-white shadow-2xl border border-surface-container-high p-6 relative rounded-sm" role="dialog" aria-modal="true" aria-labelledby="search-modal-title">
         <button
           onClick={onClose}
+          type="button"
           className="absolute top-6 right-6 text-on-surface hover:text-primary-gold transition-colors"
           aria-label="Close search"
         >
           <X className="w-6 h-6" />
         </button>
 
-        <h3 className="font-headline-md text-headline-md text-primary-navy mb-4">
+        <h3 id="search-modal-title" className="font-headline-md text-headline-md text-primary-navy mb-4">
           {dict.search.title}
         </h3>
 
         <div className="relative mb-6">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-outline" />
+          <label htmlFor="site-search" className="sr-only">{dict.search.inputPlaceholder}</label>
           <input
+            id="site-search"
             type="text"
             value={query}
             onChange={handleSearch}
             placeholder={dict.search.inputPlaceholder}
             className="w-full pl-12 pr-10 py-4 bg-surface-container-low border-b-2 border-primary-gold text-on-surface focus:outline-none font-body-md"
             autoFocus
+            aria-describedby={query.trim() && !loading && results.news.length === 0 && results.pages.length === 0 ? "search-no-results" : undefined}
           />
           {loading && <Loader2 className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 animate-spin text-primary-gold" />}
         </div>
 
         <div className="max-h-96 overflow-y-auto space-y-4">
           {query.trim() !== "" && results.news.length === 0 && results.pages.length === 0 && !loading && (
-            <p className="text-sm opacity-60 py-4 text-center">{dict.search.noResults}</p>
+            <p id="search-no-results" className="text-sm opacity-60 py-4 text-center">{dict.search.noResults}</p>
           )}
 
           {results.news.length > 0 && (

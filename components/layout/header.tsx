@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Search, Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import { Logo } from "@/components/ui/logo";
 import { Locale } from "@/i18n-config";
@@ -88,10 +87,8 @@ export function Header({ locale }: HeaderProps) {
                     {link.label}
                   </span>
                   {isActive && (
-                    <motion.div
-                      layoutId="activeNavIndicator"
+                    <span
                       className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary-gold"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
                   {!isActive && (
@@ -107,6 +104,7 @@ export function Header({ locale }: HeaderProps) {
             {/* Global Search Button */}
             <button
               onClick={() => setSearchOpen(true)}
+              type="button"
               className="text-primary-navy hover:text-primary-gold transition-colors p-2.5 rounded-full hover:bg-surface-container-low"
               aria-label="Search site"
             >
@@ -117,7 +115,9 @@ export function Header({ locale }: HeaderProps) {
             <div className="flex items-center space-x-2 border-l border-surface-container-high pl-4">
               <button
                 onClick={() => handleLanguageSwitch("en")}
+                type="button"
                 disabled={isSwitchingLang}
+                aria-pressed={locale === "en"}
                 className={`font-label text-[15px] uppercase transition-all duration-200 ${
                   locale === "en"
                     ? "text-primary-gold font-bold underline underline-offset-4"
@@ -129,7 +129,9 @@ export function Header({ locale }: HeaderProps) {
               <span className="text-surface-container-high">|</span>
               <button
                 onClick={() => handleLanguageSwitch("fr")}
+                type="button"
                 disabled={isSwitchingLang}
+                aria-pressed={locale === "fr"}
                 className={`font-label text-[15px] uppercase transition-all duration-200 ${
                   locale === "fr"
                     ? "text-primary-gold font-bold underline underline-offset-4"
@@ -143,8 +145,11 @@ export function Header({ locale }: HeaderProps) {
             {/* Mobile / Laptop Drawer Menu Trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              type="button"
               className="2xl:hidden text-primary-navy p-2 focus:outline-none"
               aria-label="Toggle Navigation Menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
             </button>
@@ -153,13 +158,11 @@ export function Header({ locale }: HeaderProps) {
       </header>
 
       {/* Mobile & Laptop Menu Drawer */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
+      {mobileMenuOpen && (
+          <div
+            id="mobile-navigation"
+            role="navigation"
+            aria-label="Primary navigation"
             className="fixed inset-x-0 top-[84px] bottom-0 z-40 bg-white p-8 2xl:hidden flex flex-col justify-between border-b border-surface-container-high overflow-y-auto"
           >
             <div className="flex flex-col space-y-5 pt-2">
@@ -184,9 +187,8 @@ export function Header({ locale }: HeaderProps) {
                 {dict.hero.ctaPrimary}
               </Link>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+      )}
 
       {/* Global Search Modal */}
       {searchOpen && (

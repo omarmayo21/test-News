@@ -1,9 +1,6 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
@@ -36,41 +33,29 @@ export function Hero({ locale, data }: HeroProps) {
           fill
           className="object-cover object-center grayscale-[10%]"
           priority
+          fetchPriority="high"
+          sizes="100vw"
         />
       </div>
 
       {/* Hero Content */}
       <div className="relative z-20 max-w-2xl">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="font-headline font-display-lg text-display-lg text-primary-navy mb-8 leading-[1.1]"
-        >
+        <h1 className="font-headline font-display-lg text-display-lg text-primary-navy mb-8 leading-[1.1]">
           {headline}
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="font-body text-body-lg text-on-surface mb-12 max-w-xl opacity-90"
-        >
+        <p className="font-body text-body-lg text-on-surface mb-12 max-w-xl opacity-90">
           {subtitle}
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-        >
+        <div>
           <Link
             href={ctaHref}
             className="inline-flex items-center justify-center px-10 py-5 bg-primary-gold text-white font-label-md text-label-md uppercase tracking-widest hover:bg-primary-navy transition-colors duration-300 shadow-ambient"
           >
             {ctaText}
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

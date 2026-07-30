@@ -1,7 +1,4 @@
-"use client";
-
 import React from "react";
-import { motion } from "framer-motion";
 import { Compass, Cpu, Layers } from "lucide-react";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -59,36 +56,20 @@ export function CapabilitiesGrid({ locale, data }: CapabilitiesGridProps) {
     <section className="py-section-padding px-margin-mobile md:px-section-padding bg-white">
       <div className="max-w-container-max mx-auto">
         <div className="mb-20 max-w-2xl">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="font-headline font-headline-lg text-headline-lg text-primary-navy mb-6"
-          >
+          <h2 className="font-headline font-headline-lg text-headline-lg text-primary-navy mb-6">
             {title}
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-body text-body-lg text-on-surface opacity-80"
-          >
+          </h2>
+          <p className="font-body text-body-lg text-on-surface opacity-80">
             {description}
-          </motion.p>
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
           {cards.map((card, idx) => {
             const IconComponent = card.lucideIcon;
             return (
-              <motion.div
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.15 }}
                 className="p-8 bg-surface-container-low border-l-2 border-primary-gold hover:shadow-xl transition-all duration-300 group cursor-pointer"
               >
                 <div className="mb-8 text-primary-gold transition-transform group-hover:scale-110 duration-300">
@@ -100,7 +81,7 @@ export function CapabilitiesGrid({ locale, data }: CapabilitiesGridProps) {
                 <p className="font-body text-body-md text-on-surface opacity-70">
                   {card.description}
                 </p>
-              </motion.div>
+              </div>
             );
           })}
         </div>

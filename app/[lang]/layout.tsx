@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { PageTransition } from "@/components/layout/page-transition";
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/lib/seo/json-ld";
 import { getSiteSettings } from "@/lib/sanity/queries";
@@ -12,12 +11,14 @@ import "../globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   variable: "--font-sans",
   display: "swap",
 });
 
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
+  weight: ["500", "600"],
   variable: "--font-serif",
   display: "swap",
 });
@@ -45,6 +46,12 @@ export default async function RootLayout({
         <WebSiteJsonLd locale={locale} />
       </head>
       <body className="bg-background text-on-surface font-body text-body-md antialiased min-h-screen flex flex-col justify-between overflow-x-hidden">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[300] focus:bg-white focus:px-4 focus:py-3 focus:text-primary-navy focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
         <AnalyticsProvider
           gaId={siteSettings?.gaMeasurementId}
           gtmId={siteSettings?.gtmContainerId}
@@ -58,7 +65,7 @@ export default async function RootLayout({
           cookieConsentEnabled={siteSettings?.enableCookieConsent ?? true}
         />
         <Header locale={locale} />
-        <PageTransition>{children}</PageTransition>
+        <main id="main-content" className="w-full flex-grow flex flex-col">{children}</main>
         <Footer locale={locale} />
       </body>
     </html>

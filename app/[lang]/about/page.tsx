@@ -58,6 +58,7 @@ export default async function AboutPage({
                   className="object-cover grayscale contrast-125 p-8"
                   priority
                   unoptimized
+                  sizes="(max-width: 1023px) 100vw, 58vw"
                 />
               </div>
             </div>

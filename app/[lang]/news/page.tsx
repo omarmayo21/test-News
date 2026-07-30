@@ -96,6 +96,7 @@ export default async function NewsPage({
                     alt={articleTitle}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 767px) 100vw, 33vw"
                   />
                 </div>
                 <div className="p-6">

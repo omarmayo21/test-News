@@ -1,24 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-
-const contactSchema = z.object({
-  fullName: z.string().min(2, "Full name must be at least 2 characters."),
-  email: z.string().email("Please enter a valid email address."),
-  phone: z.string().optional(),
-  company: z.string().optional(),
-  subject: z.string().optional(),
-  message: z.string().min(5, "Message must be at least 5 characters."),
-  honeypot: z.string().optional(),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
 
 interface ContactFormProps {
   locale: Locale;
@@ -30,18 +15,12 @@ export function ContactForm({ locale, formType = "contact" }: ContactFormProps) 
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-  });
-
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setStatus("submitting");
     setErrorMessage("");
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -52,7 +31,7 @@ export function ContactForm({ locale, formType = "contact" }: ContactFormProps) 
 
       if (res.ok && result.success) {
         setStatus("success");
-        reset();
+        form.reset();
       } else {
         setStatus("error");
         setErrorMessage(result.message || dict.contact.errorMessage);
@@ -64,18 +43,18 @@ export function ContactForm({ locale, formType = "contact" }: ContactFormProps) 
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-xl">
+    <form onSubmit={onSubmit} className="space-y-6 max-w-xl">
       {/* Honeypot Anti-Spam Field */}
       <input
         type="text"
-        {...register("honeypot")}
+        name="honeypot"
         tabIndex={-1}
         autoComplete="off"
         className="hidden opacity-0 w-0 h-0 absolute pointer-events-none"
       />
 
       {status === "success" && (
-        <div className="p-4 bg-emerald-50 border border-emerald-300 text-emerald-800 flex items-start space-x-3 rounded-sm">
+        <div className="p-4 bg-emerald-50 border border-emerald-300 text-emerald-800 flex items-start space-x-3 rounded-sm" role="status">
           <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
           <div>
             <h4 className="font-bold text-sm">{dict.contact.successTitle}</h4>
@@ -85,7 +64,7 @@ export function ContactForm({ locale, formType = "contact" }: ContactFormProps) 
       )}
 
       {status === "error" && (
-        <div className="p-4 bg-rose-50 border border-rose-300 text-rose-800 flex items-start space-x-3 rounded-sm">
+        <div className="p-4 bg-rose-50 border border-rose-300 text-rose-800 flex items-start space-x-3 rounded-sm" role="alert">
           <AlertCircle className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
           <div>
             <h4 className="font-bold text-sm">{dict.contact.errorTitle}</h4>
@@ -97,52 +76,57 @@ export function ContactForm({ locale, formType = "contact" }: ContactFormProps) 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Full Name */}
         <div>
-          <label className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
+          <label htmlFor="fullName" className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
             {dict.contact.fullName} *
           </label>
           <input
             type="text"
-            {...register("fullName")}
+            id="fullName"
+            name="fullName"
+            required
+            minLength={2}
             className="w-full p-3 bg-surface-container-low border-b-2 border-outline-variant focus:border-primary-gold focus:outline-none font-body text-body-md transition-colors"
           />
-          {errors.fullName && <p className="text-xs text-rose-600 mt-1">{errors.fullName.message}</p>}
         </div>
 
         {/* Email Address */}
         <div>
-          <label className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
+          <label htmlFor="email" className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
             {dict.contact.email} *
           </label>
           <input
             type="email"
-            {...register("email")}
+            id="email"
+            name="email"
+            required
             className="w-full p-3 bg-surface-container-low border-b-2 border-outline-variant focus:border-primary-gold focus:outline-none font-body text-body-md transition-colors"
           />
-          {errors.email && <p className="text-xs text-rose-600 mt-1">{errors.email.message}</p>}
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Phone Number */}
         <div>
-          <label className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
+          <label htmlFor="phone" className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
             {dict.contact.phone}
           </label>
           <input
             type="tel"
-            {...register("phone")}
+            id="phone"
+            name="phone"
             className="w-full p-3 bg-surface-container-low border-b-2 border-outline-variant focus:border-primary-gold focus:outline-none font-body text-body-md transition-colors"
           />
         </div>
 
         {/* Company */}
         <div>
-          <label className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
+          <label htmlFor="company" className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
             {dict.contact.company}
           </label>
           <input
             type="text"
-            {...register("company")}
+            id="company"
+            name="company"
             className="w-full p-3 bg-surface-container-low border-b-2 border-outline-variant focus:border-primary-gold focus:outline-none font-body text-body-md transition-colors"
           />
         </div>
@@ -150,15 +134,17 @@ export function ContactForm({ locale, formType = "contact" }: ContactFormProps) 
 
       {/* Message */}
       <div>
-        <label className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
+        <label htmlFor="message" className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
           {dict.contact.message} *
         </label>
         <textarea
           rows={5}
-          {...register("message")}
+          id="message"
+          name="message"
+          required
+          minLength={5}
           className="w-full p-3 bg-surface-container-low border-b-2 border-outline-variant focus:border-primary-gold focus:outline-none font-body text-body-md transition-colors"
         />
-        {errors.message && <p className="text-xs text-rose-600 mt-1">{errors.message.message}</p>}
       </div>
 
       {/* Submit Button */}

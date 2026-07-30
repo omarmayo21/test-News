@@ -1,8 +1,5 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
@@ -34,12 +31,7 @@ export function WhyEgyptTeaser({ locale, data }: WhyEgyptTeaserProps) {
     <section className="py-section-padding px-margin-mobile md:px-section-padding bg-surface-container-low border-t border-surface-container-high">
       <div className="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
         {/* Text Content */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
+        <div>
           <h2 className="font-headline font-headline-lg text-headline-lg text-primary-navy mb-8">
             {title}
           </h2>
@@ -65,23 +57,18 @@ export function WhyEgyptTeaser({ locale, data }: WhyEgyptTeaserProps) {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Visual Image Block */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative h-[500px] border-4 border-white shadow-2xl overflow-hidden"
-        >
+        <div className="relative h-[500px] border-4 border-white shadow-2xl overflow-hidden">
           <Image
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCpy1Um9NwhUGEsMkB4jzFg5GX1jjViJxSfiBHiNZiOGY25CTcPUhY0mQZ3F-IB6mXIihNeVTWxO3N5fqSKPCcjoyOLbumWIg2McvhKn0jEspvHs-avXi2kvtDxRlifUqbs7jiWSa_hzxtnIO_mlBPIEyXMTQ_27ynF0Nbi5vOPxaDa2bZB7hgPa2vh3ssChe2kPjlO1XHEdMh4u25ZmaLaMdTgNeY76WCiNCdYdHGCjlD8Cn8_spjl4R3i9HQlxClcxeu-g9L56IC"
             alt="Arabian-Nubian Shield Geology"
             fill
             className="object-cover object-center grayscale-[15%]"
+            sizes="(max-width: 767px) 100vw, 50vw"
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

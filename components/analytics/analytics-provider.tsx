@@ -76,9 +76,9 @@ export function AnalyticsProvider({
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${activeGaId}`}
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
-          <Script id="google-analytics" strategy="afterInteractive">
+          <Script id="google-analytics" strategy="lazyOnload">
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
@@ -93,7 +93,7 @@ export function AnalyticsProvider({
 
       {/* Google Tag Manager */}
       {activeGtmId && (
-        <Script id="google-tag-manager" strategy="afterInteractive">
+        <Script id="google-tag-manager" strategy="lazyOnload">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -106,7 +106,7 @@ export function AnalyticsProvider({
 
       {/* Meta Pixel */}
       {activeMetaPixelId && (
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -134,7 +134,7 @@ export function AnalyticsProvider({
 
       {/* Cookie Consent Banner */}
       {cookieConsentEnabled && cookieAccepted === false && (
-        <div className="fixed bottom-6 right-6 left-6 md:left-auto md:max-w-md z-[100] p-6 bg-primary-navy text-white shadow-2xl border border-primary-gold/30 rounded-sm">
+        <div className="fixed bottom-6 right-6 left-6 md:left-auto md:max-w-md z-[100] p-6 bg-primary-navy text-white shadow-2xl border border-primary-gold/30 rounded-sm" role="region" aria-label="Cookie preferences">
           <h4 className="font-label-md text-label-md text-primary-gold uppercase tracking-wider mb-2">
             Privacy & Cookie Preferences
           </h4>
@@ -144,12 +144,14 @@ export function AnalyticsProvider({
           <div className="flex space-x-3">
             <button
               onClick={handleAccept}
+              type="button"
               className="px-4 py-2 bg-primary-gold text-white font-label-md text-xs uppercase tracking-widest hover:bg-white hover:text-primary-navy transition-colors"
             >
               Accept All
             </button>
             <button
               onClick={handleReject}
+              type="button"
               className="px-4 py-2 border border-white/20 text-white font-label-md text-xs uppercase tracking-widest hover:bg-white/10 transition-colors"
             >
               Reject Optional

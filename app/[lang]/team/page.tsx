@@ -76,6 +76,7 @@ export default async function TeamPage({
                 alt={member.name}
                 fill
                 className="object-cover object-center grayscale-[20%]"
+                sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
               />
             </div>
             <div className="p-8">

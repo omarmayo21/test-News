@@ -1,8 +1,5 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
@@ -24,13 +21,7 @@ export function CtaBanner({ locale, data }: CtaBannerProps) {
 
   return (
     <section className="py-24 px-margin-mobile md:px-section-padding bg-white text-center border-t border-surface-container-high">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="max-w-3xl mx-auto"
-      >
+      <div className="max-w-3xl mx-auto">
         <h2 className="font-headline font-headline-lg text-headline-lg text-primary-navy mb-8">
           {title}
         </h2>
@@ -40,7 +31,7 @@ export function CtaBanner({ locale, data }: CtaBannerProps) {
         >
           {buttonText}
         </Link>
-      </motion.div>
+      </div>
     </section>
   );
 }

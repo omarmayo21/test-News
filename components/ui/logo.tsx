@@ -33,8 +33,8 @@ export function Logo({
           alt="Nexus Resources Logo"
           fill
           className="object-contain object-left"
-          priority
           unoptimized
+          sizes={size === "footer" ? "260px" : "230px"}
         />
       </div>
     </Link>

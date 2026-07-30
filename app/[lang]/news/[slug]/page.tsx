@@ -57,7 +57,7 @@ export default async function SingleNewsPage({
       />
 
       {/* Breadcrumb */}
-      <nav className="flex space-x-2 font-label text-xs uppercase tracking-wider text-secondary mb-8">
+      <nav aria-label="Breadcrumb" className="flex space-x-2 font-label text-xs uppercase tracking-wider text-secondary mb-8">
         <Link href={`/${locale}`} className="hover:text-primary-navy">Home</Link>
         <span>/</span>
         <Link href={`/${locale}/news`} className="hover:text-primary-navy">{dict.nav.news}</Link>
@@ -82,6 +82,7 @@ export default async function SingleNewsPage({
           alt={title}
           fill
           className="object-cover object-center"
+          sizes="(max-width: 767px) 100vw, 896px"
         />
       </div>
 
