@@ -22,6 +22,7 @@ export function CookieBanner({ cookieConsentEnabled }: CookieBannerProps) {
   const handleAccept = () => {
     localStorage.setItem("nexus_cookie_consent", "accepted");
     setCookieAccepted(true);
+    window.dispatchEvent(new CustomEvent("nexus_cookie_consent_change", { detail: "accepted" }));
   };
 
   const handleReject = () => {
