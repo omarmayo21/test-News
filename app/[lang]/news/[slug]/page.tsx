@@ -77,13 +77,16 @@ export default async function SingleNewsPage({
 
       {/* Hero Cover Image */}
       <div className="relative h-[450px] w-full mb-12 border-4 border-white shadow-xl overflow-hidden">
-        <Image
-          src={article?.coverImage || "https://lh3.googleusercontent.com/aida-public/AB6AXuC_raxG9n-LtRD_UiXztE5ChPc4obDFJhh8tIA25nI4mGc618f71KF0OUtGVszoZofpUu1yO5nn19c-eubyJ3uNfH8TtsHB3qZSV8TIwb14NdquLHQbC9y_31YrOQdO3Fe47szIS_VWR_rGd-K1xRTD29uO2gVMEssFb9QBIrWOX_GuHjh7A-3bUTaHIzz2J4IBOH3gwSjN38Spr_euaIJJsVR-ts1SEfdDjhCcRaSq9tMPKbov8FVazPk5mEzb-g9LgEvaFQ1ZnNc6"}
-          alt={title}
-          fill
-          className="object-cover object-center"
-          sizes="(max-width: 767px) 100vw, 896px"
-        />
+          {article?.coverImage && (
+            <Image
+              src={article.coverImage}
+              alt={title}
+              fill
+              className="object-cover grayscale-[10%]"
+              priority
+              sizes="100vw"
+            />
+          )}
       </div>
 
       {/* Body Content */}

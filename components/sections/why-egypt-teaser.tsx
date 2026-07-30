@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { urlForImage } from "@/lib/sanity/image";
 
 interface WhyEgyptTeaserProps {
   locale: Locale;
@@ -12,6 +13,7 @@ interface WhyEgyptTeaserProps {
       number?: string;
       label?: { en?: string; fr?: string };
     }>;
+    sideImage?: any;
   };
 }
 
@@ -26,6 +28,8 @@ export function WhyEgyptTeaser({ locale, data }: WhyEgyptTeaserProps) {
 
   const stat2Number = data?.stats?.[1]?.number || dict.whyEgypt.stat2Number;
   const stat2Label = data?.stats?.[1]?.label?.[locale] || data?.stats?.[1]?.label?.en || dict.whyEgypt.stat2Label;
+
+  const sideImageUrl = data?.sideImage ? urlForImage(data.sideImage)?.url() : null;
 
   return (
     <section className="py-section-padding px-margin-mobile md:px-section-padding bg-surface-container-low border-t border-surface-container-high">
@@ -60,14 +64,16 @@ export function WhyEgyptTeaser({ locale, data }: WhyEgyptTeaserProps) {
         </div>
 
         {/* Visual Image Block */}
-        <div className="relative h-[500px] border-4 border-white shadow-2xl overflow-hidden">
-          <Image
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCpy1Um9NwhUGEsMkB4jzFg5GX1jjViJxSfiBHiNZiOGY25CTcPUhY0mQZ3F-IB6mXIihNeVTWxO3N5fqSKPCcjoyOLbumWIg2McvhKn0jEspvHs-avXi2kvtDxRlifUqbs7jiWSa_hzxtnIO_mlBPIEyXMTQ_27ynF0Nbi5vOPxaDa2bZB7hgPa2vh3ssChe2kPjlO1XHEdMh4u25ZmaLaMdTgNeY76WCiNCdYdHGCjlD8Cn8_spjl4R3i9HQlxClcxeu-g9L56IC"
-            alt="Arabian-Nubian Shield Geology"
-            fill
-            className="object-cover object-center grayscale-[15%]"
-            sizes="(max-width: 767px) 100vw, 50vw"
-          />
+        <div className="relative h-[500px] border-4 border-white shadow-2xl overflow-hidden bg-surface-container-high">
+          {sideImageUrl && (
+            <Image
+              src={sideImageUrl}
+              alt="Arabian-Nubian Shield Geology"
+              fill
+              className="object-cover object-center grayscale-[15%]"
+              sizes="(max-width: 767px) 100vw, 50vw"
+            />
+          )}
         </div>
       </div>
     </section>

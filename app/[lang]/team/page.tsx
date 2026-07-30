@@ -35,19 +35,19 @@ export default async function TeamPage({
       name: "Dr. Tarek Al-Sayed",
       role: "Chief Executive & Geological Director",
       bio: "Ph.D. in Structural Geology from Imperial College London with 25+ years directing gold exploration and feasibility across North Africa and the Middle East.",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCCpy1Um9NwhUGEsMkB4jzFg5GX1jjViJxSfiBHiNZiOGY25CTcPUhY0mQZ3F-IB6mXIihNeVTWxO3N5fqSKPCcjoyOLbumWIg2McvhKn0jEspvHs-avXi2kvtDxRlifUqbs7jiWSa_hzxtnIO_mlBPIEyXMTQ_27ynF0Nbi5vOPxaDa2bZB7hgPa2vh3ssChe2kPjlO1XHEdMh4u25ZmaLaMdTgNeY76WCiNCdYdHGCjlD8Cn8_spjl4R3i9HQlxClcxeu-g9L56IC",
+      image: null,
     },
     {
       name: "Eng. Sarah Mansour",
       role: "Head of Structural Infrastructure",
       bio: "Master of Civil Engineering with specialized expertise in deep underground tunnel stabilization, slope safety, and processing plant infrastructure.",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC_raxG9n-LtRD_UiXztE5ChPc4obDFJhh8tIA25nI4mGc618f71KF0OUtGVszoZofpUu1yO5nn19c-eubyJ3uNfH8TtsHB3qZSV8TIwb14NdquLHQbC9y_31YrOQdO3Fe47szIS_VWR_rGd-K1xRTD29uO2gVMEssFb9QBIrWOX_GuHjh7A-3bUTaHIzz2J4IBOH3gwSjN38Spr_euaIJJsVR-ts1SEfdDjhCcRaSq9tMPKbov8FVazPk5mEzb-g9LgEvaFQ1ZnNc6",
+      image: null,
     },
     {
       name: "Karim Benjelloun",
       role: "Vice President of Operational Management",
       bio: "Former Operations Director for multinational mining concessions, overseeing open-pit extraction efficiency and autonomous logistics integration.",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCTBbbPEjmBrXy6iL_Br-AMCocJMeLUmFbaV7Bx0c7ZtSbllcxcjO7gFhGINNAW0bBzuyG64Q0xBy2fSZ42pAxupjo_KBm6ipJJgoJkPRj1f1S572DpIcnz5mHuaRndSB4EMcENosnCA0u_AQgfhQWK2Qj2gmeVIm9EAIT2Sc5azekQxu3dwLba67U64PxzmhvnSW8yrT8C10SfSsY6LY3EqlZ2Oaci1hmJc5fnfZwooVyJ91JWozWC-8LB7THAo-Gv7M4",
+      image: null,
     },
   ];
 
@@ -71,13 +71,15 @@ export default async function TeamPage({
             className="bg-surface-container-low border-b-2 border-primary-gold overflow-hidden hover:shadow-xl transition-all duration-300"
           >
             <div className="relative h-72 w-full">
-              <Image
-                src={member.image}
-                alt={member.name}
-                fill
-                className="object-cover object-center grayscale-[20%]"
-                sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-              />
+              {member.image && (
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500 grayscale-[20%]"
+                  sizes="(max-width: 767px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+              )}
             </div>
             <div className="p-8">
               <h3 className="font-headline text-headline-sm text-primary-navy mb-1">
