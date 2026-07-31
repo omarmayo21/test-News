@@ -9,11 +9,9 @@ const client = createClient({
 
 async function run() {
   const data = await client.fetch(
-    `*[_type == "homePage"][0]{
-      pageBuilder[]{
-        _type == "heroBlock" => { backgroundImage },
-        _type == "statsBlock" => { sideImage }
-      }
+    `*[_type == "news"][0]{
+      title,
+      coverImage
     }`
   );
   

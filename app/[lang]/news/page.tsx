@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { getNewsArticles } from "@/lib/sanity/queries";
+import { urlForImage } from "@/lib/sanity/image";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
@@ -91,9 +92,9 @@ export default async function NewsPage({
             >
               <div>
                 <div className="relative h-60 w-full overflow-hidden bg-surface-container-high">
-                  {item.coverImage && (
+                  {item.coverImage && urlForImage(item.coverImage) && (
                     <Image
-                      src={item.coverImage}
+                      src={urlForImage(item.coverImage)!.url()}
                       alt={articleTitle}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"

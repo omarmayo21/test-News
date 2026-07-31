@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { ArticleJsonLd } from "@/lib/seo/json-ld";
 import { getSingleNewsArticle } from "@/lib/sanity/queries";
+import { urlForImage } from "@/lib/sanity/image";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
@@ -76,10 +77,10 @@ export default async function SingleNewsPage({
       </div>
 
       {/* Hero Cover Image */}
-      <div className="relative h-[450px] w-full mb-12 border-4 border-white shadow-xl overflow-hidden">
-          {article?.coverImage && (
+      <div className="relative h-[450px] w-full mb-12 border-4 border-white shadow-xl overflow-hidden bg-surface-container-high">
+          {article?.coverImage && urlForImage(article.coverImage) && (
             <Image
-              src={article.coverImage}
+              src={urlForImage(article.coverImage)!.url()}
               alt={title}
               fill
               className="object-cover grayscale-[10%]"
