@@ -96,7 +96,7 @@ export async function getNewsArticles() {
         author->{ name, role, avatar }
       }`,
       {},
-      { next: { revalidate: 1800 } }
+      { cache: "no-store" }
     );
     return data || [];
   } catch {
@@ -126,7 +126,7 @@ export async function getSingleNewsArticle(slug: string) {
         relatedNews[]->{ _id, title, slug, coverImage, publishDate }
       }`,
       { slug },
-      { next: { revalidate: 1800 } }
+      { cache: "no-store" }
     );
     return data;
   } catch {

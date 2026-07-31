@@ -10,6 +10,7 @@
     "seed:sanity": "node scripts/seed-sanity.js"
   },
   "dependencies": {
+    "@portabletext/react": "^7.0.1",
     "@sanity/client": "^6.28.2",
     "@sanity/icons": "^3.5.7",
     "@sanity/image-url": "^1.1.0",

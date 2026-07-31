@@ -7,6 +7,7 @@ import { constructMetadata } from "@/lib/seo/metadata";
 import { ArticleJsonLd } from "@/lib/seo/json-ld";
 import { getSingleNewsArticle } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
+import { PortableText } from "@portabletext/react";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
@@ -91,26 +92,36 @@ export default async function SingleNewsPage({
       </div>
 
       {/* Body Content */}
-      <div className="font-body text-body-lg text-on-surface space-y-6 leading-relaxed">
-        <p className="font-semibold text-xl text-primary-navy border-l-4 border-primary-gold pl-6 py-1">
+      <div className="font-body text-body-lg text-on-surface space-y-6 leading-relaxed portable-text-content">
+        <p className="font-semibold text-xl text-primary-navy border-l-4 border-primary-gold pl-6 py-1 mb-8">
           {excerpt}
         </p>
 
-        <p>
-          Nexus Resources has officially commenced high-resolution structural mapping across the newly allocated concessions within Egypt&apos;s Eastern Desert. Utilizing advanced satellite imagery, magnetics, and targeted diamond core drilling, our engineering team is establishing 3D geological resource models.
-        </p>
+        {(locale === "fr" && article?.bodyFr) ? (
+          <PortableText value={article.bodyFr} />
+        ) : article?.body ? (
+          <PortableText value={article.body} />
+        ) : null}
 
-        <h3 className="font-headline text-2xl text-primary-navy pt-6">
-          Geological Context & Exploration Methodology
-        </h3>
-
-        <p>
-          The Arabian-Nubian shield exhibits high-grade mesothermal quartz-vein gold mineralization alongside Volcanogenic Massive Sulfide (VMS) copper deposits. By combining structural geometry with geochemical assay validation, Nexus aims to streamline pre-feasibility reporting while adhering to international environmental standards.
-        </p>
-
-        <p>
-          &quot;Our structural discipline allows us to reduce exploration risk while accelerating deposit definition,&quot; stated Dr. Tarek Al-Sayed, Chief Executive. &quot;We look forward to presenting initial resource estimates in upcoming quarter reports.&quot;
-        </p>
+        {/* Gallery Images */}
+        {article?.gallery && article.gallery.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+            {article.gallery.map((img: any, idx: number) => {
+              const src = urlForImage(img)?.url();
+              if (!src) return null;
+              return (
+                <div key={idx} className="relative h-64 w-full">
+                  <Image 
+                    src={src} 
+                    alt={img.alt?.[locale] || img.alt?.en || `Gallery image ${idx + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Back to News */}
