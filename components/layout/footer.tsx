@@ -6,10 +6,31 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 
 interface FooterProps {
   locale: Locale;
+  data?: any;
 }
 
-export function Footer({ locale }: FooterProps) {
+export function Footer({ locale, data }: FooterProps) {
   const dict = getDictionary(locale);
+  
+  const copyright = data?.copyright?.[locale] || data?.copyright?.en || dict.footer.copyright;
+  
+  const officesTitle = dict.footer.officesTitle;
+  const offices = data?.offices?.length > 0 ? data.offices : [
+    { title: { en: dict.footer.cairoOffice } },
+    { title: { en: dict.footer.internationalOffice } }
+  ];
+
+  const resourcesTitle = dict.footer.resourcesTitle;
+  const resourceLinks = data?.resourceLinks?.length > 0 ? data.resourceLinks : [
+    { label: { en: dict.footer.siteMap }, path: `/${locale}/sitemap` },
+    { label: { en: dict.footer.newsletter }, path: `/${locale}/news` }
+  ];
+
+  const complianceTitle = dict.footer.complianceTitle;
+  const complianceLinks = data?.complianceLinks?.length > 0 ? data.complianceLinks : [
+    { label: { en: dict.footer.privacyPolicy }, path: `/${locale}/legal/privacy-policy` },
+    { label: { en: dict.footer.termsOfService }, path: `/${locale}/legal/terms` }
+  ];
 
   return (
     <footer className="bg-primary-navy text-white px-margin-mobile md:px-section-padding py-section-padding w-full">
@@ -19,8 +40,8 @@ export function Footer({ locale }: FooterProps) {
           <div className="mb-8 flex items-center">
             <Logo variant="dark" size="footer" href={`/${locale}`} />
           </div>
-          <p className="font-caption text-caption opacity-60">
-            {dict.footer.copyright}
+          <p className="font-caption text-caption opacity-60 whitespace-pre-line">
+            {copyright}
           </p>
         </div>
 
@@ -28,50 +49,43 @@ export function Footer({ locale }: FooterProps) {
         <div className="col-span-1 md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
           <div className="flex flex-col space-y-4">
             <h4 className="font-label text-label-md text-primary-gold uppercase tracking-widest mb-2">
-              {dict.footer.officesTitle}
+              {officesTitle}
             </h4>
-            <span className="font-label text-label-md opacity-70">
-              {dict.footer.cairoOffice}
-            </span>
-            <span className="font-label text-label-md opacity-70">
-              {dict.footer.internationalOffice}
-            </span>
+            {offices.map((office: any, idx: number) => (
+              <span key={idx} className="font-label text-label-md opacity-70">
+                {office.title?.[locale] || office.title?.en}
+              </span>
+            ))}
           </div>
 
           <div className="flex flex-col space-y-4">
             <h4 className="font-label text-label-md text-primary-gold uppercase tracking-widest mb-2">
-              {dict.footer.resourcesTitle}
+              {resourcesTitle}
             </h4>
-            <Link
-              href={`/${locale}/sitemap`}
-              className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
-            >
-              {dict.footer.siteMap}
-            </Link>
-            <Link
-              href={`/${locale}/news`}
-              className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
-            >
-              {dict.footer.newsletter}
-            </Link>
+            {resourceLinks.map((link: any, idx: number) => (
+              <Link
+                key={idx}
+                href={link.path || "#"}
+                className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
+              >
+                {link.label?.[locale] || link.label?.en}
+              </Link>
+            ))}
           </div>
 
           <div className="flex flex-col space-y-4">
             <h4 className="font-label text-label-md text-primary-gold uppercase tracking-widest mb-2">
-              {dict.footer.complianceTitle}
+              {complianceTitle}
             </h4>
-            <Link
-              href={`/${locale}/legal/privacy-policy`}
-              className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
-            >
-              {dict.footer.privacyPolicy}
-            </Link>
-            <Link
-              href={`/${locale}/legal/terms`}
-              className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
-            >
-              {dict.footer.termsOfService}
-            </Link>
+            {complianceLinks.map((link: any, idx: number) => (
+              <Link
+                key={idx}
+                href={link.path || "#"}
+                className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
+              >
+                {link.label?.[locale] || link.label?.en}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

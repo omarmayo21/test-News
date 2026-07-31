@@ -22,27 +22,6 @@ export function CapabilitiesGrid({ locale, data }: CapabilitiesGridProps) {
   const title = data?.sectionTitle?.[locale] || data?.sectionTitle?.en || dict.capabilities.title;
   const description = data?.sectionDescription?.[locale] || data?.sectionDescription?.en || dict.capabilities.subtitle;
 
-  const defaultCards = [
-    {
-      icon: "architecture",
-      title: dict.capabilities.card1Title,
-      description: dict.capabilities.card1Desc,
-      lucideIcon: Compass,
-    },
-    {
-      icon: "terrain",
-      title: dict.capabilities.card2Title,
-      description: dict.capabilities.card2Desc,
-      lucideIcon: Layers,
-    },
-    {
-      icon: "precision_manufacturing",
-      title: dict.capabilities.card3Title,
-      description: dict.capabilities.card3Desc,
-      lucideIcon: Cpu,
-    },
-  ];
-
   const cards = data?.cards && data.cards.length > 0
     ? data.cards.map((c, idx) => ({
         icon: c.icon || "architecture",
@@ -50,7 +29,7 @@ export function CapabilitiesGrid({ locale, data }: CapabilitiesGridProps) {
         description: c.description?.[locale] || c.description?.en || "",
         lucideIcon: idx === 0 ? Compass : idx === 1 ? Layers : Cpu,
       }))
-    : defaultCards;
+    : [];
 
   return (
     <section className="py-section-padding px-margin-mobile md:px-section-padding bg-white">

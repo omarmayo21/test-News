@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/forms/contact-form";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getContactPageData } from "@/lib/sanity/queries";
 
 export async function generateMetadata({
   params,
@@ -29,19 +30,42 @@ export default async function ContactPage({
   const { lang } = await params;
   const locale = (lang as Locale) || "en";
   const dict = getDictionary(locale);
+  const data = await getContactPageData();
+
+  const kicker = data?.kicker?.[locale] || data?.kicker?.en || "Direct Technical Engagement";
+  const title = data?.title?.[locale] || data?.title?.en || dict.contact.title;
+  const subtitle = data?.subtitle?.[locale] || data?.subtitle?.en || dict.contact.subtitle;
+
+  const offices = data?.offices?.length > 0 ? data.offices : [
+    {
+      name: "Cairo Headquarters",
+      isPrimary: true,
+      address: dict.contact.cairoAddress,
+      phone: "+20 2 2790 1842",
+      email: "contact@nexus-resources.com",
+      hours: "Sunday - Thursday: 08:30 - 17:30 (EET)",
+    },
+    {
+      name: "International Advisory",
+      isPrimary: false,
+      address: "Suite 400, 100 Bishopsgate, London, UK",
+      phone: "+44 20 7946 0912",
+      email: "uk@nexus-resources.com",
+    }
+  ];
 
   return (
     <div className="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto">
       {/* Header */}
       <div className="max-w-3xl mb-16">
         <span className="font-label text-label-md text-primary-gold uppercase tracking-widest block mb-4">
-          Direct Technical Engagement
+          {kicker}
         </span>
         <h1 className="font-headline font-headline-lg text-headline-lg text-primary-navy mb-6">
-          {dict.contact.title}
+          {title}
         </h1>
         <p className="font-body text-body-lg text-on-surface opacity-80">
-          {dict.contact.subtitle}
+          {subtitle}
         </p>
       </div>
 
@@ -56,47 +80,42 @@ export default async function ContactPage({
 
         {/* Office Locations & Contact Info */}
         <div className="space-y-12">
-          {/* Cairo Office */}
-          <div className="p-8 bg-surface-container-low border-l-4 border-primary-gold space-y-4">
-            <h3 className="font-headline text-headline-sm text-primary-navy">
-              Cairo Headquarters
-            </h3>
-            <div className="flex items-start space-x-3 text-body-md opacity-80">
-              <MapPin className="w-5 h-5 text-primary-gold flex-shrink-0 mt-1" />
-              <span>{dict.contact.cairoAddress}</span>
+          {offices.map((office: any, idx: number) => (
+            <div 
+              key={idx} 
+              className={`p-8 bg-surface-container-low space-y-4 ${
+                office.isPrimary ? 'border-l-4 border-primary-gold' : 'border-l-4 border-primary-navy'
+              }`}
+            >
+              <h3 className="font-headline text-headline-sm text-primary-navy">
+                {office.name}
+              </h3>
+              {office.address && (
+                <div className="flex items-start space-x-3 text-body-md opacity-80">
+                  <MapPin className={`w-5 h-5 flex-shrink-0 mt-1 ${office.isPrimary ? 'text-primary-gold' : 'text-primary-navy'}`} />
+                  <span>{office.address}</span>
+                </div>
+              )}
+              {office.phone && (
+                <div className="flex items-center space-x-3 text-body-md opacity-80">
+                  <Phone className={`w-5 h-5 flex-shrink-0 ${office.isPrimary ? 'text-primary-gold' : 'text-primary-navy'}`} />
+                  <span>{office.phone}</span>
+                </div>
+              )}
+              {office.email && (
+                <div className="flex items-center space-x-3 text-body-md opacity-80">
+                  <Mail className={`w-5 h-5 flex-shrink-0 ${office.isPrimary ? 'text-primary-gold' : 'text-primary-navy'}`} />
+                  <span>{office.email}</span>
+                </div>
+              )}
+              {office.hours && (
+                <div className="flex items-center space-x-3 text-body-md opacity-80 pt-2 border-t border-outline-variant">
+                  <Clock className={`w-5 h-5 flex-shrink-0 ${office.isPrimary ? 'text-primary-gold' : 'text-primary-navy'}`} />
+                  <span>{office.hours}</span>
+                </div>
+              )}
             </div>
-            <div className="flex items-center space-x-3 text-body-md opacity-80">
-              <Phone className="w-5 h-5 text-primary-gold flex-shrink-0" />
-              <span>+20 2 2790 1842</span>
-            </div>
-            <div className="flex items-center space-x-3 text-body-md opacity-80">
-              <Mail className="w-5 h-5 text-primary-gold flex-shrink-0" />
-              <span>contact@nexus-resources.com</span>
-            </div>
-            <div className="flex items-center space-x-3 text-body-md opacity-80 pt-2 border-t border-outline-variant">
-              <Clock className="w-5 h-5 text-primary-gold flex-shrink-0" />
-              <span>Sunday - Thursday: 08:30 - 17:30 (EET)</span>
-            </div>
-          </div>
-
-          {/* International Office */}
-          <div className="p-8 bg-surface-container-low border-l-4 border-primary-navy space-y-4">
-            <h3 className="font-headline text-headline-sm text-primary-navy">
-              International Advisory
-            </h3>
-            <div className="flex items-start space-x-3 text-body-md opacity-80">
-              <MapPin className="w-5 h-5 text-primary-navy flex-shrink-0 mt-1" />
-              <span>Suite 400, 100 Bishopsgate, London, UK</span>
-            </div>
-            <div className="flex items-center space-x-3 text-body-md opacity-80">
-              <Phone className="w-5 h-5 text-primary-navy flex-shrink-0" />
-              <span>+44 20 7946 0912</span>
-            </div>
-            <div className="flex items-center space-x-3 text-body-md opacity-80">
-              <Mail className="w-5 h-5 text-primary-navy flex-shrink-0" />
-              <span>uk@nexus-resources.com</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

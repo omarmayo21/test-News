@@ -16,6 +16,15 @@ import { formSubmission } from "./documents/formSubmission";
 import { legalPage } from "./documents/legalPage";
 import { mediaAsset } from "./documents/mediaAsset";
 import { page } from "./documents/page";
+import { investmentCategory } from "./documents/investmentCategory";
+import { investmentOpportunity } from "./documents/investmentOpportunity";
+
+import { aboutPage } from "./singletons/aboutPage";
+import { servicesPage } from "./singletons/servicesPage";
+import { teamPage } from "./singletons/teamPage";
+import { whyEgyptPage } from "./singletons/whyEgyptPage";
+import { contactPage } from "./singletons/contactPage";
+import { investmentPage } from "./singletons/investmentPage";
 
 import { heroBlock } from "./pageBuilder/heroBlock";
 import { capabilitiesBlock } from "./pageBuilder/capabilitiesBlock";
@@ -44,6 +53,16 @@ export const schemaTypes = [
   legalPage,
   mediaAsset,
   page,
+  investmentCategory,
+  investmentOpportunity,
+
+  // Custom Pages (Singletons)
+  aboutPage,
+  servicesPage,
+  teamPage,
+  whyEgyptPage,
+  contactPage,
+  investmentPage,
 
   // Page Builder Blocks
   heroBlock,

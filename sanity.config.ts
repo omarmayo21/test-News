@@ -34,6 +34,27 @@ export default defineConfig({
             S.listItem()
               .title("Homepage")
               .child(S.document().schemaType("homePage").documentId("homePage")),
+            S.listItem()
+              .title("About Page")
+              .child(S.document().schemaType("aboutPage").documentId("aboutPage")),
+            S.listItem()
+              .title("Services Page")
+              .child(S.document().schemaType("servicesPage").documentId("servicesPage")),
+            S.listItem()
+              .title("Consultant Team Page")
+              .child(S.document().schemaType("teamPage").documentId("teamPage")),
+            S.listItem()
+              .title("Why Egypt Page")
+              .child(S.document().schemaType("whyEgyptPage").documentId("whyEgyptPage")),
+            S.listItem()
+              .title("Investment Page")
+              .child(S.document().schemaType("investmentPage").documentId("investmentPage")),
+            S.listItem()
+              .title("Contact Page")
+              .child(S.document().schemaType("contactPage").documentId("contactPage")),
+            S.divider(),
+            S.documentTypeListItem("investmentOpportunity").title("Investment Opportunities"),
+            S.documentTypeListItem("investmentCategory").title("Investment Categories"),
             S.documentTypeListItem("page").title("Dynamic Pages"),
             S.documentTypeListItem("news").title("News Articles"),
             S.documentTypeListItem("newsCategory").title("News Categories"),

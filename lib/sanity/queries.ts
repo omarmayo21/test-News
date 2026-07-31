@@ -154,3 +154,150 @@ export async function getGlobalSearchResults(query: string) {
     return { news: [], pages: [] };
   }
 }
+
+export async function getAboutPageData() {
+  if (!client) return null;
+  return client.fetch(`*[_type == "aboutPage"][0]`, {}, { next: { revalidate: 3600 } });
+}
+
+export async function getServicesPageData() {
+  if (!client) return null;
+  return client.fetch(`*[_type == "servicesPage"][0]`, {}, { next: { revalidate: 3600 } });
+}
+
+export async function getTeamPageData() {
+  if (!client) return null;
+  return client.fetch(
+    `*[_type == "teamPage"][0]{
+      ...,
+      teamMembers[]->{ name, role, bio, avatar }
+    }`,
+    {},
+    { next: { revalidate: 3600 } }
+  );
+}
+
+export async function getWhyEgyptPageData() {
+  if (!client) return null;
+  return client.fetch(`*[_type == "whyEgyptPage"][0]`, {}, { next: { revalidate: 3600 } });
+}
+
+export async function getContactPageData() {
+  if (!client) return null;
+  return client.fetch(`*[_type == "contactPage"][0]`, {}, { next: { revalidate: 3600 } });
+}
+
+export async function getInvestmentPageData() {
+  if (!client) return null;
+  return client.fetch(`*[_type == "investmentPage"][0]`, {}, { next: { revalidate: 3600 } });
+}
+
+export async function getInvestmentCategories() {
+  if (!client) return [];
+  return client.fetch(
+    `*[_type == "investmentCategory"] | order(title.en asc){ title, slug }`,
+    {},
+    { next: { revalidate: 3600 } }
+  );
+}
+
+export async function getInvestmentOpportunities() {
+  if (!client) return [];
+  return client.fetch(
+    `*[_type == "investmentOpportunity"] | order(_createdAt desc){
+      _id,
+      title,
+      location,
+      minerals,
+      stage,
+      description,
+      image,
+      category->{ title, slug }
+    }`,
+    {},
+    { next: { revalidate: 3600 } }
+  );
+}
+
+export async function getPage(slug: string) {
+  if (!client || !slug) return null;
+  try {
+    return client.fetch(
+      `*[_type == "page" && (slug.en.current == $slug || slug.fr.current == $slug)][0]{
+        title,
+        slug,
+        seo,
+        pageBuilder[]{
+          ...,
+          _type == "heroBlock" => { headline, subtitle, ctaLabel, ctaLink, backgroundImage },
+          _type == "capabilitiesBlock" => { sectionTitle, sectionDescription, cards },
+          _type == "statsBlock" => { title, subtitle, stats, sideImage },
+          _type == "ctaBlock" => { title, buttonText, buttonLink }
+        }
+      }`,
+      { slug },
+      { next: { revalidate: 3600 } }
+    );
+  } catch {
+    return null;
+  }
+}
+
+export async function getAllPages() {
+  if (!client) return [];
+  try {
+    return client.fetch(
+      `*[_type == "page"]{
+        "slugEn": slug.en.current,
+        "slugFr": slug.fr.current
+      }`,
+      {},
+      { next: { revalidate: 3600 } }
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function getHeaderData() {
+  if (!client) return null;
+  try {
+    return client.fetch(
+      `*[_type == "header"][0]{
+        navItems[]{
+          navLink { label, path }
+        },
+        ctaButton
+      }`,
+      {},
+      { next: { revalidate: 3600 } }
+    );
+  } catch {
+    return null;
+  }
+}
+
+export async function getFooterData() {
+  if (!client) return null;
+  try {
+    return client.fetch(
+      `*[_type == "footer"][0]{
+        aboutText,
+        offices[]{
+          title, address, phone, email
+        },
+        resourceLinks[]{
+          label, path
+        },
+        complianceLinks[]{
+          label, path
+        },
+        copyright
+      }`,
+      {},
+      { next: { revalidate: 3600 } }
+    );
+  } catch {
+    return null;
+  }
+}

@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { constructMetadata } from "@/lib/seo/metadata";
+import { getHeaderData, getFooterData } from "@/lib/sanity/queries";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
@@ -31,21 +32,22 @@ export default async function SitemapPage({
   const locale = (lang as Locale) || "en";
   const dict = getDictionary(locale);
 
-  const mainPages = [
-    { title: dict.nav.home, path: `/${locale}` },
-    { title: dict.nav.about, path: `/${locale}/about` },
-    { title: dict.nav.team, path: `/${locale}/team` },
-    { title: dict.nav.services, path: `/${locale}/services` },
-    { title: dict.nav.investment, path: `/${locale}/investment` },
-    { title: dict.nav.whyEgypt, path: `/${locale}/why-egypt` },
-    { title: dict.nav.news, path: `/${locale}/news` },
-    { title: dict.nav.contact, path: `/${locale}/contact` },
-  ];
+  const headerData = await getHeaderData();
+  const footerData = await getFooterData();
 
-  const legalPages = [
-    { title: dict.footer.privacyPolicy, path: `/${locale}/legal/privacy-policy` },
-    { title: dict.footer.termsOfService, path: `/${locale}/legal/terms` },
-  ];
+  const mainPages = headerData?.navItems?.length > 0 
+    ? headerData.navItems.map((item: any) => ({
+        title: item.navLink?.label?.[locale] || item.navLink?.label?.en || "Link",
+        path: item.navLink?.path || `/${locale}`,
+      }))
+    : [];
+
+  const legalPages = footerData?.complianceLinks?.length > 0
+    ? footerData.complianceLinks.map((link: any) => ({
+        title: link.label?.[locale] || link.label?.en || "Link",
+        path: link.path || "#",
+      }))
+    : [];
 
   return (
     <div className="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto">
@@ -63,7 +65,7 @@ export default async function SitemapPage({
             Main Pages
           </h2>
           <ul className="space-y-4">
-            {mainPages.map((page) => (
+            {mainPages.map((page: any) => (
               <li key={page.path}>
                 <Link
                   href={page.path}
@@ -82,7 +84,7 @@ export default async function SitemapPage({
             Legal & Compliance
           </h2>
           <ul className="space-y-4">
-            {legalPages.map((page) => (
+            {legalPages.map((page: any) => (
               <li key={page.path}>
                 <Link
                   href={page.path}

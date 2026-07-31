@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/lib/seo/json-ld";
-import { getSiteSettings } from "@/lib/sanity/queries";
+import { getSiteSettings, getHeaderData, getFooterData } from "@/lib/sanity/queries";
 import { Locale } from "@/i18n-config";
 import "../globals.css";
 
@@ -38,6 +38,8 @@ export default async function RootLayout({
   const { lang } = await params;
   const locale = (lang as Locale) || "en";
   const siteSettings = await getSiteSettings();
+  const headerData = await getHeaderData();
+  const footerData = await getFooterData();
 
   return (
     <html lang={locale} className={`${inter.variable} ${sourceSerif.variable}`}>
@@ -67,9 +69,9 @@ export default async function RootLayout({
           customBodyScripts={siteSettings?.customBodyScripts}
           cookieConsentEnabled={siteSettings?.enableCookieConsent ?? true}
         />
-        <Header locale={locale} />
+        <Header locale={locale} data={headerData} />
         <main id="main-content" className="w-full flex-grow flex flex-col">{children}</main>
-        <Footer locale={locale} />
+        <Footer locale={locale} data={footerData} />
       </body>
     </html>
   );

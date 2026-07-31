@@ -34,34 +34,7 @@ export default async function NewsPage({
 
   const sanityNews = await getNewsArticles();
 
-  const fallbackNews = [
-    {
-      _id: "news-1",
-      title: { en: "Nexus Secures New Structural Mining Concession in Eastern Desert", fr: "Nexus Obtient une Nouvelle Concession Minière en Égypte" },
-      slug: { en: { current: "nexus-secures-new-concession" }, fr: { current: "nexus-obtient-concession" } },
-      publishDate: "2026-07-15",
-      excerpt: { en: "Nexus Resources has been awarded exploration rights covering 450 km² in the Arabian-Nubian shield to deploy modern geospatial modeling.", fr: "Nexus Resources a obtenu des droits d'exploration couvrant 450 km² dans le bouclier arabo-nubien." },
-      coverImage: null,
-    },
-    {
-      _id: "news-2",
-      title: { en: "Deploying Autonomous Telemetry in Deep Underground Tunnels", fr: "Déploiement de la Télémétrie Autonome dans les Tunnels Souterrains" },
-      slug: { en: { current: "deploying-autonomous-telemetry" }, fr: { current: "telemetrie-autonome-tunnels" } },
-      publishDate: "2026-06-28",
-      excerpt: { en: "Integrating real-time sensor arrays for slope stability monitoring and worker safety compliance across remote facilities.", fr: "Intégration de capteurs en temps réel pour surveiller la stabilité des pentes et la sécurité des travailleurs." },
-      coverImage: null,
-    },
-    {
-      _id: "news-3",
-      title: { en: "Environmental Sustainability Report: Solar-Powered Camps", fr: "Rapport de Durabilité: Camps Alimentés à l'Énergie Solaire" },
-      slug: { en: { current: "environmental-sustainability-report" }, fr: { current: "rapport-durabilite-environnementale" } },
-      publishDate: "2026-05-12",
-      excerpt: { en: "How Nexus reduced diesel carbon emissions by 40% using hybrid microgrids across remote mining sites.", fr: "Comment Nexus a réduit les émissions de carbone diesel de 40% grâce à des micro-réseaux hybrides." },
-      coverImage: null,
-    },
-  ];
-
-  const articles = sanityNews.length > 0 ? sanityNews : fallbackNews;
+  const articles = sanityNews;
 
   return (
     <div className="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto">

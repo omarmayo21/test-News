@@ -16,9 +16,10 @@ const SearchModal = dynamic(
 
 interface HeaderProps {
   locale: Locale;
+  data?: any;
 }
 
-export function Header({ locale }: HeaderProps) {
+export function Header({ locale, data }: HeaderProps) {
   const dict = getDictionary(locale);
   const pathname = usePathname();
   const router = useRouter();
@@ -39,7 +40,7 @@ export function Header({ locale }: HeaderProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
+  const defaultNavLinks = [
     { label: dict.nav.home, path: `/${locale}` },
     { label: dict.nav.about, path: `/${locale}/about` },
     { label: dict.nav.team, path: `/${locale}/team` },
@@ -49,6 +50,16 @@ export function Header({ locale }: HeaderProps) {
     { label: dict.nav.news, path: `/${locale}/news` },
     { label: dict.nav.contact, path: `/${locale}/contact` },
   ];
+
+  const navLinks = data?.navItems?.length > 0
+    ? data.navItems.map((item: any) => ({
+        label: item.navLink?.label?.[locale] || item.navLink?.label?.en || "Link",
+        path: item.navLink?.path || `/${locale}`,
+      }))
+    : defaultNavLinks;
+    
+  const ctaLabel = data?.ctaButton?.label?.[locale] || data?.ctaButton?.label?.en || dict.hero.ctaPrimary;
+  const ctaUrl = data?.ctaButton?.url || `/${locale}/contact`;
 
   const handleLanguageSwitch = (targetLocale: Locale) => {
     if (targetLocale === locale || isSwitchingLang) return;
@@ -75,7 +86,7 @@ export function Header({ locale }: HeaderProps) {
 
           {/* Desktop Nav Links (8 items including Home) */}
           <div className="hidden 2xl:flex items-center space-x-6 xl:space-x-8">
-            {navLinks.map((link) => {
+            {navLinks.map((link: { label: string; path: string }) => {
               const isActive = pathname === link.path;
               return (
                 <Link
@@ -166,7 +177,7 @@ export function Header({ locale }: HeaderProps) {
             className="fixed inset-x-0 top-[84px] bottom-0 z-40 bg-white p-8 2xl:hidden flex flex-col justify-between border-b border-surface-container-high overflow-y-auto"
           >
             <div className="flex flex-col space-y-5 pt-2">
-              {navLinks.map((link) => (
+              {navLinks.map((link: { label: string; path: string }) => (
                 <Link
                   key={link.path}
                   href={link.path}
@@ -180,11 +191,11 @@ export function Header({ locale }: HeaderProps) {
 
             <div className="pt-6 border-t border-surface-container-high mt-6">
               <Link
-                href={`/${locale}/contact`}
+                href={ctaUrl}
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-center py-4 bg-primary-gold text-white font-label text-label-md uppercase tracking-widest"
               >
-                {dict.hero.ctaPrimary}
+                {ctaLabel}
               </Link>
             </div>
           </div>
