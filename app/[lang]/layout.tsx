@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/lib/seo/json-ld";
-import { getSiteSettings, getHeaderData, getFooterData } from "@/lib/sanity/queries";
+import { getSiteSettings, getHeaderData, getFooterData, getNavigationTree, getThemeSettings } from "@/lib/sanity/queries";
 import { Locale } from "@/i18n-config";
 import "../globals.css";
 
@@ -40,6 +40,8 @@ export default async function RootLayout({
   const siteSettings = await getSiteSettings();
   const headerData = await getHeaderData();
   const footerData = await getFooterData();
+  const navTree = await getNavigationTree();
+  const themeSettings = await getThemeSettings();
 
   return (
     <html lang={locale} className={`${inter.variable} ${sourceSerif.variable}`}>
@@ -69,9 +71,9 @@ export default async function RootLayout({
           customBodyScripts={siteSettings?.customBodyScripts}
           cookieConsentEnabled={siteSettings?.enableCookieConsent ?? true}
         />
-        <Header locale={locale} data={headerData} />
+        <Header locale={locale} data={headerData} navTree={navTree} themeSettings={themeSettings} />
         <main id="main-content" className="w-full flex-grow flex flex-col">{children}</main>
-        <Footer locale={locale} data={footerData} />
+        <Footer locale={locale} data={footerData} navTree={navTree} themeSettings={themeSettings} />
       </body>
     </html>
   );

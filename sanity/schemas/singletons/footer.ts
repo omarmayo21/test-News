@@ -4,6 +4,7 @@ export const footer = defineType({
   name: "footer",
   title: "Footer Section",
   type: "document",
+  
   fields: [
     defineField({
       name: "aboutText",

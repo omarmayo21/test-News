@@ -5,11 +5,18 @@ export const contactPage = defineType({
   title: "Contact Page",
   type: "document",
   groups: [
+    { name: "navigation", title: "Navigation" },
     { name: "header", title: "Header" },
     { name: "offices", title: "Office Locations" },
     { name: "seo", title: "SEO" },
   ],
   fields: [
+    defineField({
+      name: "navigation",
+      title: "Navigation",
+      type: "pageNavigation",
+      group: "navigation",
+    }),
     defineField({
       name: "kicker",
       title: "Header Kicker",

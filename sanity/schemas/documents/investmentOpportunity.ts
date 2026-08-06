@@ -4,6 +4,7 @@ export const investmentOpportunity = defineType({
   name: "investmentOpportunity",
   title: "Investment Opportunity",
   type: "document",
+  
   fields: [
     defineField({
       name: "title",

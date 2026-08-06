@@ -4,17 +4,24 @@ export const page = defineType({
   name: "page",
   title: "Dynamic Pages",
   type: "document",
+  groups: [
+    { name: "content", title: "Content" },
+    { name: "seo", title: "SEO" },
+    { name: "navigation", title: "Navigation Settings" },
+  ],
   fields: [
     defineField({
       name: "title",
       title: "Page Title",
       type: "localeString",
+      group: "content",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "localeSlug",
+      group: "content",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -27,11 +34,19 @@ export const page = defineType({
         { type: "statsBlock" },
         { type: "ctaBlock" },
       ],
+      group: "content",
+    }),
+    defineField({
+      name: "navigation",
+      title: "Navigation Settings",
+      type: "pageNavigation",
+      group: "navigation",
     }),
     defineField({
       name: "seo",
       title: "SEO Configuration",
       type: "seo",
+      group: "seo",
     }),
   ],
   preview: {

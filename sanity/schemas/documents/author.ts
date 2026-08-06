@@ -4,6 +4,7 @@ export const author = defineType({
   name: "author",
   title: "Author / Executive",
   type: "document",
+  
   fields: [
     defineField({
       name: "name",

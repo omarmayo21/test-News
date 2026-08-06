@@ -50,6 +50,9 @@ export default defineConfig({
               .title("Investment Page")
               .child(S.document().schemaType("investmentPage").documentId("investmentPage")),
             S.listItem()
+              .title("News Listing Page")
+              .child(S.document().schemaType("newsPage").documentId("newsPage")),
+            S.listItem()
               .title("Contact Page")
               .child(S.document().schemaType("contactPage").documentId("contactPage")),
             S.divider(),

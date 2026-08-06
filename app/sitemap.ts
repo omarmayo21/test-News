@@ -1,21 +1,12 @@
 import { MetadataRoute } from "next";
-import { getSiteSettings, getAllPages, getNewsArticles } from "@/lib/sanity/queries";
+import { getSiteSettings, getNewsArticles, getNavigationTree } from "@/lib/sanity/queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const settings = await getSiteSettings();
   const baseUrl = settings?.siteUrl || "https://nexus-resources.com";
   const locales = ["en", "fr"];
 
-  const coreRoutes = [
-    "",
-    "/about",
-    "/team",
-    "/services",
-    "/investment",
-    "/why-egypt",
-    "/news",
-    "/contact",
-    "/sitemap",
+  const staticRoutes = [
     "/legal/privacy-policy",
     "/legal/terms",
   ];
@@ -23,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
   for (const locale of locales) {
-    for (const route of coreRoutes) {
+    for (const route of staticRoutes) {
       sitemapEntries.push({
         url: `${baseUrl}/${locale}${route}`,
         lastModified: new Date(),
@@ -34,18 +25,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   try {
-    const pages = await getAllPages();
-    for (const page of pages) {
+    const navTree = await getNavigationTree();
+    
+    const resolvePath = (page: any, locale: string) => {
+      const typeMap: Record<string, string> = {
+        homePage: `/${locale}`,
+        aboutPage: `/${locale}/about`,
+        servicesPage: `/${locale}/services`,
+        teamPage: `/${locale}/team`,
+        whyEgyptPage: `/${locale}/why-egypt`,
+        contactPage: `/${locale}/contact`,
+        investmentPage: `/${locale}/investment`,
+        newsPage: `/${locale}/news`,
+      };
+      if (typeMap[page._type]) return typeMap[page._type];
+      const slugStr = page.slug?.[locale]?.current || page.slug?.en?.current || page._id;
+      return `/${locale}/${slugStr}`;
+    };
+
+    const sitemapPages = navTree.filter((p: any) => p.navigation?.showInSitemap !== false);
+
+    for (const page of sitemapPages) {
+      if (page.navigation?.externalUrl) continue; // Don't include external links in sitemap
+      
       for (const locale of locales) {
-        const slug = locale === "fr" && page.slugFr ? page.slugFr : page.slugEn;
-        if (slug) {
-          sitemapEntries.push({
-            url: `${baseUrl}/${locale}/${slug}`,
-            lastModified: new Date(),
-            changeFrequency: "weekly",
-            priority: 0.7,
-          });
-        }
+        const path = resolvePath(page, locale);
+        sitemapEntries.push({
+          url: `${baseUrl}${path}`,
+          lastModified: new Date(),
+          changeFrequency: path === `/${locale}` ? "daily" : "weekly",
+          priority: path === `/${locale}` ? 1.0 : 0.8,
+        });
       }
     }
   } catch (e) {

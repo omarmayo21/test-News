@@ -5,12 +5,19 @@ export const aboutPage = defineType({
   title: "About Page",
   type: "document",
   groups: [
+    { name: "navigation", title: "Navigation" },
     { name: "hero", title: "Hero Section" },
     { name: "mission", title: "Mission & Principles" },
     { name: "cta", title: "Call to Action" },
     { name: "seo", title: "SEO" },
   ],
   fields: [
+    defineField({
+      name: "navigation",
+      title: "Navigation",
+      type: "pageNavigation",
+      group: "navigation",
+    }),
     defineField({
       name: "title",
       title: "Hero Title",

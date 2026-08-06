@@ -4,7 +4,16 @@ export const homePage = defineType({
   name: "homePage",
   title: "Homepage CMS",
   type: "document",
+  groups: [
+    { name: "navigation", title: "Navigation" }
+  ],
   fields: [
+    defineField({
+      name: "navigation",
+      title: "Navigation",
+      type: "pageNavigation",
+      group: "navigation",
+    }),
     defineField({
       name: "title",
       title: "Document Title",

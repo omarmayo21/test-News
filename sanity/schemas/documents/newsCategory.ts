@@ -4,6 +4,7 @@ export const newsCategory = defineType({
   name: "newsCategory",
   title: "News Category",
   type: "document",
+  
   fields: [
     defineField({
       name: "title",

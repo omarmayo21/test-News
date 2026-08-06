@@ -5,12 +5,19 @@ export const teamPage = defineType({
   title: "Team Page",
   type: "document",
   groups: [
+    { name: "navigation", title: "Navigation" },
     { name: "header", title: "Header" },
     { name: "team", title: "Team Grid" },
     { name: "cta", title: "Call to Action" },
     { name: "seo", title: "SEO" },
   ],
   fields: [
+    defineField({
+      name: "navigation",
+      title: "Navigation",
+      type: "pageNavigation",
+      group: "navigation",
+    }),
     defineField({
       name: "title",
       title: "Header Title",

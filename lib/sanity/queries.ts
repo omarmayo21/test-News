@@ -25,7 +25,7 @@ export async function getSiteSettings() {
         defaultSeo
       }`,
       {},
-      { next: { revalidate: 3600 } }
+      { next: { tags: ["sanity"] } }
     );
     return data;
   } catch {
@@ -48,7 +48,7 @@ export async function getThemeSettings() {
         socialLinks
       }`,
       {},
-      { next: { revalidate: 3600 } }
+      { next: { tags: ["sanity"] } }
     );
     return data;
   } catch {
@@ -72,7 +72,7 @@ export async function getHomePageData() {
         seo
       }`,
       {},
-      { next: { revalidate: 3600 } }
+      { next: { tags: ["sanity"] } }
     );
     return data;
   } catch {
@@ -96,7 +96,7 @@ export async function getNewsArticles() {
         author->{ name, role, avatar }
       }`,
       {},
-      { cache: "no-store" }
+      { next: { tags: ["sanity"] } }
     );
     return data || [];
   } catch {
@@ -126,7 +126,7 @@ export async function getSingleNewsArticle(slug: string) {
         relatedNews[]->{ _id, title, slug, coverImage, publishDate }
       }`,
       { slug },
-      { cache: "no-store" }
+      { next: { tags: ["sanity"] } }
     );
     return data;
   } catch {
@@ -236,7 +236,7 @@ export async function getPage(slug: string) {
         }
       }`,
       { slug },
-      { next: { revalidate: 3600 } }
+      { next: { tags: ["sanity"] } }
     );
   } catch {
     return null;
@@ -252,7 +252,7 @@ export async function getAllPages() {
         "slugFr": slug.fr.current
       }`,
       {},
-      { next: { revalidate: 3600 } }
+      { next: { tags: ["sanity"] } }
     );
   } catch {
     return [];
@@ -264,16 +264,52 @@ export async function getHeaderData() {
   try {
     return client.fetch(
       `*[_type == "header"][0]{
-        navItems[]{
-          navLink { label, path }
-        },
-        ctaButton
+        logo,
+        linkedinUrl,
+        enableLanguageSwitcher,
+        ctaButton,
+        externalLinks
       }`,
       {},
-      { next: { revalidate: 3600 } }
+      { next: { tags: ["sanity"] } }
     );
   } catch {
     return null;
+  }
+}
+
+export async function getNavigationTree() {
+  if (!client) return [];
+  try {
+    const pages = await client.fetch(
+      `*[
+        _type in ["homePage", "aboutPage", "servicesPage", "teamPage", "whyEgyptPage", "contactPage", "investmentPage", "newsPage", "page"]
+        && defined(navigation) 
+        && navigation.enabled == true
+      ] | order(navigation.order asc) {
+        _id,
+        _type,
+        title,
+        slug,
+        navigation {
+          showInNav,
+          showInFooter,
+          showInSitemap,
+          navTitle,
+          navGroup,
+          parent->{ _id },
+          order,
+          openInNewTab,
+          externalUrl
+        }
+      }`,
+      {},
+      { next: { tags: ["sanity"] } }
+    );
+    return pages;
+  } catch (err) {
+    console.error("Error fetching navigation tree:", err);
+    return [];
   }
 }
 
@@ -295,7 +331,7 @@ export async function getFooterData() {
         copyright
       }`,
       {},
-      { next: { revalidate: 3600 } }
+      { next: { tags: ["sanity"] } }
     );
   } catch {
     return null;

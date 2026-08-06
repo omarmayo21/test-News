@@ -5,6 +5,7 @@ export const whyEgyptPage = defineType({
   title: "Why Egypt Page",
   type: "document",
   groups: [
+    { name: "navigation", title: "Navigation" },
     { name: "header", title: "Header" },
     { name: "stats", title: "Stats Counters" },
     { name: "deepDive", title: "Deep Dive Grid" },
@@ -12,6 +13,12 @@ export const whyEgyptPage = defineType({
     { name: "seo", title: "SEO" },
   ],
   fields: [
+    defineField({
+      name: "navigation",
+      title: "Navigation",
+      type: "pageNavigation",
+      group: "navigation",
+    }),
     defineField({
       name: "kicker",
       title: "Header Kicker",

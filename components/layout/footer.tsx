@@ -7,9 +7,11 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 interface FooterProps {
   locale: Locale;
   data?: any;
+  navTree?: any[];
+  themeSettings?: any;
 }
 
-export function Footer({ locale, data }: FooterProps) {
+export function Footer({ locale, data, navTree, themeSettings }: FooterProps) {
   const dict = getDictionary(locale);
   
   const copyright = data?.copyright?.[locale] || data?.copyright?.en || dict.footer.copyright;
@@ -32,13 +34,32 @@ export function Footer({ locale, data }: FooterProps) {
     { label: { en: dict.footer.termsOfService }, path: `/${locale}/legal/terms` }
   ];
 
+  const resolvePath = (page: any) => {
+    if (page.navigation?.externalUrl) return page.navigation.externalUrl;
+    const typeMap: Record<string, string> = {
+      homePage: `/${locale}`,
+      aboutPage: `/${locale}/about`,
+      servicesPage: `/${locale}/services`,
+      teamPage: `/${locale}/team`,
+      whyEgyptPage: `/${locale}/why-egypt`,
+      contactPage: `/${locale}/contact`,
+      investmentPage: `/${locale}/investment`,
+      newsPage: `/${locale}/news`,
+    };
+    if (typeMap[page._type]) return typeMap[page._type];
+    const slugStr = page.slug?.[locale]?.current || page.slug?.en?.current || page._id;
+    return `/${locale}/${slugStr}`;
+  };
+
+  const dynamicFooterLinks = (navTree || []).filter((p: any) => p.navigation?.showInFooter);
+
   return (
     <footer className="bg-primary-navy text-white px-margin-mobile md:px-section-padding py-section-padding w-full">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
         {/* Column 1: Logo & Copyright */}
         <div className="col-span-1 md:col-span-1">
           <div className="mb-8 flex items-center">
-            <Logo variant="dark" size="footer" href={`/${locale}`} />
+            <Logo variant="dark" size="footer" href={`/${locale}`} themeSettings={themeSettings} />
           </div>
           <p className="font-caption text-caption opacity-60 whitespace-pre-line">
             {copyright}
@@ -62,15 +83,33 @@ export function Footer({ locale, data }: FooterProps) {
             <h4 className="font-label text-label-md text-primary-gold uppercase tracking-widest mb-2">
               {resourcesTitle}
             </h4>
-            {resourceLinks.map((link: any, idx: number) => (
-              <Link
-                key={idx}
-                href={link.path || "#"}
-                className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
-              >
-                {link.label?.[locale] || link.label?.en}
-              </Link>
-            ))}
+            {dynamicFooterLinks.length > 0 ? (
+              dynamicFooterLinks.map((link: any, idx: number) => {
+                const itemPath = resolvePath(link);
+                const itemLabel = link.navigation?.navTitle?.[locale] || link.navigation?.navTitle?.en || link.title?.[locale] || link.title?.en;
+                const target = link.navigation?.openInNewTab ? "_blank" : undefined;
+                return (
+                  <Link
+                    key={idx}
+                    href={itemPath}
+                    target={target}
+                    className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
+                  >
+                    {itemLabel}
+                  </Link>
+                );
+              })
+            ) : (
+              resourceLinks.map((link: any, idx: number) => (
+                <Link
+                  key={idx}
+                  href={link.path || "#"}
+                  className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
+                >
+                  {link.label?.[locale] || link.label?.en}
+                </Link>
+              ))
+            )}
           </div>
 
           <div className="flex flex-col space-y-4">

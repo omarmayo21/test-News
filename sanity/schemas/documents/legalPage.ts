@@ -4,7 +4,16 @@ export const legalPage = defineType({
   name: "legalPage",
   title: "Legal & Compliance Pages",
   type: "document",
+  groups: [
+    { name: "navigation", title: "Navigation" }
+  ],
   fields: [
+    defineField({
+      name: "navigation",
+      title: "Navigation",
+      type: "pageNavigation",
+      group: "navigation",
+    }),
     defineField({
       name: "title",
       title: "Page Title",

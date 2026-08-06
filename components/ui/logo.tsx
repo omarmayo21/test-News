@@ -1,12 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { urlForImage } from "@/lib/sanity/image";
 
 interface LogoProps {
   variant?: "dark" | "light";
   size?: "header" | "footer" | "custom";
   className?: string;
   href?: string;
+  themeSettings?: any;
+  headerLogo?: any;
 }
 
 export function Logo({
@@ -14,13 +17,26 @@ export function Logo({
   size = "header",
   className = "",
   href = "/",
+  themeSettings,
+  headerLogo,
 }: LogoProps) {
-  const logoSrc = variant === "dark" ? "/logo/D- Reverse copy.svg" : "/logo/Original.svg";
+  // Determine source from Sanity, falling back to local SVGs
+  let logoSrc = variant === "dark" ? "/logo/D- Reverse copy.svg" : "/logo/Original.svg";
+
+  if (size === "header" && headerLogo) {
+    logoSrc = urlForImage(headerLogo)?.url() || logoSrc;
+  } else if (themeSettings) {
+    if (variant === "dark" && themeSettings.darkLogo) {
+      logoSrc = urlForImage(themeSettings.darkLogo)?.url() || logoSrc;
+    } else if (variant === "light" && themeSettings.lightLogo) {
+      logoSrc = urlForImage(themeSettings.lightLogo)?.url() || logoSrc;
+    }
+  }
 
   // Slightly enlarged logo container for prominent luxury presentation
   const containerClasses =
     size === "header"
-      ? "w-[150px] h-[40px] sm:w-[190px] sm:h-[48px] md:w-[230px] md:h-[54px] lg:w-[220px] lg:h-[50px]"
+      ? "w-[130px] h-[34px] sm:w-[160px] sm:h-[40px] md:w-[190px] md:h-[46px] lg:w-[180px] lg:h-[42px]"
       : size === "footer"
         ? "w-[200px] h-[50px] md:w-[260px] md:h-[60px]"
         : "w-[180px] h-[46px]";

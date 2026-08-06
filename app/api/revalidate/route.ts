@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -10,11 +10,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Invalid revalidate secret" }, { status: 401 });
     }
 
-    const body = await request.json();
-    const { _type, slug } = body;
+    let body = {};
+    try {
+      body = await request.json();
+    } catch (e) {
+      // Ignore if body is empty or invalid JSON
+    }
+    
+    const { _type, slug } = body as any;
 
     // Revalidate paths based on content type
     revalidatePath("/", "layout");
+    revalidateTag("sanity");
     revalidatePath("/en");
     revalidatePath("/fr");
 

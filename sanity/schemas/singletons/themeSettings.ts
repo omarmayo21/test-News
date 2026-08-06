@@ -4,6 +4,7 @@ export const themeSettings = defineType({
   name: "themeSettings",
   title: "Global Theme & Branding Settings",
   type: "document",
+  
   fields: [
     defineField({
       name: "lightLogo",

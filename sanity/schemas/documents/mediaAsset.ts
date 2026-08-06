@@ -4,6 +4,7 @@ export const mediaAsset = defineType({
   name: "mediaAsset",
   title: "Media & Document Library",
   type: "document",
+  
   fields: [
     defineField({
       name: "title",

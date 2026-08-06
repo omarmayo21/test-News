@@ -5,11 +5,18 @@ export const investmentPage = defineType({
   title: "Investment Page",
   type: "document",
   groups: [
+    { name: "navigation", title: "Navigation" },
     { name: "header", title: "Header" },
     { name: "cta", title: "Call to Action" },
     { name: "seo", title: "SEO" },
   ],
   fields: [
+    defineField({
+      name: "navigation",
+      title: "Navigation",
+      type: "pageNavigation",
+      group: "navigation",
+    }),
     defineField({
       name: "title",
       title: "Header Title",

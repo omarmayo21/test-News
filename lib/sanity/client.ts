@@ -12,7 +12,7 @@ export const client = isSanityConfigured
       projectId,
       dataset,
       apiVersion,
-      useCdn: true,
+      useCdn: false, // Must be false so Next.js handles caching via tags
     })
   : null;
 

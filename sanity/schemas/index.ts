@@ -2,6 +2,7 @@ import { localeString } from "./objects/localeString";
 import { localeText } from "./objects/localeText";
 import { localeSlug } from "./objects/localeSlug";
 import { seo } from "./objects/seo";
+import { pageNavigation } from "./objects/pageNavigation";
 
 import { siteSettings } from "./singletons/siteSettings";
 import { themeSettings } from "./singletons/themeSettings";
@@ -25,6 +26,7 @@ import { teamPage } from "./singletons/teamPage";
 import { whyEgyptPage } from "./singletons/whyEgyptPage";
 import { contactPage } from "./singletons/contactPage";
 import { investmentPage } from "./singletons/investmentPage";
+import { newsPage } from "./singletons/newsPage";
 
 import { heroBlock } from "./pageBuilder/heroBlock";
 import { capabilitiesBlock } from "./pageBuilder/capabilitiesBlock";
@@ -37,6 +39,7 @@ export const schemaTypes = [
   localeText,
   localeSlug,
   seo,
+  pageNavigation,
 
   // Singletons
   siteSettings,
@@ -63,6 +66,7 @@ export const schemaTypes = [
   whyEgyptPage,
   contactPage,
   investmentPage,
+  newsPage,
 
   // Page Builder Blocks
   heroBlock,
