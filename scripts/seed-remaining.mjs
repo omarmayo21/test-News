@@ -29,6 +29,7 @@ async function run() {
   console.log("Seeding remaining singletons and content...");
 
   // Seed HomePage
+  await client.createIfNotExists({ _id: 'homePage', _type: 'homePage' });
   await client.patch('homePage').set({
     title: "Homepage CMS",
     pageBuilder: [
@@ -74,6 +75,7 @@ async function run() {
   console.log("HomePage seeded.");
 
   // Seed AboutPage
+  await client.createIfNotExists({ _id: 'aboutPage', _type: 'aboutPage' });
   await client.patch('aboutPage').set({
     title: { en: "About Nexus", fr: "À propos de Nexus" },
     subtitle: { en: "Building a sustainable legacy.", fr: "Construire un héritage durable." },
@@ -96,6 +98,7 @@ async function run() {
     role: "Chief Executive Officer",
   });
   
+  await client.createIfNotExists({ _id: 'teamPage', _type: 'teamPage' });
   await client.patch('teamPage').set({
     title: { en: "Leadership Team", fr: "Équipe Dirigeante" },
     subtitle: { en: "Guided by decades of experience.", fr: "Guidés par des décennies d'expérience." },

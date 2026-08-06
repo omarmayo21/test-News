@@ -24,7 +24,8 @@ const client = createClient({
 async function run() {
   console.log("Seeding Explicit Navigation Tree...");
 
-  // 1. Singletons (Already exist, just updating navigation)
+  // 1. Singletons (Ensure exist before patching)
+  await client.createIfNotExists({ _id: 'homePage', _type: 'homePage' });
   await client.patch('homePage').set({
     navigation: {
       enabled: true, showInNav: true, showInFooter: false, showInSitemap: true,
@@ -34,6 +35,7 @@ async function run() {
   }).commit();
   console.log("Updated Home Page");
 
+  await client.createIfNotExists({ _id: 'aboutPage', _type: 'aboutPage' });
   await client.patch('aboutPage').set({
     navigation: {
       enabled: true, showInNav: true, showInFooter: true, showInSitemap: true,
@@ -62,6 +64,7 @@ async function run() {
   });
   console.log("Created Corporate Page");
 
+  await client.createIfNotExists({ _id: 'servicesPage', _type: 'servicesPage' });
   await client.patch('servicesPage').set({
     navigation: {
       enabled: true, showInNav: true, showInFooter: true, showInSitemap: true,
@@ -71,6 +74,7 @@ async function run() {
   }).commit();
   console.log("Updated Services Page");
 
+  await client.createIfNotExists({ _id: 'whyEgyptPage', _type: 'whyEgyptPage' });
   await client.patch('whyEgyptPage').set({
     navigation: {
       enabled: true, showInNav: true, showInFooter: false, showInSitemap: true,
@@ -92,6 +96,7 @@ async function run() {
   });
   console.log("Created News Page");
 
+  await client.createIfNotExists({ _id: 'contactPage', _type: 'contactPage' });
   await client.patch('contactPage').set({
     navigation: {
       enabled: true, showInNav: true, showInFooter: true, showInSitemap: true,
@@ -101,6 +106,7 @@ async function run() {
   }).commit();
   console.log("Updated Contact Page");
 
+  await client.createIfNotExists({ _id: 'investmentPage', _type: 'investmentPage' });
   await client.patch('investmentPage').set({
     navigation: {
       enabled: false, showInNav: true, showInFooter: false, showInSitemap: false,
@@ -141,6 +147,7 @@ async function run() {
   }
 
   // --- Corporate Dropdown Children ---
+  await client.createIfNotExists({ _id: 'teamPage', _type: 'teamPage' });
   await client.patch('teamPage').set({
     navigation: {
       enabled: true, showInNav: true, showInFooter: false, showInSitemap: true,
