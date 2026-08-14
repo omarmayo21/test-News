@@ -157,12 +157,12 @@ export async function getGlobalSearchResults(query: string) {
 
 export async function getAboutPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "aboutPage"][0]`, {}, { next: { revalidate: 3600 } });
+  return client.fetch(`*[_type == "aboutPage"][0]`, {}, { next: { tags: ["sanity"] } });
 }
 
 export async function getServicesPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "servicesPage"][0]`, {}, { next: { revalidate: 3600 } });
+  return client.fetch(`*[_type == "servicesPage"][0]`, {}, { next: { tags: ["sanity"] } });
 }
 
 export async function getTeamPageData() {
@@ -175,33 +175,33 @@ export async function getTeamPageData() {
       specialistConsultants[]->{ name, role, bio, avatar }
     }`,
     {},
-    { next: { revalidate: 3600 } }
+    { next: { tags: ["sanity"] } }
   );
 }
 
 export async function getWhyEgyptPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "whyEgyptPage"][0]`, {}, { next: { revalidate: 3600 } });
+  return client.fetch(`*[_type == "whyEgyptPage"][0]`, {}, { next: { tags: ["sanity"] } });
 }
 
 export async function getWhyNexusPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "whyNexusPage"][0]`, {}, { next: { revalidate: 3600 } });
+  return client.fetch(`*[_type == "whyNexusPage"][0]`, {}, { next: { tags: ["sanity"] } });
 }
 
 export async function getNewsPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "newsPage"][0]`, {}, { next: { revalidate: 3600 } });
+  return client.fetch(`*[_type == "newsPage"][0]`, {}, { next: { tags: ["sanity"] } });
 }
 
 export async function getContactPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "contactPage"][0]`, {}, { next: { revalidate: 3600 } });
+  return client.fetch(`*[_type == "contactPage"][0]`, {}, { next: { tags: ["sanity"] } });
 }
 
 export async function getInvestmentPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "investmentPage"][0]`, {}, { next: { revalidate: 3600 } });
+  return client.fetch(`*[_type == "investmentPage"][0]`, {}, { next: { tags: ["sanity"] } });
 }
 
 export async function getInvestmentCategories() {
@@ -209,7 +209,7 @@ export async function getInvestmentCategories() {
   return client.fetch(
     `*[_type == "investmentCategory"] | order(title.en asc){ title, slug }`,
     {},
-    { next: { revalidate: 3600 } }
+    { next: { tags: ["sanity"] } }
   );
 }
 
@@ -227,7 +227,7 @@ export async function getInvestmentOpportunities() {
       category->{ title, slug }
     }`,
     {},
-    { next: { revalidate: 3600 } }
+    { next: { tags: ["sanity"] } }
   );
 }
 
