@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { ContactForm } from "@/components/forms/contact-form";
 import { constructMetadata } from "@/lib/seo/metadata";
@@ -162,12 +163,12 @@ export default async function ContactPage({
             {data.closingSubtitle?.[locale] || data.closingSubtitle?.en}
           </p>
           {data.closingButtonLabel && (
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            <Link
+              href="#top"
               className="inline-block px-8 py-4 bg-primary-gold text-white font-label text-label-md uppercase tracking-widest hover:bg-primary-navy transition-colors duration-300"
             >
               {data.closingButtonLabel?.[locale] || data.closingButtonLabel?.en}
-            </button>
+            </Link>
           )}
         </div>
       )}
