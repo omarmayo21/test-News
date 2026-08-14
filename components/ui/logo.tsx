@@ -21,7 +21,7 @@ export function Logo({
   headerLogo,
 }: LogoProps) {
   // Determine source from Sanity, falling back to local SVGs
-  let logoSrc = variant === "dark" ? "/logo/D- Reverse copy.svg" : "/logo/Original.svg";
+  let logoSrc = variant === "dark" ? "/logo/D- original copy.svg" : "/logo/Original.svg";
 
   if (size === "header" && headerLogo) {
     logoSrc = urlForImage(headerLogo)?.url() || logoSrc;

@@ -24,6 +24,7 @@ import { aboutPage } from "./singletons/aboutPage";
 import { servicesPage } from "./singletons/servicesPage";
 import { teamPage } from "./singletons/teamPage";
 import { whyEgyptPage } from "./singletons/whyEgyptPage";
+import { whyNexusPage } from "./singletons/whyNexusPage";
 import { contactPage } from "./singletons/contactPage";
 import { investmentPage } from "./singletons/investmentPage";
 import { newsPage } from "./singletons/newsPage";
@@ -64,6 +65,7 @@ export const schemaTypes = [
   servicesPage,
   teamPage,
   whyEgyptPage,
+  whyNexusPage,
   contactPage,
   investmentPage,
   newsPage,

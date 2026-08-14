@@ -38,17 +38,14 @@ export default defineConfig({
               .title("About Page")
               .child(S.document().schemaType("aboutPage").documentId("aboutPage")),
             S.listItem()
-              .title("Services Page")
-              .child(S.document().schemaType("servicesPage").documentId("servicesPage")),
+              .title("Why Nexus Page")
+              .child(S.document().schemaType("whyNexusPage").documentId("whyNexusPage")),
             S.listItem()
               .title("Consultant Team Page")
               .child(S.document().schemaType("teamPage").documentId("teamPage")),
             S.listItem()
               .title("Why Egypt Page")
               .child(S.document().schemaType("whyEgyptPage").documentId("whyEgyptPage")),
-            S.listItem()
-              .title("Investment Page")
-              .child(S.document().schemaType("investmentPage").documentId("investmentPage")),
             S.listItem()
               .title("News Listing Page")
               .child(S.document().schemaType("newsPage").documentId("newsPage")),

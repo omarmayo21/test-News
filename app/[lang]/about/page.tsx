@@ -39,6 +39,11 @@ export default async function AboutPage({
 
   const title = data?.title?.[locale] || data?.title?.en || dict.about.title;
   const subtitle = data?.subtitle?.[locale] || data?.subtitle?.en || dict.about.subtitle;
+  const overviewTitle = data?.overviewTitle?.[locale] || data?.overviewTitle?.en || "Company Overview";
+  const overviewHeadline = data?.overviewHeadline?.[locale] || data?.overviewHeadline?.en || "";
+  const overviewDesc = data?.overviewDesc?.[locale] || data?.overviewDesc?.en || "";
+  const visionTitle = data?.visionTitle?.[locale] || data?.visionTitle?.en || "Vision";
+  const visionDesc = data?.visionDesc?.[locale] || data?.visionDesc?.en || "";
   const missionTitle = data?.missionTitle?.[locale] || data?.missionTitle?.en || dict.about.missionTitle;
   const missionHeadline = data?.missionHeadline?.[locale] || data?.missionHeadline?.en || dict.about.missionHeadline;
   const missionDesc = data?.missionDesc?.[locale] || data?.missionDesc?.en || dict.about.missionDesc;
@@ -80,6 +85,42 @@ export default async function AboutPage({
           </div>
         </div>
       </section>
+
+      {/* Overview / Vision */}
+      {(overviewTitle || visionTitle) && (
+        <section className="bg-white py-section-padding px-margin-mobile md:px-section-padding border-t border-surface-container-high">
+          <div className="max-w-container-max mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter lg:gap-24">
+              {/* Overview */}
+              <div>
+                <span className="font-label text-label-md text-primary-gold uppercase tracking-widest block mb-4">
+                  {overviewTitle}
+                </span>
+                {overviewHeadline && (
+                  <h2 className="font-headline text-headline-lg text-primary-navy mb-6">
+                    {overviewHeadline}
+                  </h2>
+                )}
+                <div className="font-body text-body-md text-on-surface opacity-80 leading-relaxed whitespace-pre-wrap space-y-4">
+                  {overviewDesc.split('\n').map((para: string, i: number) => (
+                    <p key={i}>{para}</p>
+                  ))}
+                </div>
+              </div>
+
+              {/* Vision */}
+              <div>
+                <span className="font-label text-label-md text-primary-gold uppercase tracking-widest block mb-4">
+                  {visionTitle}
+                </span>
+                <p className="font-body text-body-md text-on-surface opacity-80 leading-relaxed whitespace-pre-wrap">
+                  {visionDesc}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Mission / Core Principles */}
       <section className="bg-surface-container-low py-section-padding px-margin-mobile md:px-section-padding border-t border-surface-container-high">

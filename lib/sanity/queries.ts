@@ -170,7 +170,9 @@ export async function getTeamPageData() {
   return client.fetch(
     `*[_type == "teamPage"][0]{
       ...,
-      teamMembers[]->{ name, role, bio, avatar }
+      managementTeam[]->{ name, role, bio, avatar },
+      advisoryBoard[]->{ name, role, bio, avatar },
+      specialistConsultants[]->{ name, role, bio, avatar }
     }`,
     {},
     { next: { revalidate: 3600 } }
@@ -180,6 +182,16 @@ export async function getTeamPageData() {
 export async function getWhyEgyptPageData() {
   if (!client) return null;
   return client.fetch(`*[_type == "whyEgyptPage"][0]`, {}, { next: { revalidate: 3600 } });
+}
+
+export async function getWhyNexusPageData() {
+  if (!client) return null;
+  return client.fetch(`*[_type == "whyNexusPage"][0]`, {}, { next: { revalidate: 3600 } });
+}
+
+export async function getNewsPageData() {
+  if (!client) return null;
+  return client.fetch(`*[_type == "newsPage"][0]`, {}, { next: { revalidate: 3600 } });
 }
 
 export async function getContactPageData() {
@@ -283,7 +295,7 @@ export async function getNavigationTree() {
   try {
     const pages = await client.fetch(
       `*[
-        _type in ["homePage", "aboutPage", "servicesPage", "teamPage", "whyEgyptPage", "contactPage", "investmentPage", "newsPage", "page"]
+        _type in ["homePage", "aboutPage", "servicesPage", "teamPage", "whyEgyptPage", "whyNexusPage", "contactPage", "investmentPage", "newsPage", "page"]
         && defined(navigation) 
         && navigation.enabled == true
       ] | order(navigation.order asc) {

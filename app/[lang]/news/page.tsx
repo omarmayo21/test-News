@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { constructMetadata } from "@/lib/seo/metadata";
-import { getNewsArticles } from "@/lib/sanity/queries";
+import { getNewsArticles, getNewsPageData } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -33,6 +33,10 @@ export default async function NewsPage({
   const dict = getDictionary(locale);
 
   const sanityNews = await getNewsArticles();
+  const pageData = await getNewsPageData();
+
+  const title = pageData?.title?.[locale] || pageData?.title?.en || dict.news.title;
+  const subtitle = pageData?.subtitle?.[locale] || pageData?.subtitle?.en || dict.news.subtitle;
 
   const articles = sanityNews;
 
@@ -44,10 +48,10 @@ export default async function NewsPage({
           Insights & Updates
         </span>
         <h1 className="font-headline font-headline-lg text-headline-lg text-primary-navy mb-6">
-          {dict.news.title}
+          {title}
         </h1>
         <p className="font-body text-body-lg text-on-surface opacity-80">
-          {dict.news.subtitle}
+          {subtitle}
         </p>
       </div>
 

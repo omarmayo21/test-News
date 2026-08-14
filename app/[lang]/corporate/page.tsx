@@ -41,42 +41,15 @@ export default async function TeamPage({
   const ctaButtonLabel = data?.ctaButtonLabel?.[locale] || data?.ctaButtonLabel?.en || "Contact Advisory Board";
   const ctaButtonLink = data?.ctaButtonLink || `/${locale}/contact`;
 
-  const team = data?.teamMembers?.length > 0 ? data.teamMembers : [
-    {
-      name: "Dr. Tarek Al-Sayed",
-      role: { en: "Chief Executive & Geological Director" },
-      bio: { en: "Ph.D. in Structural Geology from Imperial College London with 25+ years directing gold exploration and feasibility across North Africa and the Middle East." },
-      avatar: null,
-    },
-    {
-      name: "Eng. Sarah Mansour",
-      role: { en: "Head of Structural Infrastructure" },
-      bio: { en: "Master of Civil Engineering with specialized expertise in deep underground tunnel stabilization, slope safety, and processing plant infrastructure." },
-      avatar: null,
-    },
-    {
-      name: "Karim Benjelloun",
-      role: { en: "Vice President of Operational Management" },
-      bio: { en: "Former Operations Director for multinational mining concessions, overseeing open-pit extraction efficiency and autonomous logistics integration." },
-      avatar: null,
-    },
-  ];
+  const managementTeam = data?.managementTeam || [];
+  const advisoryBoard = data?.advisoryBoard || [];
+  const specialistConsultants = data?.specialistConsultants || [];
 
-  return (
-    <div className="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto">
-      {/* Header */}
-      <div className="max-w-3xl mb-16">
-        <h1 className="font-headline font-headline-lg text-headline-lg text-primary-navy mb-6">
-          {title}
-        </h1>
-        <p className="font-body text-body-lg text-on-surface opacity-80">
-          {subtitle}
-        </p>
-      </div>
-
-      {/* Team Cards Grid */}
+  const renderTeamGrid = (teamMembers: any[]) => {
+    if (!teamMembers || teamMembers.length === 0) return null;
+    return (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-20">
-        {team.map((member: any, idx: number) => (
+        {teamMembers.map((member: any, idx: number) => (
           <div
             key={idx}
             className="bg-surface-container-low border-b-2 border-primary-gold overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col"
@@ -106,6 +79,44 @@ export default async function TeamPage({
           </div>
         ))}
       </div>
+    );
+  };
+
+  return (
+    <div className="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto">
+      {/* Header */}
+      <div className="max-w-3xl mb-16">
+        <h1 className="font-headline font-headline-lg text-headline-lg text-primary-navy mb-6">
+          {title}
+        </h1>
+        <p className="font-body text-body-lg text-on-surface opacity-80">
+          {subtitle}
+        </p>
+      </div>
+
+      {/* Management Team Grid */}
+      {managementTeam.length > 0 && (
+        <div className="mb-12">
+          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">Management Team</h2>
+          {renderTeamGrid(managementTeam)}
+        </div>
+      )}
+
+      {/* Advisory Board Grid */}
+      {advisoryBoard.length > 0 && (
+        <div className="mb-12">
+          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">Advisory Board</h2>
+          {renderTeamGrid(advisoryBoard)}
+        </div>
+      )}
+
+      {/* Specialist Consultants Grid */}
+      {specialistConsultants.length > 0 && (
+        <div className="mb-12">
+          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">Specialist Consultants</h2>
+          {renderTeamGrid(specialistConsultants)}
+        </div>
+      )}
 
       {/* Advisory CTA */}
       <div className="text-center p-12 bg-white border border-surface-container-high">

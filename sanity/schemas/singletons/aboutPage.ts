@@ -38,6 +38,40 @@ export const aboutPage = defineType({
       group: "hero",
     }),
     
+    // Overview
+    defineField({
+      name: "overviewTitle",
+      title: "Overview Title",
+      type: "localeString",
+      group: "mission",
+    }),
+    defineField({
+      name: "overviewHeadline",
+      title: "Overview Headline",
+      type: "localeString",
+      group: "mission",
+    }),
+    defineField({
+      name: "overviewDesc",
+      title: "Overview Description",
+      type: "localeText",
+      group: "mission",
+    }),
+
+    // Vision
+    defineField({
+      name: "visionTitle",
+      title: "Vision Title",
+      type: "localeString",
+      group: "mission",
+    }),
+    defineField({
+      name: "visionDesc",
+      title: "Vision Description",
+      type: "localeText",
+      group: "mission",
+    }),
+
     // Mission
     defineField({
       name: "missionTitle",

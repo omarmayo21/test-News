@@ -55,32 +55,27 @@ export const whyEgyptPage = defineType({
       ],
     }),
 
-    // Deep Dive
+    // Content Sections
     defineField({
-      name: "deepDiveTitle",
-      title: "Deep Dive Title",
-      type: "localeString",
-      group: "deepDive",
-    }),
-    defineField({
-      name: "deepDiveDesc",
-      title: "Deep Dive Description",
-      type: "localeText",
-      group: "deepDive",
-    }),
-    defineField({
-      name: "deepDiveList",
-      title: "Deep Dive Bullet Points",
+      name: "contentBlocks",
+      title: "Content Sections",
       type: "array",
       group: "deepDive",
-      of: [{ type: "localeString" }],
-    }),
-    defineField({
-      name: "deepDiveImage",
-      title: "Deep Dive Image",
-      type: "image",
-      options: { hotspot: true },
-      group: "deepDive",
+      of: [
+        {
+          type: "object",
+          title: "Content Block",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "localeString" }),
+            defineField({ name: "description", title: "Description", type: "localeText" }),
+            defineField({ name: "content", title: "Rich Text Content / Bullets", type: "array", of: [{ type: "block" }] }),
+            defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
+            defineField({ name: "statValue", title: "Stat Value (e.g. 500,000 oz)", type: "string" }),
+            defineField({ name: "statLabel", title: "Stat Label", type: "localeString" }),
+            defineField({ name: "statDisclaimer", title: "Stat Disclaimer", type: "localeString" }),
+          ],
+        },
+      ],
     }),
 
     // CTA

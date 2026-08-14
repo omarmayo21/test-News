@@ -1,13 +1,13 @@
 import { defineType, defineField } from "sanity";
 
-export const teamPage = defineType({
-  name: "teamPage",
-  title: "Team Page",
+export const whyNexusPage = defineType({
+  name: "whyNexusPage",
+  title: "Why Nexus Page",
   type: "document",
   groups: [
     { name: "navigation", title: "Navigation" },
     { name: "header", title: "Header" },
-    { name: "team", title: "Team Grid" },
+    { name: "content", title: "Content Sections" },
     { name: "cta", title: "Call to Action" },
     { name: "seo", title: "SEO" },
   ],
@@ -31,31 +31,24 @@ export const teamPage = defineType({
       group: "header",
     }),
     
-    // Management Team
+    // Content Sections
     defineField({
-      name: "managementTeam",
-      title: "Management Team",
+      name: "contentBlocks",
+      title: "Content Sections",
       type: "array",
-      group: "team",
-      of: [{ type: "reference", to: [{ type: "author" }] }],
-    }),
-    
-    // Advisory Board
-    defineField({
-      name: "advisoryBoard",
-      title: "Advisory Board",
-      type: "array",
-      group: "team",
-      of: [{ type: "reference", to: [{ type: "author" }] }],
-    }),
-
-    // Specialist Consultants
-    defineField({
-      name: "specialistConsultants",
-      title: "Specialist Consultants",
-      type: "array",
-      group: "team",
-      of: [{ type: "reference", to: [{ type: "author" }] }],
+      group: "content",
+      of: [
+        {
+          type: "object",
+          title: "Content Block",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "localeString" }),
+            defineField({ name: "description", title: "Description", type: "localeText" }),
+            defineField({ name: "content", title: "Rich Text Content / Bullets", type: "array", of: [{ type: "block" }] }),
+            defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
+          ],
+        },
+      ],
     }),
 
     // CTA
@@ -93,7 +86,7 @@ export const teamPage = defineType({
   ],
   preview: {
     prepare() {
-      return { title: "Team Page" };
+      return { title: "Why Nexus Page" };
     },
   },
 });
