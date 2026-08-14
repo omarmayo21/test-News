@@ -42,9 +42,10 @@ export default async function WhyEgyptPage({
 
   const contentBlocks = data?.contentBlocks || [];
 
-  const ctaTitle = data?.ctaTitle?.[locale] || data?.ctaTitle?.en || "Ready to Explore?";
-  const ctaButtonLabel = data?.ctaButtonLabel?.[locale] || data?.ctaButtonLabel?.en || "Request Exploration Report";
-  const ctaButtonLink = data?.ctaButtonLink || `/${locale}/contact`;
+  const ctaTitle = data?.ctaTitle?.[locale] || data?.ctaTitle?.en || "Egypt Creates the Opportunity. Nexus Helps Advance It.";
+  const ctaSubtitle = data?.ctaSubtitle?.[locale] || data?.ctaSubtitle?.en || "Egypt's geology, evolving mining framework, international\nparticipation, and proven production create the opportunity.\n\nDiscover how Nexus combines local execution, technical expertise, and\nstrategic partnerships to participate in Egypt's next phase of\nmineral development.";
+  const ctaButtonLabel = data?.ctaButtonLabel?.[locale] || data?.ctaButtonLabel?.en || "Why Nexus →";
+  const ctaButtonLink = data?.ctaButtonLink || `/${locale}/why-nexus`;
 
   return (
     <div className="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto space-y-20">
@@ -134,18 +135,25 @@ export default async function WhyEgyptPage({
       )}
 
       {/* CTA */}
-      <div className="text-center pt-8 border-t border-surface-container-high">
-        {data?.ctaTitle && (
-          <h3 className="font-headline text-headline-md text-primary-navy mb-6">
-            {ctaTitle}
-          </h3>
-        )}
-        <Link
-          href={ctaButtonLink}
-          className="inline-block px-10 py-5 bg-primary-gold text-white font-label text-label-md uppercase tracking-widest hover:bg-primary-navy transition-colors"
-        >
-          {ctaButtonLabel}
-        </Link>
+      <div className="text-center pt-8 border-t border-surface-container-high bg-surface-container-low p-12">
+        <div className="max-w-3xl mx-auto">
+          {ctaTitle && (
+            <h3 className="font-headline text-headline-md text-primary-navy mb-6">
+              {ctaTitle}
+            </h3>
+          )}
+          {ctaSubtitle && (
+            <div className="font-body text-body-lg text-on-surface opacity-85 leading-relaxed whitespace-pre-wrap mb-8">
+              {ctaSubtitle}
+            </div>
+          )}
+          <Link
+            href={ctaButtonLink}
+            className="inline-block px-10 py-5 bg-primary-gold text-white font-label text-label-md uppercase tracking-widest hover:bg-primary-navy transition-colors"
+          >
+            {ctaButtonLabel}
+          </Link>
+        </div>
       </div>
     </div>
   );

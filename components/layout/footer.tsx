@@ -39,9 +39,9 @@ export function Footer({ locale, data, navTree, themeSettings }: FooterProps) {
     const typeMap: Record<string, string> = {
       homePage: `/${locale}`,
       aboutPage: `/${locale}/about`,
-      servicesPage: `/${locale}/services`,
-      teamPage: `/${locale}/team`,
+      teamPage: `/${locale}/corporate`,
       whyEgyptPage: `/${locale}/why-egypt`,
+      whyNexusPage: `/${locale}/why-nexus`,
       contactPage: `/${locale}/contact`,
       investmentPage: `/${locale}/investment`,
       newsPage: `/${locale}/news`,

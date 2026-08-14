@@ -67,7 +67,7 @@ export async function getHomePageData() {
           _type == "heroBlock" => { headline, subtitle, ctaLabel, ctaLink, backgroundImage },
           _type == "capabilitiesBlock" => { sectionTitle, sectionDescription, cards },
           _type == "statsBlock" => { title, subtitle, stats, sideImage },
-          _type == "ctaBlock" => { title, buttonText, buttonLink }
+          _type == "ctaBlock" => { title, subtitle, buttonText, buttonLink }
         },
         seo
       }`,
@@ -244,7 +244,7 @@ export async function getPage(slug: string) {
           _type == "heroBlock" => { headline, subtitle, ctaLabel, ctaLink, backgroundImage },
           _type == "capabilitiesBlock" => { sectionTitle, sectionDescription, cards },
           _type == "statsBlock" => { title, subtitle, stats, sideImage },
-          _type == "ctaBlock" => { title, buttonText, buttonLink }
+          _type == "ctaBlock" => { title, subtitle, buttonText, buttonLink }
         }
       }`,
       { slug },

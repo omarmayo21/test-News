@@ -10,7 +10,7 @@ import { getHomePageData } from "@/lib/sanity/queries";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { Locale } from "@/i18n-config";
 
-export const revalidate = 3600; // Revalidate ISR every 1 hour
+export const revalidate = 0; // Disable ISR caching to ensure fresh Sanity data
 
 export async function generateMetadata({
   params,
@@ -25,7 +25,7 @@ export async function generateMetadata({
     title: homeData?.seo?.metaTitle?.[locale] || "Nexus Resources - Engineering the Future of Egyptian Mining",
     description:
       homeData?.seo?.metaDescription?.[locale] ||
-      "Delivering structural excellence and strategic resource management through precision engineering and sustainable practices.",
+      "Nexus Resources is an Egyptian mining and mineral development company advancing high potential gold and mineral opportunities from exploration toward responsible production.",
     locale,
     path: "",
   });

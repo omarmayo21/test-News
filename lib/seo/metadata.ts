@@ -17,7 +17,7 @@ interface GenerateMetadataOptions {
 
 export async function constructMetadata({
   title = "Nexus Resources - Engineering the Future of Egyptian Mining",
-  description = "Delivering structural excellence and strategic resource management through precision engineering and sustainable practices in the Arabian-Nubian shield.",
+  description = "Nexus Resources is an Egyptian mining and mineral development company advancing high potential gold and mineral opportunities from exploration toward responsible production.",
   keywords = ["Nexus Resources", "Egyptian Mining", "Arabian-Nubian Shield", "Structural Engineering", "Resource Exploration"],
   canonicalUrl,
   ogImage = "/logo/Original.webp",

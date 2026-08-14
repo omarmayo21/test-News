@@ -36,21 +36,33 @@ export default async function ContactPage({
   const title = data?.title?.[locale] || data?.title?.en || dict.contact.title;
   const subtitle = data?.subtitle?.[locale] || data?.subtitle?.en || dict.contact.subtitle;
 
-  const offices = data?.offices?.length > 0 ? data.offices : [
+  const contactBlocks = [
     {
-      name: "Cairo Headquarters",
-      isPrimary: true,
-      address: dict.contact.cairoAddress,
-      phone: "+20 2 2790 1842",
-      email: "contact@nexus-resources.com",
-      hours: "Sunday - Thursday: 08:30 - 17:30 (EET)",
+      name: "GENERAL INQUIRIES",
+      subtitle: "Get in Touch",
+      description: "For corporate information, technical discussions, suppliers, service providers, and general business inquiries:",
+      email: "info@nexusmines.com",
+      phoneLabel: "Cairo Office",
+      phone: "+20 2 3745 9141",
     },
     {
-      name: "International Advisory",
-      isPrimary: false,
-      address: "Suite 400, 100 Bishopsgate, London, UK",
-      phone: "+44 20 7946 0912",
-      email: "uk@nexus-resources.com",
+      name: "INVESTORS & PARTNERSHIPS",
+      subtitle: "Discuss an Opportunity",
+      description: "For investment opportunities, strategic partnerships, joint ventures, project development, and mining collaboration:",
+      email: "invest@nexusmines.com",
+      phoneLabel: "International / WhatsApp",
+      phone: "+44 7453 421940",
+    },
+    {
+      name: "CAIRO HEADQUARTERS",
+      subtitle: "Nexus Resources",
+      addressLines: [
+        "20th Floor, North Tower",
+        "Nile City Towers",
+        "2005C Nile Corniche",
+        "Cairo, Egypt",
+        "Postal Code: 11221"
+      ]
     }
   ];
 
@@ -86,42 +98,57 @@ export default async function ContactPage({
 
         {/* Office Locations & Contact Info */}
         <div className="space-y-12">
-          {offices.map((office: any, idx: number) => (
+          {contactBlocks.map((block: any, idx: number) => (
             <div 
               key={idx} 
-              className={`p-8 bg-surface-container-low space-y-4 ${
-                office.isPrimary ? 'border-l-4 border-primary-gold' : 'border-l-4 border-primary-navy'
-              }`}
+              className="p-8 bg-surface-container-low space-y-4 border-l-4 border-primary-gold"
             >
-              <h3 className="font-headline text-headline-sm text-primary-navy">
-                {office.name}
+              <h3 className="font-headline text-headline-sm text-primary-navy uppercase tracking-wider">
+                {block.name}
               </h3>
-              {office.address && (
-                <div className="flex items-start space-x-3 text-body-md opacity-80">
-                  <MapPin className={`w-5 h-5 flex-shrink-0 mt-1 ${office.isPrimary ? 'text-primary-gold' : 'text-primary-navy'}`} />
-                  <span>{office.address}</span>
+              {block.subtitle && (
+                <p className="font-label text-label-md text-primary-gold font-bold">
+                  {block.subtitle}
+                </p>
+              )}
+              {block.description && (
+                <p className="font-body text-body-md opacity-80 leading-relaxed">
+                  {block.description}
+                </p>
+              )}
+              {block.email && (
+                <div className="flex items-center space-x-3 text-body-md opacity-80 pt-2">
+                  <Mail className="w-5 h-5 flex-shrink-0 text-primary-gold" />
+                  <span>Email: {block.email}</span>
                 </div>
               )}
-              {office.phone && (
+              {block.phone && (
                 <div className="flex items-center space-x-3 text-body-md opacity-80">
-                  <Phone className={`w-5 h-5 flex-shrink-0 ${office.isPrimary ? 'text-primary-gold' : 'text-primary-navy'}`} />
-                  <span>{office.phone}</span>
+                  <Phone className="w-5 h-5 flex-shrink-0 text-primary-gold" />
+                  <span>{block.phoneLabel}: {block.phone}</span>
                 </div>
               )}
-              {office.email && (
-                <div className="flex items-center space-x-3 text-body-md opacity-80">
-                  <Mail className={`w-5 h-5 flex-shrink-0 ${office.isPrimary ? 'text-primary-gold' : 'text-primary-navy'}`} />
-                  <span>{office.email}</span>
-                </div>
-              )}
-              {office.hours && (
-                <div className="flex items-center space-x-3 text-body-md opacity-80 pt-2 border-t border-outline-variant">
-                  <Clock className={`w-5 h-5 flex-shrink-0 ${office.isPrimary ? 'text-primary-gold' : 'text-primary-navy'}`} />
-                  <span>{office.hours}</span>
+              {block.addressLines && (
+                <div className="flex items-start space-x-3 text-body-md opacity-80 pt-2">
+                  <MapPin className="w-5 h-5 flex-shrink-0 mt-1 text-primary-gold" />
+                  <div className="space-y-1">
+                    {block.addressLines.map((line: string, i: number) => (
+                      <div key={i}>{line}</div>
+                    ))}
+                    <div className="mt-4 font-bold uppercase tracking-wider text-xs underline cursor-pointer">
+                      View on Google Maps →
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
           ))}
+          
+          <div className="p-8 bg-surface-container-low border border-surface-container-high text-center">
+             <p className="font-body text-body-md opacity-80 leading-relaxed">
+               We welcome discussions with international mining companies, investors, project owners, license holders, and strategic partners interested in developing opportunities in Egypt.
+             </p>
+          </div>
         </div>
       </div>
 
