@@ -42,6 +42,16 @@ export const formSubmission = defineType({
       type: "string",
     }),
     defineField({
+      name: "country",
+      title: "Country",
+      type: "string",
+    }),
+    defineField({
+      name: "inquiryType",
+      title: "Inquiry Type",
+      type: "string",
+    }),
+    defineField({
       name: "subject",
       title: "Subject",
       type: "string",

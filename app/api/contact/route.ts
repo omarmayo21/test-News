@@ -8,6 +8,8 @@ const contactSchema = z.object({
   email: z.string().email("Invalid email address."),
   phone: z.string().optional(),
   company: z.string().optional(),
+  country: z.string().optional(),
+  inquiryType: z.string().optional(),
   subject: z.string().optional(),
   message: z.string().min(5, "Message must be at least 5 characters."),
   honeypot: z.string().optional(), // Anti-spam honeypot
@@ -31,6 +33,8 @@ export async function POST(request: NextRequest) {
       email: validated.email,
       phone: validated.phone || "",
       company: validated.company || "",
+      country: validated.country || "",
+      inquiryType: validated.inquiryType || "",
       subject: validated.subject || "Direct Website Contact",
       message: validated.message,
       submittedAt: new Date().toISOString(),

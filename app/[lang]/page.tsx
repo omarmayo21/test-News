@@ -40,17 +40,23 @@ export default async function HomePage({
   const locale = (lang as Locale) || "en";
   const homeData = await getHomePageData();
 
-  const heroBlock = homeData?.pageBuilder?.find((b: any) => b._type === "heroBlock");
-  const capabilitiesBlock = homeData?.pageBuilder?.find((b: any) => b._type === "capabilitiesBlock");
-  const statsBlock = homeData?.pageBuilder?.find((b: any) => b._type === "statsBlock");
-  const ctaBlock = homeData?.pageBuilder?.find((b: any) => b._type === "ctaBlock");
-
   return (
     <>
-      <Hero locale={locale} data={heroBlock} />
-      <CapabilitiesGrid locale={locale} data={capabilitiesBlock} />
-      <WhyEgyptTeaser locale={locale} data={statsBlock} />
-      <CtaBanner locale={locale} data={ctaBlock} />
+      {homeData?.pageBuilder?.map((block: any, idx: number) => {
+        if (block._type === "heroBlock") {
+          return <Hero key={block._key || idx} locale={locale} data={block} />;
+        }
+        if (block._type === "capabilitiesBlock") {
+          return <CapabilitiesGrid key={block._key || idx} locale={locale} data={block} />;
+        }
+        if (block._type === "statsBlock") {
+          return <WhyEgyptTeaser key={block._key || idx} locale={locale} data={block} />;
+        }
+        if (block._type === "ctaBlock") {
+          return <CtaBanner key={block._key || idx} locale={locale} data={block} />;
+        }
+        return null;
+      })}
     </>
   );
 }

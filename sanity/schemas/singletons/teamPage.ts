@@ -58,6 +58,26 @@ export const teamPage = defineType({
       of: [{ type: "reference", to: [{ type: "author" }] }],
     }),
 
+    // Integrated Expertise
+    defineField({
+      name: "integratedExpertiseTitle",
+      title: "Integrated Expertise Title",
+      type: "localeString",
+      group: "team",
+    }),
+    defineField({
+      name: "integratedExpertiseSubtitle",
+      title: "Integrated Expertise Subtitle",
+      type: "localeText",
+      group: "team",
+    }),
+    defineField({
+      name: "integratedExpertiseDisciplines",
+      title: "Integrated Expertise Disciplines",
+      type: "localeText",
+      group: "team",
+    }),
+
     // CTA
     defineField({
       name: "ctaTitle",

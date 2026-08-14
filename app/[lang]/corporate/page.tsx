@@ -96,25 +96,40 @@ export default async function TeamPage({
 
       {/* Management Team Grid */}
       {managementTeam.length > 0 && (
-        <div className="mb-12">
-          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">Management Team</h2>
+        <div id="leadership-team" className="mb-12 scroll-mt-24">
+          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">MANAGEMENT TEAM</h2>
           {renderTeamGrid(managementTeam)}
         </div>
       )}
 
       {/* Advisory Board Grid */}
       {advisoryBoard.length > 0 && (
-        <div className="mb-12">
-          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">Advisory Board</h2>
+        <div id="advisory-board" className="mb-12 scroll-mt-24">
+          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">ADVISORY BOARD</h2>
           {renderTeamGrid(advisoryBoard)}
         </div>
       )}
 
       {/* Specialist Consultants Grid */}
       {specialistConsultants.length > 0 && (
-        <div className="mb-12">
-          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">Specialist Consultants</h2>
+        <div className="mb-12 scroll-mt-24">
+          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">SPECIALIST CONSULTANTS</h2>
           {renderTeamGrid(specialistConsultants)}
+        </div>
+      )}
+
+      {/* Integrated Expertise Section */}
+      {data?.integratedExpertiseTitle && (
+        <div className="mb-16 text-center max-w-4xl mx-auto py-12 border-y border-surface-container-high">
+          <h2 className="font-headline text-headline-md text-primary-navy mb-4 uppercase">
+            {data.integratedExpertiseTitle?.[locale] || data.integratedExpertiseTitle?.en}
+          </h2>
+          <p className="font-body text-body-lg text-primary-gold font-bold uppercase tracking-wider mb-6">
+            {data.integratedExpertiseSubtitle?.[locale] || data.integratedExpertiseSubtitle?.en}
+          </p>
+          <p className="font-body text-body-md text-on-surface opacity-80 leading-relaxed font-medium">
+            {data.integratedExpertiseDisciplines?.[locale] || data.integratedExpertiseDisciplines?.en}
+          </p>
         </div>
       )}
 

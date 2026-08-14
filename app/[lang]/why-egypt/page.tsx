@@ -38,12 +38,7 @@ export default async function WhyEgyptPage({
   const title = data?.title?.[locale] || data?.title?.en || "Unlocking the Arabian-Nubian Shield";
   const subtitle = data?.subtitle?.[locale] || data?.subtitle?.en || "The Arabian-Nubian Shield (ANS) represents one of the world's last remaining under-explored mineral frontiers.";
 
-  const stats = data?.statsGrid?.length > 0 ? data.statsGrid : [
-    { number: "1.2M", label: { en: "Ounces Discovered" } },
-    { number: "40+", label: { en: "Active Concessions" } },
-    { number: "$1.5B+", label: { en: "Sector Investment" } },
-    { number: "6,000 km", label: { en: "Road Infrastructure" } },
-  ];
+  const stats = data?.statsGrid || [];
 
   const contentBlocks = data?.contentBlocks || [];
 
@@ -67,16 +62,18 @@ export default async function WhyEgyptPage({
       </div>
 
       {/* Stats Counter Section */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter bg-surface-container-low p-10 border-l-4 border-primary-gold">
-        {stats.map((s: any, idx: number) => (
-          <div key={idx}>
-            <div className="font-headline text-display-lg text-primary-navy mb-1">{s.number}</div>
-            <div className="font-label text-label-md text-primary-gold uppercase tracking-wider font-bold">
-              {s.label?.[locale] || s.label?.en}
+      {stats.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter bg-surface-container-low p-10 border-l-4 border-primary-gold">
+          {stats.map((s: any, idx: number) => (
+            <div key={idx}>
+              <div className="font-headline text-display-lg text-primary-navy mb-1">{s.number}</div>
+              <div className="font-label text-label-md text-primary-gold uppercase tracking-wider font-bold">
+                {s.label?.[locale] || s.label?.en}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* Content Blocks */}
       {contentBlocks.length > 0 && (

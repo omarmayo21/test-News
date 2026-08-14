@@ -53,70 +53,43 @@ export function Footer({ locale, data, navTree, themeSettings }: FooterProps) {
 
   const dynamicFooterLinks = (navTree || []).filter((p: any) => p.navigation?.showInFooter);
 
+  const emails = data?.contactEmails || ["info@nexusmines.com", "invest@nexusmines.com"];
+
   return (
     <footer className="bg-primary-navy text-white px-margin-mobile md:px-section-padding py-section-padding w-full">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-container-max mx-auto">
         {/* Column 1: Logo & Copyright */}
-        <div className="col-span-1 md:col-span-1">
-          <div className="mb-8 flex items-center">
-            <Logo variant="dark" size="footer" href={`/${locale}`} themeSettings={themeSettings} />
+        <div className="col-span-1 md:col-span-1 flex flex-col justify-between">
+          <div>
+            <div className="mb-6 flex items-center">
+              <Logo variant="dark" size="footer" href={`/${locale}`} themeSettings={themeSettings} />
+            </div>
+            <p className="font-caption text-caption opacity-60 max-w-xs">
+              {copyright}
+            </p>
           </div>
-          <p className="font-caption text-caption opacity-60 whitespace-pre-line">
-            {copyright}
-          </p>
         </div>
 
-        {/* Column 2 - 4: Links */}
-        <div className="col-span-1 md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
-          <div className="flex flex-col space-y-4">
-            <h4 className="font-label text-label-md text-primary-gold uppercase tracking-widest mb-2">
-              {officesTitle}
-            </h4>
-            {offices.map((office: any, idx: number) => (
-              <span key={idx} className="font-label text-label-md opacity-70">
-                {office.title?.[locale] || office.title?.en}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex flex-col space-y-4">
-            <h4 className="font-label text-label-md text-primary-gold uppercase tracking-widest mb-2">
-              {resourcesTitle}
-            </h4>
-            {dynamicFooterLinks.length > 0 ? (
-              dynamicFooterLinks.map((link: any, idx: number) => {
-                const itemPath = resolvePath(link);
-                const itemLabel = link.navigation?.navTitle?.[locale] || link.navigation?.navTitle?.en || link.title?.[locale] || link.title?.en;
-                const target = link.navigation?.openInNewTab ? "_blank" : undefined;
-                return (
-                  <Link
-                    key={idx}
-                    href={itemPath}
-                    target={target}
-                    className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
-                  >
-                    {itemLabel}
-                  </Link>
-                );
-              })
-            ) : (
-              resourceLinks.map((link: any, idx: number) => (
+        {/* Column 2: Main Navigation */}
+        <div className="col-span-1 flex flex-col space-y-4">
+          {dynamicFooterLinks.length > 0 ? (
+            dynamicFooterLinks.map((link: any, idx: number) => {
+              const itemPath = resolvePath(link);
+              const itemLabel = link.navigation?.navTitle?.[locale] || link.navigation?.navTitle?.en || link.title?.[locale] || link.title?.en;
+              const target = link.navigation?.openInNewTab ? "_blank" : undefined;
+              return (
                 <Link
                   key={idx}
-                  href={link.path || "#"}
+                  href={itemPath}
+                  target={target}
                   className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
                 >
-                  {link.label?.[locale] || link.label?.en}
+                  {itemLabel}
                 </Link>
-              ))
-            )}
-          </div>
-
-          <div className="flex flex-col space-y-4">
-            <h4 className="font-label text-label-md text-primary-gold uppercase tracking-widest mb-2">
-              {complianceTitle}
-            </h4>
-            {complianceLinks.map((link: any, idx: number) => (
+              );
+            })
+          ) : (
+            resourceLinks.map((link: any, idx: number) => (
               <Link
                 key={idx}
                 href={link.path || "#"}
@@ -124,8 +97,34 @@ export function Footer({ locale, data, navTree, themeSettings }: FooterProps) {
               >
                 {link.label?.[locale] || link.label?.en}
               </Link>
-            ))}
-          </div>
+            ))
+          )}
+        </div>
+
+        {/* Column 3: Legal & Compliance */}
+        <div className="col-span-1 flex flex-col space-y-4">
+          {complianceLinks.map((link: any, idx: number) => (
+            <Link
+              key={idx}
+              href={link.path || "#"}
+              className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
+            >
+              {link.label?.[locale] || link.label?.en}
+            </Link>
+          ))}
+        </div>
+
+        {/* Column 4: Contact Emails */}
+        <div className="col-span-1 flex flex-col space-y-4">
+          {emails.map((email: string, idx: number) => (
+            <a
+              key={idx}
+              href={`mailto:${email}`}
+              className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
+            >
+              {email}
+            </a>
+          ))}
         </div>
       </div>
     </footer>

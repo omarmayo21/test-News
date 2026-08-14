@@ -73,9 +73,15 @@ export default async function ContactPage({
         {/* Contact Form Component */}
         <div className="bg-white p-8 md:p-10 border border-surface-container-high shadow-ambient">
           <h3 className="font-headline text-2xl text-primary-navy mb-6">
-            Send an Inquiry
+            Let&apos;s Work Together
           </h3>
           <ContactForm locale={locale} formType="contact" />
+          
+          {data?.consentText && (
+            <p className="mt-6 text-body-sm text-on-surface opacity-70 italic text-center">
+              {data.consentText?.[locale] || data.consentText?.en}
+            </p>
+          )}
         </div>
 
         {/* Office Locations & Contact Info */}
@@ -118,6 +124,26 @@ export default async function ContactPage({
           ))}
         </div>
       </div>
+
+      {/* Closing CTA */}
+      {(data?.closingTitle || data?.closingSubtitle) && (
+        <div className="mt-20 text-center bg-surface-container-low p-12 border border-surface-container-high">
+          <h2 className="font-headline text-headline-md text-primary-navy mb-4">
+            {data.closingTitle?.[locale] || data.closingTitle?.en}
+          </h2>
+          <p className="font-body text-body-lg opacity-80 max-w-2xl mx-auto mb-8">
+            {data.closingSubtitle?.[locale] || data.closingSubtitle?.en}
+          </p>
+          {data.closingButtonLabel && (
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="inline-block px-8 py-4 bg-primary-gold text-white font-label text-label-md uppercase tracking-widest hover:bg-primary-navy transition-colors duration-300"
+            >
+              {data.closingButtonLabel?.[locale] || data.closingButtonLabel?.en}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -331,9 +331,7 @@ export async function getFooterData() {
     return client.fetch(
       `*[_type == "footer"][0]{
         aboutText,
-        offices[]{
-          title, address, phone, email
-        },
+        contactEmails,
         resourceLinks[]{
           label, path
         },

@@ -118,6 +118,45 @@ export function ContactForm({ locale, formType = "contact" }: ContactFormProps) 
           />
         </div>
 
+        {/* Country */}
+        <div>
+          <label htmlFor="country" className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
+            Country *
+          </label>
+          <input
+            type="text"
+            id="country"
+            name="country"
+            required
+            className="w-full p-3 bg-surface-container-low border-b-2 border-outline-variant focus:border-primary-gold focus:outline-none font-body text-body-md transition-colors"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Inquiry Type */}
+        <div>
+          <label htmlFor="inquiryType" className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
+            Inquiry Type *
+          </label>
+          <select
+            id="inquiryType"
+            name="inquiryType"
+            required
+            className="w-full p-3 bg-surface-container-low border-b-2 border-outline-variant focus:border-primary-gold focus:outline-none font-body text-body-md transition-colors appearance-none"
+          >
+            <option value="" disabled selected>Select Inquiry Type</option>
+            <option value="General Inquiry">General Inquiry</option>
+            <option value="Investment Opportunity">Investment Opportunity</option>
+            <option value="Strategic Partnership">Strategic Partnership</option>
+            <option value="Mining Project">Mining Project</option>
+            <option value="Exploration Opportunity">Exploration Opportunity</option>
+            <option value="Technical Collaboration">Technical Collaboration</option>
+            <option value="Supplier / Contractor">Supplier / Contractor</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
         {/* Company */}
         <div>
           <label htmlFor="company" className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
@@ -131,6 +170,22 @@ export function ContactForm({ locale, formType = "contact" }: ContactFormProps) 
           />
         </div>
       </div>
+
+      {/* Subject */}
+      <div>
+        <label htmlFor="subject" className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
+          Subject *
+        </label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          required
+          className="w-full p-3 bg-surface-container-low border-b-2 border-outline-variant focus:border-primary-gold focus:outline-none font-body text-body-md transition-colors"
+        />
+      </div>
+
+
 
       {/* Message */}
       <div>

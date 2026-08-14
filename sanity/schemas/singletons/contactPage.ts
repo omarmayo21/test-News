@@ -57,6 +57,31 @@ export const contactPage = defineType({
       ],
     }),
 
+    // Closing CTA & Form Consent
+    defineField({
+      name: "consentText",
+      title: "Form Consent Text",
+      type: "localeText",
+      group: "header",
+    }),
+    defineField({
+      name: "closingTitle",
+      title: "Closing CTA Title",
+      type: "localeString",
+      group: "header",
+    }),
+    defineField({
+      name: "closingSubtitle",
+      title: "Closing CTA Subtitle",
+      type: "localeText",
+      group: "header",
+    }),
+    defineField({
+      name: "closingButtonLabel",
+      title: "Closing CTA Button Label",
+      type: "localeString",
+      group: "header",
+    }),
     defineField({
       name: "seo",
       title: "SEO",

@@ -12,20 +12,10 @@ export const footer = defineType({
       type: "localeText",
     }),
     defineField({
-      name: "offices",
-      title: "Office Locations Column",
+      name: "contactEmails",
+      title: "Contact Emails",
       type: "array",
-      of: [
-        {
-          type: "object",
-          fields: [
-            { name: "title", type: "localeString", title: "Office Name" },
-            { name: "address", type: "localeString", title: "Address" },
-            { name: "phone", type: "string", title: "Phone" },
-            { name: "email", type: "string", title: "Email" },
-          ],
-        },
-      ],
+      of: [{ type: "string" }],
     }),
     defineField({
       name: "resourceLinks",
