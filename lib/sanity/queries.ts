@@ -25,7 +25,7 @@ export async function getSiteSettings() {
         defaultSeo
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      { cache: "no-store" }
     );
     return data;
   } catch {
@@ -48,7 +48,7 @@ export async function getThemeSettings() {
         socialLinks
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      { cache: "no-store" }
     );
     return data;
   } catch {
@@ -72,7 +72,7 @@ export async function getHomePageData() {
         seo
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      { cache: "no-store" }
     );
     return data;
   } catch {
@@ -96,7 +96,7 @@ export async function getNewsArticles() {
         author->{ name, role, avatar }
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      { cache: "no-store" }
     );
     return data || [];
   } catch {
@@ -126,7 +126,7 @@ export async function getSingleNewsArticle(slug: string) {
         relatedNews[]->{ _id, title, slug, coverImage, publishDate }
       }`,
       { slug },
-      { next: { tags: ["sanity"] } }
+      { cache: "no-store" }
     );
     return data;
   } catch {
@@ -157,12 +157,12 @@ export async function getGlobalSearchResults(query: string) {
 
 export async function getAboutPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "aboutPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  return client.fetch(`*[_type == "aboutPage"][0]`, {}, { cache: "no-store" });
 }
 
 export async function getServicesPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "servicesPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  return client.fetch(`*[_type == "servicesPage"][0]`, {}, { cache: "no-store" });
 }
 
 export async function getTeamPageData() {
@@ -175,33 +175,33 @@ export async function getTeamPageData() {
       specialistConsultants[]->{ name, role, bio, avatar }
     }`,
     {},
-    { next: { tags: ["sanity"] } }
+    { cache: "no-store" }
   );
 }
 
 export async function getWhyEgyptPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "whyEgyptPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  return client.fetch(`*[_type == "whyEgyptPage"][0]`, {}, { cache: "no-store" });
 }
 
 export async function getWhyNexusPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "whyNexusPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  return client.fetch(`*[_type == "whyNexusPage"][0]`, {}, { cache: "no-store" });
 }
 
 export async function getNewsPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "newsPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  return client.fetch(`*[_type == "newsPage"][0]`, {}, { cache: "no-store" });
 }
 
 export async function getContactPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "contactPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  return client.fetch(`*[_type == "contactPage"][0]`, {}, { cache: "no-store" });
 }
 
 export async function getInvestmentPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "investmentPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  return client.fetch(`*[_type == "investmentPage"][0]`, {}, { cache: "no-store" });
 }
 
 export async function getInvestmentCategories() {
@@ -209,7 +209,7 @@ export async function getInvestmentCategories() {
   return client.fetch(
     `*[_type == "investmentCategory"] | order(title.en asc){ title, slug }`,
     {},
-    { next: { tags: ["sanity"] } }
+    { cache: "no-store" }
   );
 }
 
@@ -227,7 +227,7 @@ export async function getInvestmentOpportunities() {
       category->{ title, slug }
     }`,
     {},
-    { next: { tags: ["sanity"] } }
+    { cache: "no-store" }
   );
 }
 
@@ -248,7 +248,7 @@ export async function getPage(slug: string) {
         }
       }`,
       { slug },
-      { next: { tags: ["sanity"] } }
+      { cache: "no-store" }
     );
   } catch {
     return null;
@@ -264,7 +264,7 @@ export async function getAllPages() {
         "slugFr": slug.fr.current
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      { cache: "no-store" }
     );
   } catch {
     return [];
@@ -283,7 +283,7 @@ export async function getHeaderData() {
         externalLinks
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      { cache: "no-store" }
     );
   } catch {
     return null;
@@ -316,7 +316,7 @@ export async function getNavigationTree() {
         }
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      { cache: "no-store" }
     );
     return pages;
   } catch (err) {
@@ -341,7 +341,7 @@ export async function getFooterData() {
         copyright
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      { cache: "no-store" }
     );
   } catch {
     return null;

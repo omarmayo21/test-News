@@ -33,6 +33,7 @@ export default async function WhyEgyptPage({
   const locale = (lang as Locale) || "en";
   const dict = getDictionary(locale);
   const data = await getWhyEgyptPageData();
+  console.log("WHY EGYPT DATA CTA:", { ctaTitle: data?.ctaTitle, ctaSubtitle: data?.ctaSubtitle });
 
   const kicker = data?.kicker?.[locale] || data?.kicker?.en || "Strategic Landscape";
   const title = data?.title?.[locale] || data?.title?.en || "Unlocking the Arabian-Nubian Shield";
