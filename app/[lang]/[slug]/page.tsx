@@ -11,7 +11,7 @@ const CapabilitiesGrid = dynamic(() => import("@/components/sections/capabilitie
 const WhyEgyptTeaser = dynamic(() => import("@/components/sections/why-egypt-teaser").then((mod) => mod.WhyEgyptTeaser));
 const CtaBanner = dynamic(() => import("@/components/sections/cta-banner").then((mod) => mod.CtaBanner));
 
-export const revalidate = 3600;
+
 
 export async function generateStaticParams() {
   const pages = await getAllPages();

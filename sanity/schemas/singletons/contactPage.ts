@@ -7,8 +7,10 @@ export const contactPage = defineType({
   groups: [
     { name: "navigation", title: "Navigation" },
     { name: "header", title: "Header" },
+    { name: "pageBuilder", title: "Page Content (Builder)" },
     { name: "offices", title: "Office Locations" },
     { name: "seo", title: "SEO" },
+    { name: "legacy", title: "Legacy Fields (Hidden)" },
   ],
   fields: [
     defineField({
@@ -36,12 +38,30 @@ export const contactPage = defineType({
       group: "header",
     }),
     
-    // Offices
+    // Flexible Page Builder
+    defineField({
+      name: "pageBuilder",
+      title: "Page Sections",
+      description: "Add, edit, and reorder sections on the page.",
+      type: "array",
+      group: "pageBuilder",
+      of: [
+        { type: "richTextBlock" },
+        { type: "splitBlock" },
+        { type: "cardsBlock" },
+        { type: "accordionBlock" },
+        { type: "statsBlock" },
+        { type: "ctaBlock" },
+      ],
+    }),
+
+    // Legacy Offices
     defineField({
       name: "offices",
-      title: "Office Locations",
+      title: "Legacy Office Locations",
       type: "array",
-      group: "offices",
+      group: "legacy",
+      hidden: true,
       of: [
         {
           type: "object",
@@ -87,6 +107,43 @@ export const contactPage = defineType({
       title: "SEO",
       type: "seo",
       group: "seo",
+    }),
+
+    // Legacy Fields (preserves data without warnings)
+    defineField({
+      name: "address",
+      title: "Legacy Address",
+      type: "localeText",
+      group: "legacy",
+      hidden: true,
+    }),
+    defineField({
+      name: "generalEmail",
+      title: "Legacy General Email",
+      type: "string",
+      group: "legacy",
+      hidden: true,
+    }),
+    defineField({
+      name: "mapUrl",
+      title: "Legacy Map URL",
+      type: "string",
+      group: "legacy",
+      hidden: true,
+    }),
+    defineField({
+      name: "phone",
+      title: "Legacy Phone",
+      type: "string",
+      group: "legacy",
+      hidden: true,
+    }),
+    defineField({
+      name: "pressEmail",
+      title: "Legacy Press Email",
+      type: "string",
+      group: "legacy",
+      hidden: true,
     }),
   ],
   preview: {

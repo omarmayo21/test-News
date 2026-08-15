@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { ContactForm } from "@/components/forms/contact-form";
+import { PageBuilder } from "@/components/sections/page-builder";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -143,6 +144,9 @@ export default async function ContactPage({
           </div>
         </div>
       </div>
+
+      {/* Dynamic Page Builder Content */}
+      <PageBuilder blocks={data?.pageBuilder || []} locale={locale} />
 
       {/* Closing CTA */}
       {(data?.closingTitle || data?.closingSubtitle) && (

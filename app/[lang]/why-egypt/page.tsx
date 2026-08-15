@@ -8,6 +8,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { PortableText } from "@portabletext/react";
 import { getWhyEgyptPageData } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
+import { PageBuilder } from "@/components/sections/page-builder";
 
 export async function generateMetadata({
   params,
@@ -63,77 +64,8 @@ export default async function WhyEgyptPage({
         </p>
       </div>
 
-      {/* Stats Counter Section */}
-      {stats.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter bg-surface-container-low p-10 border-l-4 border-primary-gold">
-          {stats.map((s: any, idx: number) => (
-            <div key={idx}>
-              <div className="font-headline text-display-lg text-primary-navy mb-1">{s.number}</div>
-              <div className="font-label text-label-md text-primary-gold uppercase tracking-wider font-bold">
-                {s.label?.[locale] || s.label?.en}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Content Blocks */}
-      {contentBlocks.length > 0 && (
-        <div className="space-y-32">
-          {contentBlocks.map((block: any, idx: number) => {
-            const isEven = idx % 2 === 0;
-            return (
-              <div key={idx} className={`grid grid-cols-1 md:grid-cols-2 gap-16 items-center ${!isEven ? 'md:flex-row-reverse' : ''}`}>
-                <div className={`space-y-6 ${!isEven ? 'md:order-2' : 'md:order-1'}`}>
-                  {block.title && (
-                    <h2 className="font-headline text-headline-lg text-primary-navy">
-                      {block.title?.[locale] || block.title?.en}
-                    </h2>
-                  )}
-                  {block.description && (
-                    <p className="font-body text-body-md opacity-80 leading-relaxed whitespace-pre-wrap">
-                      {block.description?.[locale] || block.description?.en}
-                    </p>
-                  )}
-                  {block.content && (
-                    <div className="prose prose-lg prose-p:font-body prose-p:text-body-md prose-p:opacity-80 prose-li:font-body prose-li:text-body-md prose-li:opacity-90 marker:text-primary-gold max-w-none">
-                      <PortableText value={block.content} />
-                    </div>
-                  )}
-                  {block.statValue && (
-                    <div className="mt-8 p-6 bg-surface-container border-l-4 border-primary-gold">
-                      <div className="font-headline text-display-md text-primary-navy mb-2">{block.statValue}</div>
-                      <div className="font-label text-label-md text-primary-gold uppercase tracking-wider font-bold mb-1">
-                        {block.statLabel?.[locale] || block.statLabel?.en}
-                      </div>
-                      {block.statDisclaimer && (
-                        <div className="font-body text-xs text-on-surface opacity-60">
-                          {block.statDisclaimer?.[locale] || block.statDisclaimer?.en}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-                <div className={`relative h-[400px] border-4 border-white shadow-xl overflow-hidden bg-surface-container-high ${!isEven ? 'md:order-1' : 'md:order-2'}`}>
-                  {block.image && urlForImage(block.image) ? (
-                    <Image
-                      src={urlForImage(block.image)!.url()}
-                      alt={block.title?.[locale] || block.title?.en || "Deep Dive Image"}
-                      fill
-                      className="object-cover grayscale-[15%]"
-                      sizes="(max-width: 767px) 100vw, 50vw"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-surface-container-highest flex items-center justify-center text-on-surface opacity-30 font-label tracking-widest uppercase">
-                      No Image Provided
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+      {/* Dynamic Page Builder Content */}
+      <PageBuilder blocks={data?.pageBuilder || []} locale={locale} />
 
       {/* CTA */}
       <div className="text-center pt-8 border-t border-surface-container-high bg-surface-container-low p-12">

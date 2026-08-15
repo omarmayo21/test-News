@@ -7,8 +7,8 @@ export const whyEgyptPage = defineType({
   groups: [
     { name: "navigation", title: "Navigation" },
     { name: "header", title: "Header" },
-    { name: "stats", title: "Stats Counters" },
-    { name: "deepDive", title: "Deep Dive Grid" },
+    { name: "pageBuilder", title: "Page Content (Builder)" },
+    { name: "legacy", title: "Legacy Content (Hidden)" },
     { name: "cta", title: "Call to Action" },
     { name: "seo", title: "SEO" },
   ],
@@ -38,12 +38,30 @@ export const whyEgyptPage = defineType({
       group: "header",
     }),
     
-    // Stats Counter
+    // Flexible Page Builder
+    defineField({
+      name: "pageBuilder",
+      title: "Page Sections",
+      description: "Add, edit, and reorder sections on the page.",
+      type: "array",
+      group: "pageBuilder",
+      of: [
+        { type: "richTextBlock" },
+        { type: "splitBlock" },
+        { type: "cardsBlock" },
+        { type: "accordionBlock" },
+        { type: "statsBlock" },
+        { type: "ctaBlock" },
+      ],
+    }),
+
+    // Legacy Stats Counter
     defineField({
       name: "statsGrid",
-      title: "Stats Counters",
+      title: "Legacy Stats Counters",
       type: "array",
-      group: "stats",
+      group: "legacy",
+      hidden: true,
       of: [
         {
           type: "object",
@@ -55,12 +73,13 @@ export const whyEgyptPage = defineType({
       ],
     }),
 
-    // Content Sections
+    // Legacy Content Sections
     defineField({
       name: "contentBlocks",
-      title: "Content Sections",
+      title: "Legacy Content Sections",
       type: "array",
-      group: "deepDive",
+      group: "legacy",
+      hidden: true,
       of: [
         {
           type: "object",

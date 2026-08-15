@@ -1,0 +1,752 @@
+[
+  {
+    "_createdAt": "2026-08-06T15:56:32Z",
+    "_id": "aboutPage",
+    "_rev": "13szLHQ71QeyqE1Xinie7g",
+    "_type": "aboutPage",
+    "_updatedAt": "2026-08-14T22:05:08Z",
+    "ctaButtonLabel": {
+      "en": "Explore Corporate →"
+    },
+    "ctaButtonLink": "/en/corporate",
+    "ctaSubtitle": {
+      "en": "Discover the leadership, technical expertise, and advisory experience supporting Nexus Resources and its long-term development."
+    },
+    "ctaTitle": {
+      "en": "Meet the People Behind Nexus"
+    },
+    "missionDesc": {
+      "en": "We combine technical expertise, local execution, and strategic partnerships to identify promising opportunities, advance viable projects, and contribute to responsible mineral development."
+    },
+    "missionHeadline": {
+      "en": "To Create Lasting Value from Egypt's Mineral Resources."
+    },
+    "missionTitle": {
+      "en": "MISSION"
+    },
+    "navigation": {
+      "enabled": true,
+      "navTitle": {
+        "en": "ABOUT",
+        "fr": "ABOUT"
+      },
+      "order": 20,
+      "showInNav": true
+    },
+    "overviewDesc": {
+      "en": "Nexus Resources was established to contribute to the next phase of Egypt's mineral development, combining technical expertise, local knowledge, strategic partnerships, and disciplined execution.\n\nWe work across the mining value chain, supporting the evaluation and advancement of mineral opportunities while building the technical and operational capabilities required for long term participation in exploration, project development, mining, and production.\n\nOur work supports international mining companies, investors, project owners, license holders, and technical partners seeking to understand, enter, develop, or operate within Egypt's mining sector.\n\nNexus is built as a technical and strategic mining partner on the ground in Egypt, helping transform mineral opportunities into structured, investable, and responsibly developed projects."
+    },
+    "overviewHeadline": {
+      "en": "Nexus Overview\n\nA Mining Company Built to Turn Potential into Progress"
+    },
+    "overviewTitle": {
+      "en": "About Nexus"
+    },
+    "principles": [
+      {
+        "_key": "v1",
+        "description": {
+          "en": "We operate with transparency, accountability, and honesty in our relationships with partners, investors, authorities, and stakeholders."
+        },
+        "title": {
+          "en": "Integrity"
+        }
+      },
+      {
+        "_key": "v2",
+        "description": {
+          "en": "We rely on sound engineering, geological understanding, data, and disciplined technical analysis to support informed decisions."
+        },
+        "title": {
+          "en": "Technical Excellence"
+        }
+      },
+      {
+        "_key": "v3",
+        "description": {
+          "en": "We believe expertise creates value when it is translated into practical action, measurable progress, and effective project delivery."
+        },
+        "title": {
+          "en": "Execution"
+        }
+      },
+      {
+        "_key": "v4",
+        "description": {
+          "en": "We build long term around trust, aligned interests, shared objectives, and common value."
+        },
+        "title": {
+          "en": "Partnership"
+        }
+      },
+      {
+        "_key": "v5",
+        "description": {
+          "en": "We pursue mineral development with consideration for people, communities, the environment, and the long-term value of Egypt's mineral resources."
+        },
+        "title": {
+          "en": "Responsible Development"
+        }
+      }
+    ],
+    "principlesTitle": {
+      "en": "OUR VALUES"
+    },
+    "subtitle": {
+      "en": "A Mining Company Built to Turn Potential into Progress"
+    },
+    "title": {
+      "en": "About Nexus"
+    },
+    "visionDesc": {
+      "en": "To Become a Leading Egyptian Mining and Resources Company with Global Reach.\n\nWe envision Nexus Resources growing from an Egypt focused mining company into a trusted international mining partner, bringing together Egypt's mineral potential, international capital, technical expertise, technology, and strategic partnerships, with a long term ambition to contribute to responsible resource development across Africa."
+    },
+    "visionTitle": {
+      "en": "VISION"
+    }
+  },
+  {
+    "_createdAt": "2026-08-06T15:57:01Z",
+    "_id": "contactPage",
+    "_rev": "Y5NPXgWhbvM793fLbmc2Ay",
+    "_type": "contactPage",
+    "_updatedAt": "2026-08-14T22:05:21Z",
+    "address": {
+      "en": "20th Floor, North Tower\nNile City Towers\n2005C Nile Corniche\nCairo, Egypt\nPostal Code: 11221"
+    },
+    "closingButtonLabel": {
+      "en": "Send an Inquiry →"
+    },
+    "closingSubtitle": {
+      "en": "We welcome inquiries from mining companies, investors, project owners, and strategic partners seeking to explore opportunities in Egypt."
+    },
+    "closingTitle": {
+      "en": "Mining Opportunities Begin With the Right Conversation."
+    },
+    "consentText": {
+      "en": "By submitting this form, you agree that Nexus Resources may contact you regarding your inquiry. Please refer to our Privacy Policy for information on how we handle personal data."
+    },
+    "generalEmail": "info@nexusmines.com",
+    "kicker": {
+      "en": "Let's Work Together"
+    },
+    "mapUrl": "https://maps.google.com",
+    "navigation": {
+      "enabled": true,
+      "navTitle": {
+        "en": "CONTACT",
+        "fr": "CONTACT"
+      },
+      "order": 70,
+      "showInNav": true
+    },
+    "offices": [
+      {
+        "_key": "off1",
+        "address": "For corporate information, technical discussions, suppliers, service providers, and general business inquiries",
+        "email": "info@nexusmines.com",
+        "isPrimary": false,
+        "name": "GENERAL INQUIRIES",
+        "phone": "+20 2 3745 9141 (Cairo Office)"
+      },
+      {
+        "_key": "off2",
+        "address": "For investment opportunities, strategic partnerships, joint ventures, project development, and mining collaboration",
+        "email": "invest@nexusmines.com",
+        "isPrimary": true,
+        "name": "INVESTORS & PARTNERSHIPS",
+        "phone": "+44 7453 421940 (International / WhatsApp)"
+      },
+      {
+        "_key": "off3",
+        "address": "20th Floor, North Tower, Nile City Towers, 2005C Nile Corniche, Cairo, Egypt — Postal Code: 11221",
+        "isPrimary": false,
+        "name": "CAIRO HEADQUARTERS"
+      }
+    ],
+    "phone": "+20 2 3745 9141",
+    "pressEmail": "invest@nexusmines.com",
+    "subtitle": {
+      "en": "Whether you are exploring an investment opportunity, developing a mining project, seeking an Egyptian project partner, or looking to enter the Egyptian mining sector, our team is ready to connect."
+    },
+    "title": {
+      "en": "Start a Conversation With Nexus"
+    }
+  },
+  {
+    "_createdAt": "2026-08-06T15:53:59Z",
+    "_id": "footer",
+    "_rev": "13szLHQ71QeyqE1XinigCd",
+    "_type": "footer",
+    "_updatedAt": "2026-08-14T22:05:22Z",
+    "aboutText": {
+      "en": "Nexus Resources is a premier structural engineering and geological firm operating in the Arabian-Nubian shield.",
+      "fr": "Nexus Resources est une société d'ingénierie de premier plan."
+    },
+    "complianceLinks": [
+      {
+        "_key": "fl1",
+        "label": {
+          "en": "Privacy Policy"
+        },
+        "path": "/en/legal/privacy-policy"
+      },
+      {
+        "_key": "fl2",
+        "label": {
+          "en": "Terms of Use"
+        },
+        "path": "/en/legal/terms"
+      },
+      {
+        "_key": "fl3",
+        "label": {
+          "en": "Website Disclaimer"
+        },
+        "path": "/en/legal/disclaimer"
+      }
+    ],
+    "contactEmails": [
+      "info@nexusmines.com",
+      "invest@nexusmines.com"
+    ],
+    "copyright": {
+      "en": "© Nexus Resources. All Rights Reserved."
+    },
+    "offices": [
+      {
+        "_key": "f1",
+        "title": {
+          "en": "Cairo HQ"
+        }
+      },
+      {
+        "_key": "f2",
+        "title": {
+          "en": "London Advisory"
+        }
+      }
+    ],
+    "resourceLinks": []
+  },
+  {
+    "_createdAt": "2026-08-06T15:59:54Z",
+    "_id": "homePage",
+    "_rev": "Y5NPXgWhbvM793fLbmc0oz",
+    "_type": "homePage",
+    "_updatedAt": "2026-08-14T22:05:07Z",
+    "navigation": {
+      "enabled": true,
+      "navTitle": {
+        "en": "HOME",
+        "fr": "HOME"
+      },
+      "order": 10,
+      "showInNav": true
+    },
+    "pageBuilder": [
+      {
+        "_key": "home-hero",
+        "_type": "heroBlock",
+        "headline": {
+          "en": "Heritage Beneath. Resourcing the Future."
+        },
+        "subtitle": {
+          "en": "From Yesterday’s Heritage to Today’s Expertise to Tomorrow’s Production.\n\nNexus Resources is an Egyptian mining and mineral development company advancing high potential gold and mineral opportunities from exploration toward responsible production through technical expertise, local execution, strategic partnerships, and disciplined investment.\n\nEgyptian Resources. Global Ambition."
+        }
+      },
+      {
+        "_key": "home-capabilities",
+        "_type": "capabilitiesBlock",
+        "cards": [
+          {
+            "_key": "cap-1",
+            "description": {
+              "en": "Technical and commercial evaluation to better understand opportunities, risks, and development potential."
+            },
+            "subtitle": {
+              "en": "Evaluate Before You Invest."
+            },
+            "title": {
+              "en": "EVALUATE"
+            }
+          },
+          {
+            "_key": "cap-2",
+            "description": {
+              "en": "Exploration planning, geological programs, data interpretation, and technical coordination designed to advance mineral opportunities."
+            },
+            "subtitle": {
+              "en": "Discover and Define the Resource."
+            },
+            "title": {
+              "en": "EXPLORE"
+            }
+          },
+          {
+            "_key": "cap-3",
+            "description": {
+              "en": "Project development, engineering coordination, planning, and execution focused on moving viable opportunities toward implementation."
+            },
+            "subtitle": {
+              "en": "Turn Opportunities Into Projects."
+            },
+            "title": {
+              "en": "DEVELOP"
+            }
+          },
+          {
+            "_key": "cap-4",
+            "description": {
+              "en": "Creating aligned relationships between project owners, investors, technical specialists, and strategic partners."
+            },
+            "subtitle": {
+              "en": "Build the Right Partnerships."
+            },
+            "title": {
+              "en": "PARTNER"
+            }
+          },
+          {
+            "_key": "cap-5",
+            "description": {
+              "en": "Mine development, production planning, project execution, and operational development."
+            },
+            "subtitle": {
+              "en": "Move From Resource to Production."
+            },
+            "title": {
+              "en": "MINING"
+            }
+          },
+          {
+            "_key": "cap-6",
+            "description": {
+              "en": "Mineral-processing development, recovery planning, process design, and optimization."
+            },
+            "subtitle": {
+              "en": "Turn Ore Into Value."
+            },
+            "title": {
+              "en": "PROCESS"
+            }
+          }
+        ],
+        "sectionDescription": {
+          "en": "Egypt holds significant mineral potential. Unlocking that potential requires more than identifying a resource it requires technical understanding, disciplined evaluation, project development, partnerships, and effective execution.\n\nNexus Resources works across the mining lifecycle to evaluate opportunities, advance viable projects, build the right partnerships, and develop the capabilities required to move mineral assets toward production."
+        },
+        "sectionTitle": {
+          "en": "Advancing Mineral Opportunities"
+        }
+      },
+      {
+        "_key": "home-built-for-egypt",
+        "_type": "ctaBlock",
+        "subtitle": {
+          "en": "Local Knowledge. International Perspective.\n\nNexus combines practical knowledge of Egypt's mining environment with a disciplined approach to technical evaluation, project development, partnerships, and execution.\n\nOur ambition is to participate in the development of Egypt's next generation of mineral projects while building long-term relationships with international mining companies, investors, project owners, and technical partners."
+        },
+        "title": {
+          "en": "BUILT FOR EGYPT"
+        }
+      },
+      {
+        "_key": "home-why-now",
+        "_type": "ctaBlock",
+        "buttonLink": "/en/why-egypt",
+        "buttonText": {
+          "en": "Explore Why Egypt →"
+        },
+        "subtitle": {
+          "en": "A New Chapter in Egyptian Mining\n\nEgypt's Arabian-Nubian Shield, evolving mining framework, new exploration opportunities, proven gold production, and increasing international participation are creating a new environment for mineral development."
+        },
+        "title": {
+          "en": "WHY NOW?"
+        }
+      },
+      {
+        "_key": "home-closing-cta",
+        "_type": "ctaBlock",
+        "buttonLink": "/en/about",
+        "buttonText": {
+          "en": "About Nexus →"
+        },
+        "subtitle": {
+          "en": "Learn more about the company, our vision, and the approach behind our long-term development."
+        },
+        "title": {
+          "en": "Discover Nexus"
+        }
+      }
+    ],
+    "seo": {
+      "metaDescription": {
+        "en": "Nexus Resources is an Egyptian mining and mineral development company advancing high potential gold and mineral opportunities from exploration toward responsible production."
+      },
+      "metaTitle": {
+        "en": "Nexus Resources - Egyptian Mining & Mineral Development"
+      },
+      "openGraphDescription": {
+        "en": "Nexus Resources is an Egyptian mining and mineral development company advancing high potential gold and mineral opportunities from exploration toward responsible production."
+      },
+      "twitterDescription": {
+        "en": "Nexus Resources is an Egyptian mining and mineral development company advancing high potential gold and mineral opportunities from exploration toward responsible production."
+      }
+    },
+    "title": {
+      "en": "Home"
+    }
+  },
+  {
+    "_createdAt": "2026-08-06T16:00:19Z",
+    "_id": "newsPage",
+    "_rev": "Y5NPXgWhbvM793fLbmaEbZ",
+    "_type": "newsPage",
+    "_updatedAt": "2026-08-14T21:13:27Z",
+    "navigation": {
+      "enabled": true,
+      "navTitle": {
+        "en": "NEWS",
+        "fr": "NEWS"
+      },
+      "order": 60,
+      "showInNav": true
+    },
+    "subtitle": {
+      "en": "The latest structural engineering breakthroughs, mining concessions, and operational updates from Nexus Resources."
+    },
+    "title": {
+      "en": "Insights & Updates"
+    }
+  },
+  {
+    "_createdAt": "2026-08-06T15:53:55Z",
+    "_id": "siteSettings",
+    "_rev": "13szLHQ71QeyqE1XinigMY",
+    "_type": "siteSettings",
+    "_updatedAt": "2026-08-14T22:05:23Z",
+    "defaultSeo": {
+      "metaDescription": {
+        "en": "Nexus Resources is an Egyptian mining and mineral development company advancing high potential gold and mineral opportunities from exploration toward responsible production."
+      },
+      "metaTitle": {
+        "en": "Nexus Resources - Egyptian Mining & Mineral Development"
+      },
+      "openGraphDescription": {
+        "en": "Nexus Resources is an Egyptian mining and mineral development company advancing high potential gold and mineral opportunities from exploration toward responsible production."
+      },
+      "twitterDescription": {
+        "en": "Nexus Resources is an Egyptian mining and mineral development company advancing high potential gold and mineral opportunities from exploration toward responsible production."
+      }
+    },
+    "siteDescription": {
+      "en": "Nexus Resources is an Egyptian mining and mineral development company advancing high potential gold and mineral opportunities from exploration toward responsible production."
+    },
+    "siteTitle": {
+      "en": "Nexus Resources"
+    },
+    "siteUrl": "https://nexus-resources.com"
+  },
+  {
+    "_createdAt": "2026-08-06T15:56:37Z",
+    "_id": "teamPage",
+    "_rev": "Y5NPXgWhbvM793fLbmeUaB",
+    "_type": "teamPage",
+    "_updatedAt": "2026-08-15T00:18:23Z",
+    "advisoryBoard": [
+      {
+        "_key": "author-saad-h-hashish",
+        "_ref": "author-saad-h-hashish",
+        "_type": "reference"
+      },
+      {
+        "_key": "author-michael-short",
+        "_ref": "author-michael-short",
+        "_type": "reference"
+      },
+      {
+        "_key": "author-ahmed-sroor",
+        "_ref": "author-ahmed-sroor",
+        "_type": "reference"
+      },
+      {
+        "_key": "author-abbas-mohamed",
+        "_ref": "author-abbas-mohamed",
+        "_type": "reference"
+      },
+      {
+        "_key": "author-hazem-el-etraby",
+        "_ref": "author-hazem-el-etraby",
+        "_type": "reference"
+      },
+      {
+        "_key": "author-mourad-adel",
+        "_ref": "author-mourad-adel",
+        "_type": "reference"
+      }
+    ],
+    "ctaButtonLabel": {
+      "en": "Explore Why Egypt →"
+    },
+    "ctaButtonLink": "/en/why-egypt",
+    "ctaSubtitle": {
+      "en": "Explore why Egypt is emerging as a significant destination for mineral exploration, development, and mining investment."
+    },
+    "ctaTitle": {
+      "en": "Discover the Opportunity"
+    },
+    "integratedExpertiseDisciplines": {
+      "en": "Leadership · Mining · Geology · Mineral Processing · Engineering · Technology · Business Development · Stakeholder Relations"
+    },
+    "integratedExpertiseSubtitle": {
+      "en": "One Team. Multiple Disciplines."
+    },
+    "integratedExpertiseTitle": {
+      "en": "INTEGRATED EXPERTISE"
+    },
+    "managementTeam": [
+      {
+        "_key": "author-ahmed-a-elassy",
+        "_ref": "author-ahmed-a-elassy",
+        "_type": "reference"
+      },
+      {
+        "_key": "author-medhat-a-elassy",
+        "_ref": "author-medhat-a-elassy",
+        "_type": "reference"
+      },
+      {
+        "_key": "author-mohamed-a-elassy",
+        "_ref": "author-mohamed-a-elassy",
+        "_type": "reference"
+      }
+    ],
+    "navigation": {
+      "enabled": true,
+      "navTitle": {
+        "en": "CORPORATE"
+      },
+      "order": 30,
+      "showInFooter": true,
+      "showInNav": true,
+      "showInSitemap": true
+    },
+    "slug": {
+      "en": {
+        "current": "corporate"
+      },
+      "fr": {
+        "current": "corporate"
+      }
+    },
+    "specialistConsultants": [
+      {
+        "_key": "author-remi-bosc",
+        "_ref": "author-remi-bosc",
+        "_type": "reference"
+      }
+    ],
+    "subtitle": {
+      "en": "Leadership. Expertise. Execution.\n\nNexus Resources brings together experienced leadership and specialist expertise across mining, geology, engineering, mineral processing, business development, technology, finance, and stakeholder relations.\n\nOur corporate structure combines executive management, experienced advisors, and specialist consultants to support the evaluation, development, and operation of mining projects."
+    },
+    "title": {
+      "en": "The People Behind Nexus"
+    }
+  },
+  {
+    "_createdAt": "2026-08-06T15:56:38Z",
+    "_id": "whyEgyptPage",
+    "_rev": "PvZDPMYPRMMM1Fg3hfrjIa",
+    "_type": "whyEgyptPage",
+    "_updatedAt": "2026-08-15T00:15:17Z",
+    "contentBlocks": [
+      {
+        "_key": "b1",
+        "description": {
+          "en": "Mining as a Strategic Priority\n\nEgypt is actively working to increase the contribution of mining to the national economy and attract greater international investment into the sector.\n\nRecent initiatives are focused on improving access to investment opportunities, streamlining procedures, expanding geological data availability, and creating a more flexible and competitive environment for mineral exploration and development.\n\nMore Investment. Better Access. Greater Flexibility. More International Participation."
+        },
+        "title": {
+          "en": "GOVERNMENT AMBITION"
+        }
+      },
+      {
+        "_key": "b2",
+        "description": {
+          "en": "A New Approach to Exploration Opportunities\n\nIn June 2026, Egypt introduced its Open Blocks System, creating a new mechanism for companies to access mineral exploration opportunities without waiting for a single fixed bid round deadline.\n\nThe offering covers opportunities for gold and associated minerals, phosphate, talc, and kaolin.\n\nUnder the system, companies can select and apply for available exploration areas throughout the year. When the first offer is received for a specific block, a 30-day competitive submission period begins, while blocks that receive no offers remain available for application.\n\n[IMAGE PLACEHOLDER: Official MRMIA Open Blocks Map]\nCaption: Egypt's Open Blocks System — exploration opportunities across gold, associated minerals, and other mineral commodities."
+        },
+        "title": {
+          "en": "OPEN BLOCKS"
+        }
+      },
+      {
+        "_key": "b3",
+        "description": {
+          "en": "Global Mining Companies Are Looking Toward Egypt\n\nEgypt's mineral potential has attracted established international mining companies.\n\nAngloGold Ashanti holds Eastern Desert exploration licenses covering the Nugrus and Najd blocks, comprising approximately 1,389 km² within the Egyptian section of the Arabian-Nubian Shield.\n\nBarrick Gold has also established an exploration position in Egypt as part of its wider Africa and Middle East exploration strategy.\n\nTheir participation provides an important market signal: Egypt is increasingly being evaluated as a destination for modern mineral exploration, development, and mining investment."
+        },
+        "title": {
+          "en": "INTERNATIONAL INTEREST"
+        }
+      },
+      {
+        "_key": "b4",
+        "description": {
+          "en": "The Arabian-Nubian Shield\n\nEgypt's Eastern Desert forms part of the Arabian-Nubian Shield, a major geological terrane extending across northeastern Africa and the Arabian Peninsula.\n\nThe region hosts established gold mineralization, historic workings, and large areas that remain relatively underexplored using modern exploration methods.\n\nFor modern explorers, Egypt combines:\n- Prospective Geology\n- Large Exposed Areas\n- Historic Mineral Workings\n- Underexplored Ground\n- Growing Geological Data\n\nAncient Geology. Modern Exploration. New Opportunity.\n\n[IMAGE PLACEHOLDER: Eastern Desert / Arabian-Nubian Shield Geological Map or Landscape]"
+        },
+        "title": {
+          "en": "GEOLOGICAL ADVANTAGE"
+        }
+      },
+      {
+        "_key": "b5",
+        "description": {
+          "en": "Egypt Is More Than an Exploration Story\n\nEgypt has already demonstrated that large-scale commercial gold production is achievable.\n\nThe Sukari Gold Mine produced approximately 500,000 ounces of gold in 2025, providing an important operating benchmark for companies evaluating Egypt's broader gold potential.\n\nSukari demonstrates the country's ability to host a long-life, large-scale modern mining operation."
+        },
+        "statDisclaimer": {
+          "en": "Note: Egypt sector benchmark. Not a Nexus Resources production figure."
+        },
+        "statLabel": {
+          "en": "Sukari Gold Production — 2025"
+        },
+        "statValue": "500,000 oz",
+        "title": {
+          "en": "PROVEN GOLD PRODUCTION"
+        }
+      },
+      {
+        "_key": "b6",
+        "description": {
+          "en": "Where Africa, Europe and Global Markets Meet\n\nEgypt occupies a strategic position connecting Africa, the Middle East, the Mediterranean, and the Red Sea, providing access to major regional markets and international trade routes.\n\nFor mining companies, this geographic position can support access to ports, equipment, suppliers, industrial services, regional logistics, and international markets.\n\nFor long-life mining projects, location matters — from equipment and logistics to people, infrastructure, and supply chains.\n\n[IMAGE PLACEHOLDER: Egypt / Red Sea / Strategic Location Map]"
+        },
+        "title": {
+          "en": "STRATEGIC LOCATION"
+        }
+      },
+      {
+        "_key": "b7",
+        "description": {
+          "en": "Geology Creates Potential. Reform Creates Access.\n\nEgypt is bringing together the elements required for a more active modern mining sector.\n\nProspective Geology\nThe Arabian-Nubian Shield provides a strong geological foundation for gold and associated mineral exploration.\n\nOpen Exploration Opportunities\nThe Open Blocks System provides a more flexible mechanism for accessing exploration areas throughout the year.\n\nGovernment Ambition\nMining-sector reforms and investor-focused initiatives are aimed at attracting international investment and expanding exploration activity.\n\nInternational Participation\nEstablished international mining companies have already developed exploration and mining interests in Egypt.\n\nProven Production\nSukari demonstrates that large-scale modern gold mining is already achievable in Egypt.\n\nStrategic Location\nEgypt connects African and Middle Eastern markets with major Mediterranean and Red Sea trade routes."
+        },
+        "title": {
+          "en": "THE OPPORTUNITY"
+        }
+      }
+    ],
+    "ctaButtonLabel": {
+      "en": "Why Nexus →",
+      "fr": "Pourquoi Nexus →"
+    },
+    "ctaButtonLink": "/en/why-nexus",
+    "ctaSubtitle": {
+      "en": "Egypt's geology, evolving mining framework, international\nparticipation, and proven production create the opportunity.\n\nDiscover how Nexus combines local execution, technical expertise, and\nstrategic partnerships to participate in Egypt's next phase of\nmineral development."
+    },
+    "ctaTitle": {
+      "en": "Egypt Creates the Opportunity. Nexus Helps Advance It."
+    },
+    "kicker": {
+      "en": "Why Egypt. Why Now."
+    },
+    "navigation": {
+      "enabled": true,
+      "navTitle": {
+        "en": "WHY EGYPT",
+        "fr": "WHY EGYPT"
+      },
+      "order": 40,
+      "showInNav": true
+    },
+    "statsGrid": [],
+    "subtitle": {
+      "en": "Egypt is entering a new phase of mineral development. Government ambition, a new Open Blocks system, increasing international participation, proven gold production, and the geological potential of the Arabian-Nubian Shield are creating new opportunities for mining companies and investors. For international companies, the opportunity is not only what lies beneath Egypt but also what is changing above ground."
+    },
+    "title": {
+      "en": "A New Era in Egyptian Mining"
+    }
+  },
+  {
+    "_createdAt": "2026-08-14T21:00:15Z",
+    "_id": "whyNexusPage",
+    "_rev": "Y5NPXgWhbvM793fLbmaETN",
+    "_type": "whyNexusPage",
+    "_updatedAt": "2026-08-14T21:13:26Z",
+    "contentBlocks": [
+      {
+        "_key": "n1",
+        "description": {
+          "en": "Nexus evaluates mining opportunities through the full project lifecycle. EXPLORE → EVALUATE → DEVELOP → FINANCE → BUILD → OPERATE → PRODUCE. From identifying a promising mineral opportunity to developing the project and supporting production, our focus is on creating value at every stage where our capabilities can make a meaningful contribution."
+        },
+        "title": {
+          "en": "A Full Project Lifecycle Approach"
+        }
+      },
+      {
+        "_key": "n2",
+        "description": {
+          "en": "Nexus pursues mining opportunities through direct applications, acquisitions, joint ventures, strategic partnerships, and project development agreements. We also work with international mining companies, investors, asset owners, and license holders seeking a capable Egyptian partner to help evaluate, develop, or operate projects."
+        },
+        "title": {
+          "en": "More Than Technical Support"
+        }
+      },
+      {
+        "_key": "n3",
+        "description": {
+          "en": "Mining is local by nature. Successful projects depend on understanding the geology, regulatory environment, infrastructure, workforce, supply chain, stakeholders, and operating realities of the country in which they are developed. Nexus combines local knowledge and on-the-ground execution in Egypt with a disciplined approach to technical evaluation, project development, investment, and mining operations. This allows us to work effectively with both international mining companies and Egyptian project owners."
+        },
+        "title": {
+          "en": "Egyptian Knowledge. International Perspective."
+        }
+      },
+      {
+        "_key": "n4",
+        "description": {
+          "en": "Great mining projects rarely succeed through one capability alone. They require the right combination of: ASSETS (Mining rights), CAPITAL (Funding), TECHNICAL EXPERTISE, and EXECUTION. Nexus aims to bring these capabilities together around viable mining opportunities and participate as a development and operating partner where our involvement can create long-term value."
+        },
+        "title": {
+          "en": "Partnerships That Build Value"
+        }
+      },
+      {
+        "_key": "n5",
+        "description": {
+          "en": "From Plans to Production. Our ambition goes beyond holding interests in mining opportunities. We are building the technical and operational capability required to develop and operate mining projects. Our operational focus includes: Project Management, Mine Development, Production Planning, Procurement & Logistics, Mineral Processing, HSE, Operational Optimization."
+        },
+        "title": {
+          "en": "Built Around Execution"
+        }
+      },
+      {
+        "_key": "n6",
+        "description": {
+          "en": "Nexus is not being built around a single transaction or project. Our long term objective is to build a diversified portfolio of exploration, development, and production assets across Egypt, establishing Nexus Resources as a leading Egyptian mining and resources company with international reach. We measure our progress by the projects we help advance, develop, operate, and ultimately bring into production."
+        },
+        "title": {
+          "en": "Building an Egyptian Mining Company for the Long Term"
+        }
+      }
+    ],
+    "ctaButtonLabel": {
+      "en": "Partner With Nexus"
+    },
+    "ctaButtonLink": "/en/contact",
+    "ctaSubtitle": {
+      "en": "Whether you are an international mining company, investor, project owner, or strategic partner, Nexus is ready to explore how we can build value together."
+    },
+    "ctaTitle": {
+      "en": "We Don't Just Identify Opportunities. We Build Them. We Develop Them. We Operate Them."
+    },
+    "navigation": {
+      "enabled": true,
+      "navTitle": {
+        "en": "WHY NEXUS",
+        "fr": "WHY NEXUS"
+      },
+      "order": 50,
+      "showInNav": true
+    },
+    "subtitle": {
+      "en": "Egypt has the mineral potential. Turning that potential into successful mining projects requires more than identifying an opportunity. It requires technical expertise, local execution, project development, capital, strategic partnerships, and operational capability. Nexus Resources brings these elements together through a mining-focused approach designed to advance opportunities from exploration toward development and production."
+    },
+    "title": {
+      "en": "We Build Mining Projects."
+    }
+  }
+]

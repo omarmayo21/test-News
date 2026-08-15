@@ -7,7 +7,8 @@ export const whyNexusPage = defineType({
   groups: [
     { name: "navigation", title: "Navigation" },
     { name: "header", title: "Header" },
-    { name: "content", title: "Content Sections" },
+    { name: "pageBuilder", title: "Page Content (Builder)" },
+    { name: "legacy", title: "Legacy Content (Hidden)" },
     { name: "cta", title: "Call to Action" },
     { name: "seo", title: "SEO" },
   ],
@@ -31,12 +32,30 @@ export const whyNexusPage = defineType({
       group: "header",
     }),
     
-    // Content Sections
+    // Flexible Page Builder
+    defineField({
+      name: "pageBuilder",
+      title: "Page Sections",
+      description: "Add, edit, and reorder sections on the page.",
+      type: "array",
+      group: "pageBuilder",
+      of: [
+        { type: "richTextBlock" },
+        { type: "splitBlock" },
+        { type: "cardsBlock" },
+        { type: "accordionBlock" },
+        { type: "statsBlock" },
+        { type: "ctaBlock" },
+      ],
+    }),
+
+    // Legacy Content Sections
     defineField({
       name: "contentBlocks",
-      title: "Content Sections",
+      title: "Legacy Content Sections",
       type: "array",
-      group: "content",
+      group: "legacy",
+      hidden: true,
       of: [
         {
           type: "object",
