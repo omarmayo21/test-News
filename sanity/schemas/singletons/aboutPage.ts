@@ -7,8 +7,7 @@ export const aboutPage = defineType({
   groups: [
     { name: "navigation", title: "Navigation" },
     { name: "hero", title: "Hero Section" },
-    { name: "pageBuilder", title: "Page Content (Builder)" },
-    { name: "legacy", title: "Legacy Content (Hidden)" },
+    { name: "mission", title: "Mission & Principles" },
     { name: "cta", title: "Call to Action" },
     { name: "seo", title: "SEO" },
   ],
@@ -39,94 +38,72 @@ export const aboutPage = defineType({
       group: "hero",
     }),
     
-    // Flexible Page Builder
-    defineField({
-      name: "pageBuilder",
-      title: "Page Sections",
-      description: "Add, edit, and reorder sections on the page.",
-      type: "array",
-      group: "pageBuilder",
-      of: [
-        { type: "richTextBlock" },
-        { type: "splitBlock" },
-        { type: "twoColumnBlock" },
-        { type: "cardsBlock" },
-        { type: "accordionBlock" },
-        { type: "statsBlock" },
-        { type: "ctaBlock" },
-      ],
-    }),
-
-    // Legacy Fields (Hidden)
+    // Overview
     defineField({
       name: "overviewTitle",
-      title: "Legacy Overview Title",
+      title: "Overview Title",
       type: "localeString",
-      group: "legacy",
-      hidden: true,
+      group: "mission",
     }),
     defineField({
       name: "overviewHeadline",
-      title: "Legacy Overview Headline",
+      title: "Overview Headline",
       type: "localeString",
-      group: "legacy",
-      hidden: true,
+      group: "mission",
     }),
     defineField({
       name: "overviewDesc",
-      title: "Legacy Overview Description",
+      title: "Overview Description",
       type: "localeText",
-      group: "legacy",
-      hidden: true,
+      group: "mission",
     }),
+
+    // Vision
     defineField({
       name: "visionTitle",
-      title: "Legacy Vision Title",
+      title: "Vision Title",
       type: "localeString",
-      group: "legacy",
-      hidden: true,
+      group: "mission",
     }),
     defineField({
       name: "visionDesc",
-      title: "Legacy Vision Description",
+      title: "Vision Description",
       type: "localeText",
-      group: "legacy",
-      hidden: true,
+      group: "mission",
     }),
+
+    // Mission
     defineField({
       name: "missionTitle",
-      title: "Legacy Mission Kicker Title",
+      title: "Mission Kicker Title",
       type: "localeString",
-      group: "legacy",
-      hidden: true,
+      group: "mission",
     }),
     defineField({
       name: "missionHeadline",
-      title: "Legacy Mission Headline",
+      title: "Mission Headline",
       type: "localeString",
-      group: "legacy",
-      hidden: true,
+      group: "mission",
     }),
     defineField({
       name: "missionDesc",
-      title: "Legacy Mission Description",
+      title: "Mission Description",
       type: "localeText",
-      group: "legacy",
-      hidden: true,
+      group: "mission",
     }),
+    
+    // Principles
     defineField({
       name: "principlesTitle",
-      title: "Legacy Principles Title",
+      title: "Principles Title",
       type: "localeString",
-      group: "legacy",
-      hidden: true,
+      group: "mission",
     }),
     defineField({
       name: "principles",
-      title: "Legacy Core Principles",
+      title: "Core Principles",
       type: "array",
-      group: "legacy",
-      hidden: true,
+      group: "mission",
       of: [
         {
           type: "object",

@@ -50,24 +50,5 @@ export const footer = defineType({
       title: "Copyright Notice",
       type: "localeString",
     }),
-    
-    // Legacy fields
-    defineField({
-      name: "offices",
-      title: "Legacy Offices (Hidden)",
-      type: "array",
-      hidden: true,
-      of: [
-        {
-          type: "object",
-          fields: [
-            { name: "name", type: "string", title: "Name" },
-            { name: "address", type: "string", title: "Address" },
-            { name: "phone", type: "string", title: "Phone" },
-            { name: "email", type: "string", title: "Email" },
-          ],
-        },
-      ],
-    }),
   ],
 });

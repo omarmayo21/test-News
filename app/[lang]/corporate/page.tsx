@@ -7,7 +7,6 @@ import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getTeamPageData } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
-import { PageBuilder } from "@/components/sections/page-builder";
 
 export async function generateMetadata({
   params,

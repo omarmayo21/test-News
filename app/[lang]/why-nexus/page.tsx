@@ -8,7 +8,6 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { PortableText } from "@portabletext/react";
 import { getWhyNexusPageData } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
-import { PageBuilder } from "@/components/sections/page-builder";
 
 export async function generateMetadata({
   params,
@@ -59,8 +58,46 @@ export default async function WhyNexusPage({
         )}
       </div>
 
-      {/* Dynamic Page Builder Content */}
-      <PageBuilder blocks={data?.pageBuilder || []} locale={locale} />
+      {/* Content Blocks */}
+      {contentBlocks.length > 0 && (
+        <div className="space-y-32">
+          {contentBlocks.map((block: any, idx: number) => {
+            const isEven = idx % 2 === 0;
+            return (
+              <div key={idx} className={`grid grid-cols-1 ${block.image ? 'md:grid-cols-2 gap-16' : ''} items-center ${block.image && !isEven ? 'md:flex-row-reverse' : ''}`}>
+                <div className={`space-y-6 ${block.image && !isEven ? 'md:order-2' : 'md:order-1'}`}>
+                  {block.title && (
+                    <h2 className="font-headline text-headline-lg text-primary-navy">
+                      {block.title?.[locale] || block.title?.en}
+                    </h2>
+                  )}
+                  {block.description && (
+                    <p className="font-body text-body-md opacity-80 leading-relaxed whitespace-pre-wrap">
+                      {block.description?.[locale] || block.description?.en}
+                    </p>
+                  )}
+                  {block.content && (
+                    <div className="prose prose-lg prose-p:font-body prose-p:text-body-md prose-p:opacity-80 prose-li:font-body prose-li:text-body-md prose-li:opacity-90 marker:text-primary-gold max-w-none">
+                      <PortableText value={block.content} />
+                    </div>
+                  )}
+                </div>
+                {block.image && urlForImage(block.image) && (
+                  <div className={`relative h-[400px] border-4 border-white shadow-xl overflow-hidden bg-surface-container-high ${!isEven ? 'md:order-1' : 'md:order-2'}`}>
+                    <Image
+                      src={urlForImage(block.image)!.url()}
+                      alt={block.title?.[locale] || block.title?.en || "Content Image"}
+                      fill
+                      className="object-cover grayscale-[15%]"
+                      sizes="(max-width: 767px) 100vw, 50vw"
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* CTA */}
       <div className="text-center pt-8 border-t border-surface-container-high">

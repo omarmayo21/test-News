@@ -6,7 +6,7 @@ import { getHeaderData, getFooterData } from "@/lib/sanity/queries";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
-
+export const revalidate = 3600;
 
 export async function generateMetadata({
   params,

@@ -10,7 +10,7 @@ import { getHomePageData } from "@/lib/sanity/queries";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { Locale } from "@/i18n-config";
 
-
+export const revalidate = 0; // Disable ISR caching to ensure fresh Sanity data
 
 export async function generateMetadata({
   params,

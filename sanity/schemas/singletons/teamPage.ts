@@ -7,8 +7,7 @@ export const teamPage = defineType({
   groups: [
     { name: "navigation", title: "Navigation" },
     { name: "header", title: "Header" },
-    { name: "pageBuilder", title: "Page Content (Builder)" },
-    { name: "legacy", title: "Legacy Content (Hidden)" },
+    { name: "team", title: "Team Grid" },
     { name: "cta", title: "Call to Action" },
     { name: "seo", title: "SEO" },
   ],
@@ -32,74 +31,51 @@ export const teamPage = defineType({
       group: "header",
     }),
     
-    // Flexible Page Builder
-    defineField({
-      name: "pageBuilder",
-      title: "Page Sections",
-      description: "Add, edit, and reorder sections on the page.",
-      type: "array",
-      group: "pageBuilder",
-      of: [
-        { type: "richTextBlock" },
-        { type: "splitBlock" },
-        { type: "cardsBlock" },
-        { type: "accordionBlock" },
-        { type: "statsBlock" },
-        { type: "ctaBlock" },
-      ],
-    }),
-
-    // Legacy Management Team
+    // Management Team
     defineField({
       name: "managementTeam",
-      title: "Legacy Management Team",
+      title: "Management Team",
       type: "array",
-      group: "legacy",
-      hidden: true,
+      group: "team",
       of: [{ type: "reference", to: [{ type: "author" }] }],
     }),
     
-    // Legacy Advisory Board
+    // Advisory Board
     defineField({
       name: "advisoryBoard",
-      title: "Legacy Advisory Board",
+      title: "Advisory Board",
       type: "array",
-      group: "legacy",
-      hidden: true,
+      group: "team",
       of: [{ type: "reference", to: [{ type: "author" }] }],
     }),
 
-    // Legacy Specialist Consultants
+    // Specialist Consultants
     defineField({
       name: "specialistConsultants",
-      title: "Legacy Specialist Consultants",
+      title: "Specialist Consultants",
       type: "array",
-      group: "legacy",
-      hidden: true,
+      group: "team",
       of: [{ type: "reference", to: [{ type: "author" }] }],
     }),
 
-    // Legacy Integrated Expertise
+    // Integrated Expertise
     defineField({
       name: "integratedExpertiseTitle",
-      title: "Legacy Integrated Expertise Title",
+      title: "Integrated Expertise Title",
       type: "localeString",
-      group: "legacy",
-      hidden: true,
+      group: "team",
     }),
     defineField({
       name: "integratedExpertiseSubtitle",
-      title: "Legacy Integrated Expertise Subtitle",
+      title: "Integrated Expertise Subtitle",
       type: "localeText",
-      group: "legacy",
-      hidden: true,
+      group: "team",
     }),
     defineField({
       name: "integratedExpertiseDisciplines",
-      title: "Legacy Integrated Expertise Disciplines",
+      title: "Integrated Expertise Disciplines",
       type: "localeText",
-      group: "legacy",
-      hidden: true,
+      group: "team",
     }),
 
     // CTA
