@@ -11,6 +11,11 @@ export const ctaBlock = defineType({
       type: "localeString",
     }),
     defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      type: "localeText",
+    }),
+    defineField({
       name: "buttonText",
       title: "Button Text",
       type: "localeString",

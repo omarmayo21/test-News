@@ -37,35 +37,26 @@ export default async function ContactPage({
   const title = data?.title?.[locale] || data?.title?.en || dict.contact.title;
   const subtitle = data?.subtitle?.[locale] || data?.subtitle?.en || dict.contact.subtitle;
 
-  const contactBlocks = [
-    {
-      name: "GENERAL INQUIRIES",
-      subtitle: "Get in Touch",
-      description: "For corporate information, technical discussions, suppliers, service providers, and general business inquiries:",
-      email: "info@nexusmines.com",
-      phoneLabel: "Cairo Office",
-      phone: "+20 2 3745 9141",
-    },
-    {
-      name: "INVESTORS & PARTNERSHIPS",
-      subtitle: "Discuss an Opportunity",
-      description: "For investment opportunities, strategic partnerships, joint ventures, project development, and mining collaboration:",
-      email: "invest@nexusmines.com",
-      phoneLabel: "International / WhatsApp",
-      phone: "+44 7453 421940",
-    },
-    {
-      name: "CAIRO HEADQUARTERS",
-      subtitle: "Nexus Resources",
-      addressLines: [
-        "20th Floor, North Tower",
-        "Nile City Towers",
-        "2005C Nile Corniche",
-        "Cairo, Egypt",
-        "Postal Code: 11221"
-      ]
-    }
-  ];
+  const contactBlocks = data?.offices?.map((office: any) => {
+    // We map the Sanity fields to match the UI requirements.
+    // In Sanity, "address" was used for the description text for Inquiries, and actual address for HQ.
+    const isHQ = office.name?.includes("HEADQUARTERS");
+    
+    // Parse phone label if it contains parentheses, e.g., "+20 2 3745 9141 (Cairo Office)"
+    let phoneStr = office.phone || "";
+    let phoneLabel = isHQ ? "" : (phoneStr.includes("(International") ? "International / WhatsApp" : "Cairo Office");
+    let phoneVal = phoneStr.replace(/\(.*?\)/g, "").trim();
+
+    return {
+      name: office.name,
+      subtitle: isHQ ? "Nexus Resources" : (office.name?.includes("INVESTORS") ? "Discuss an Opportunity" : "Get in Touch"),
+      description: isHQ ? "" : office.address,
+      email: office.email,
+      phoneLabel: phoneLabel,
+      phone: phoneVal,
+      addressLines: isHQ ? office.address?.split(", ").map((s: string) => s.trim()) : undefined
+    };
+  }) || [];
 
   return (
     <div className="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto">
