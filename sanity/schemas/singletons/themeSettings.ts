@@ -28,20 +28,26 @@ export const themeSettings = defineType({
     defineField({
       name: "primaryColor",
       title: "Primary Navy Color",
-      type: "string",
-      initialValue: "#0A1624",
+      type: "object",
+      fields: [
+        { name: "hex", title: "Hex Color Value", type: "string", initialValue: "#0A1624" },
+      ],
     }),
     defineField({
       name: "accentGoldColor",
       title: "Primary Gold Color",
-      type: "string",
-      initialValue: "#CC9A2C",
+      type: "object",
+      fields: [
+        { name: "hex", title: "Hex Color Value", type: "string", initialValue: "#CC9A2C" },
+      ],
     }),
     defineField({
       name: "secondaryTextColor",
       title: "Secondary Text Color",
-      type: "string",
-      initialValue: "#494740",
+      type: "object",
+      fields: [
+        { name: "hex", title: "Hex Color Value", type: "string", initialValue: "#494740" },
+      ],
     }),
     defineField({
       name: "socialLinks",

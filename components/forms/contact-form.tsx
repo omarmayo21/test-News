@@ -143,9 +143,10 @@ export function ContactForm({ locale, formType = "contact" }: ContactFormProps) 
             id="inquiryType"
             name="inquiryType"
             required
+            defaultValue=""
             className="w-full p-3 bg-surface-container-low border-b-2 border-outline-variant focus:border-primary-gold focus:outline-none font-body text-body-md transition-colors appearance-none"
           >
-            <option value="" disabled selected>Select Inquiry Type</option>
+            <option value="" disabled>Select Inquiry Type</option>
             <option value="General Inquiry">General Inquiry</option>
             <option value="Investment Opportunity">Investment Opportunity</option>
             <option value="Strategic Partnership">Strategic Partnership</option>

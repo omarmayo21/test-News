@@ -6,6 +6,12 @@ export const localeSlug = defineType({
   type: "object",
   fields: [
     defineField({
+      name: "current",
+      title: "Fallback Slug",
+      type: "string",
+      hidden: true,
+    }),
+    defineField({
       name: "en",
       title: "English Slug",
       type: "slug",

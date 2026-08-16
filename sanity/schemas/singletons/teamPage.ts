@@ -21,6 +21,12 @@ export const teamPage = defineType({
       group: "navigation",
     }),
     defineField({
+      name: "slug",
+      title: "Page Slug",
+      type: "localeSlug",
+      group: "navigation",
+    }),
+    defineField({
       name: "title",
       title: "Header Title",
       type: "localeString",

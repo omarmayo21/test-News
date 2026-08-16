@@ -14,11 +14,7 @@ export const investmentCategory = defineType({
     defineField({
       name: "slug",
       title: "Slug",
-      type: "slug",
-      options: {
-        source: "title.en",
-        maxLength: 96,
-      },
+      type: "localeSlug",
     }),
   ],
   preview: {

@@ -18,7 +18,7 @@ async function run() {
       {
         _type: 'heroBlock',
         _key: 'home-hero',
-        headline: { en: "Heritage Beneath Resourcing the Future." },
+        headline: { en: "Heritage Beneath. Resourcing the Future." },
         subtitle: { en: "From Yesterday’s Heritage to Today’s Expertise to Tomorrow’s Production.\n\nNexus Resources is an Egyptian mining and mineral development company advancing high potential gold and mineral opportunities from exploration toward responsible production through technical expertise, local execution, strategic partnerships, and disciplined investment.\n\nEgyptian Resources. Global Ambition." }
       },
       {
