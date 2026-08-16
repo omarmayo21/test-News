@@ -57,7 +57,7 @@ export function CapabilitiesGrid({ locale, data }: CapabilitiesGridProps) {
                 <h3 className="font-headline text-headline-md text-primary-navy mb-4">
                   {card.title}
                 </h3>
-                <p className="font-body text-body-md text-on-surface opacity-70">
+                <p className="font-body text-body-md text-on-surface opacity-70 whitespace-pre-wrap leading-relaxed">
                   {card.description}
                 </p>
               </div>
