@@ -8,6 +8,7 @@ import { constructMetadata } from "@/lib/seo/metadata";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getContactPageData } from "@/lib/sanity/queries";
+import { urlForImage } from "@/lib/sanity/image";
 
 export const revalidate = 60;
 
@@ -58,19 +59,27 @@ export default async function ContactPage({
     };
   }) || [];
 
+  const heroImageUrl = data?.heroImage ? urlForImage(data.heroImage)?.url() : null;
+
   return (
     <div className="w-full bg-background">
       {/* 1. Hero: Cinematic Dark Navy Split Banner */}
       <section className="relative min-h-[500px] lg:min-h-[580px] bg-primary-navy-dark text-white flex items-center overflow-hidden border-b border-primary-gold/20">
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <Image
-            src="/logo/desert-landscape.jpg"
-            alt={title}
-            fill
-            className="object-cover object-right md:object-center opacity-40 lg:opacity-65 scale-105 transition-transform duration-1000"
-            priority
-            sizes="100vw"
-          />
+          {heroImageUrl ? (
+            <Image
+              src={heroImageUrl}
+              alt={title}
+              fill
+              className="object-cover object-right md:object-center opacity-40 lg:opacity-65 scale-105 transition-transform duration-1000"
+              priority
+              sizes="100vw"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-r from-primary-navy-dark via-primary-navy to-[#050A15]">
+              <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:28px_28px]" />
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-r from-primary-navy-dark via-primary-navy-dark/90 lg:via-primary-navy-dark/75 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary-navy-dark via-transparent to-primary-navy-dark/40" />
         </div>

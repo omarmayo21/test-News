@@ -6,7 +6,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  serverExternalPackages: ["sanity", "next-sanity", "@sanity/client", "@sanity/vision", "@sanity/image-url"],
   images: {
     remotePatterns: [
       {

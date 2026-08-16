@@ -28,7 +28,7 @@ export function Hero({ locale, data }: HeroProps) {
   const ctaHref = data?.ctaLink || `/${locale}/why-nexus`;
   const secondaryCtaText = data?.secondaryCtaLabel?.[locale] || data?.secondaryCtaLabel?.en || "Partner With Us →";
   const secondaryCtaHref = data?.secondaryCtaLink || `/${locale}/contact`;
-  const bgImageUrl = data?.backgroundImage ? urlForImage(data.backgroundImage)?.url() : "/logo/mining-hero.jpg";
+  const bgImageUrl = data?.backgroundImage ? urlForImage(data.backgroundImage)?.url() : null;
 
   // Parse headline into primary and gold accent phrases
   const headlineParts = headline.includes(".") 

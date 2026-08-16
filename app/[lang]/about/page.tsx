@@ -76,7 +76,7 @@ export default async function AboutPage({
   const ctaSubtitle = data?.ctaSubtitle?.[locale] || data?.ctaSubtitle?.en || "Leadership, technical expertise, and specialist experience supporting Nexus Resources.";
   const ctaButtonLabel = data?.ctaButtonLabel?.[locale] || data?.ctaButtonLabel?.en || "EXPLORE CORPORATE →";
   const ctaButtonLink = data?.ctaButtonLink || `/${locale}/corporate`;
-  const heroImageUrl = data?.heroImage ? urlForImage(data.heroImage)?.url() : "/logo/mining-hero.jpg";
+  const heroImageUrl = data?.heroImage ? urlForImage(data.heroImage)?.url() : null;
 
   const principles = data?.principles || [
     { title: { en: "Integrity" }, description: { en: "We operate with transparency, accountability, and honesty in our relationships with partners, investors, authorities, and stakeholders." } },
@@ -91,14 +91,20 @@ export default async function AboutPage({
       {/* 1. Hero: Cinematic Dark Navy Split Banner */}
       <section className="relative min-h-[580px] lg:min-h-[660px] bg-primary-navy-dark text-white flex items-center overflow-hidden border-b border-primary-gold/20">
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <Image
-            src={heroImageUrl!}
-            alt={title}
-            fill
-            className="object-cover object-right md:object-center opacity-45 lg:opacity-75 scale-105 transition-transform duration-1000"
-            priority
-            sizes="100vw"
-          />
+          {heroImageUrl ? (
+            <Image
+              src={heroImageUrl}
+              alt={title}
+              fill
+              className="object-cover object-right md:object-center opacity-45 lg:opacity-75 scale-105 transition-transform duration-1000"
+              priority
+              sizes="100vw"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-r from-primary-navy-dark via-primary-navy to-[#050A15]">
+              <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:28px_28px]" />
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-r from-primary-navy-dark via-primary-navy-dark/90 lg:via-primary-navy-dark/75 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary-navy-dark via-transparent to-primary-navy-dark/40" />
         </div>

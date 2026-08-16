@@ -62,16 +62,13 @@ export function CtaBanner({ locale, data }: CtaBannerProps) {
             )}
           </div>
 
-          {/* Cinematic Desert Landscape Image Column */}
-          <div className="lg:col-span-6 relative min-h-[300px] lg:min-h-full">
-            <Image
-              src="/logo/desert-landscape.jpg"
-              alt="Egyptian Mining Opportunity"
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 1023px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-navy-dark via-primary-navy-dark/30 to-transparent hidden lg:block" />
+          {/* Cinematic Desert Gradient Column */}
+          <div className="lg:col-span-6 relative min-h-[300px] lg:min-h-full bg-gradient-to-br from-primary-navy via-primary-navy-dark to-[#050A15] flex items-center justify-center p-8 overflow-hidden">
+            <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px]" />
+            <div className="relative z-10 w-32 h-32 rounded-full border-2 border-primary-gold/30 bg-white/5 flex items-center justify-center text-primary-gold shadow-2xl">
+              <Mountain className="w-16 h-16 stroke-[1.5]" />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-navy-dark via-transparent to-transparent hidden lg:block" />
             <div className="absolute inset-0 bg-gradient-to-t from-primary-navy-dark via-transparent to-transparent lg:hidden" />
           </div>
         </div>
