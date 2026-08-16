@@ -15,105 +15,111 @@ export function Footer({ locale, data, navTree, themeSettings }: FooterProps) {
   const dict = getDictionary(locale);
   
   const copyright = data?.copyright?.[locale] || data?.copyright?.en || dict.footer.copyright;
-  
-  const officesTitle = dict.footer.officesTitle;
-  const offices = data?.offices?.length > 0 ? data.offices : [
-    { title: { en: dict.footer.cairoOffice } },
-    { title: { en: dict.footer.internationalOffice } }
-  ];
 
-  const resourcesTitle = dict.footer.resourcesTitle;
-  const resourceLinks = data?.resourceLinks?.length > 0 ? data.resourceLinks : [
-    { label: { en: dict.footer.siteMap }, path: `/${locale}/sitemap` },
-    { label: { en: dict.footer.newsletter }, path: `/${locale}/news` }
-  ];
-
-  const complianceTitle = dict.footer.complianceTitle;
   const complianceLinks = data?.complianceLinks?.length > 0 ? data.complianceLinks : [
-    { label: { en: dict.footer.privacyPolicy }, path: `/${locale}/legal/privacy-policy` },
-    { label: { en: dict.footer.termsOfService }, path: `/${locale}/legal/terms` }
+    { label: { en: dict.footer.privacyPolicy || "Privacy Policy" }, path: `/${locale}/legal/privacy-policy` },
+    { label: { en: dict.footer.termsOfService || "Terms of Service" }, path: `/${locale}/legal/terms` }
   ];
-
-  const resolvePath = (page: any) => {
-    if (page.navigation?.externalUrl) return page.navigation.externalUrl;
-    const typeMap: Record<string, string> = {
-      homePage: `/${locale}`,
-      aboutPage: `/${locale}/about`,
-      teamPage: `/${locale}/corporate`,
-      whyEgyptPage: `/${locale}/why-egypt`,
-      whyNexusPage: `/${locale}/why-nexus`,
-      contactPage: `/${locale}/contact`,
-      investmentPage: `/${locale}/investment`,
-      newsPage: `/${locale}/news`,
-    };
-    if (typeMap[page._type]) return typeMap[page._type];
-    const slugStr = page.slug?.[locale]?.current || page.slug?.en?.current || page._id;
-    return `/${locale}/${slugStr}`;
-  };
-
-  const dynamicFooterLinks = (navTree || []).filter((p: any) => p.navigation?.showInFooter);
 
   const emails = data?.contactEmails || ["info@nexusmines.com", "invest@nexusmines.com"];
 
   return (
-    <footer className="bg-primary-navy text-white px-margin-mobile md:px-section-padding py-section-padding w-full">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-container-max mx-auto">
-        {/* Column 1: Logo & Copyright */}
-        <div className="col-span-1 md:col-span-1 flex flex-col justify-between">
-          <div>
-            <div className="mb-6 flex items-center">
+    <footer className="bg-primary-navy-dark text-white border-t border-primary-gold/25 w-full">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Column 1: Brand & Overview (4 cols) */}
+          <div className="lg:col-span-4 space-y-6">
+            <div className="flex items-center">
               <Logo variant="dark" size="footer" href={`/${locale}`} themeSettings={themeSettings} />
             </div>
-            <p className="font-caption text-caption opacity-60 max-w-xs">
-              {copyright}
+            <p className="font-body text-xs sm:text-[13px] text-white/70 leading-relaxed max-w-sm">
+              Egyptian mining and mineral development advancing promising gold and mineral opportunities through technical expertise, local execution, strategic partnerships, and disciplined project development.
             </p>
+            <div className="font-label text-xs uppercase tracking-[0.15em] text-primary-gold font-bold">
+              Egyptian Resources. Global Ambition.
+            </div>
+          </div>
+
+          {/* Column 2: Navigation (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="font-label text-xs uppercase tracking-[0.2em] text-primary-gold font-bold mb-4">
+              NAVIGATION
+            </h4>
+            <ul className="space-y-2.5">
+              {[
+                { label: "Home", path: `/${locale}` },
+                { label: "About Nexus", path: `/${locale}/about` },
+                { label: "Corporate & Team", path: `/${locale}/corporate` },
+                { label: "Why Egypt", path: `/${locale}/why-egypt` },
+                { label: "Why Nexus", path: `/${locale}/why-nexus` },
+                { label: "News & Insights", path: `/${locale}/news` },
+                { label: "Contact Us", path: `/${locale}/contact` },
+              ].map((link: any, idx: number) => (
+                <li key={idx}>
+                  <Link
+                    href={link.path}
+                    className="font-body text-xs sm:text-sm text-white/75 hover:text-primary-gold transition-colors duration-200"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Direct Inquiries (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="font-label text-xs uppercase tracking-[0.2em] text-primary-gold font-bold mb-4">
+              DIRECT INQUIRIES
+            </h4>
+            <div className="space-y-3 font-body text-xs sm:text-sm text-white/75">
+              <div>
+                <span className="block text-white/50 text-[11px] uppercase tracking-wider">Cairo Office</span>
+                <a href="mailto:info@nexusmines.com" className="hover:text-primary-gold transition-colors">
+                  info@nexusmines.com
+                </a>
+              </div>
+              <div>
+                <span className="block text-white/50 text-[11px] uppercase tracking-wider">Investors & Partnerships</span>
+                <a href="mailto:invest@nexusmines.com" className="hover:text-primary-gold transition-colors">
+                  invest@nexusmines.com
+                </a>
+              </div>
+              <div>
+                <span className="block text-white/50 text-[11px] uppercase tracking-wider">International / WhatsApp</span>
+                <span className="text-white/90 font-medium">+20 10 9345 5282</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Column 4: Legal & Compliance (2 cols) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="font-label text-xs uppercase tracking-[0.2em] text-primary-gold font-bold mb-4">
+              LEGAL
+            </h4>
+            <ul className="space-y-2.5">
+              {complianceLinks.map((link: any, idx: number) => (
+                <li key={idx}>
+                  <Link
+                    href={link.path || "#"}
+                    className="font-body text-xs sm:text-sm text-white/75 hover:text-primary-gold transition-colors duration-200"
+                  >
+                    {link.label?.[locale] || link.label?.en}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        {/* Column 2: Main Navigation */}
-        <div className="col-span-1 flex flex-col space-y-4">
-          {[
-            { label: "Home", path: `/${locale}` },
-            { label: "About", path: `/${locale}/about` },
-            { label: "Corporate", path: `/${locale}/corporate` },
-            { label: "Why Egypt", path: `/${locale}/why-egypt` },
-            { label: "Why Nexus", path: `/${locale}/why-nexus` },
-            { label: "Contact", path: `/${locale}/contact` },
-          ].map((link: any, idx: number) => (
-            <Link
-              key={idx}
-              href={link.path}
-              className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        {/* Column 3: Legal & Compliance */}
-        <div className="col-span-1 flex flex-col space-y-4">
-          {complianceLinks.map((link: any, idx: number) => (
-            <Link
-              key={idx}
-              href={link.path || "#"}
-              className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
-            >
-              {link.label?.[locale] || link.label?.en}
-            </Link>
-          ))}
-        </div>
-
-        {/* Column 4: Contact Emails */}
-        <div className="col-span-1 flex flex-col space-y-4">
-          {emails.map((email: string, idx: number) => (
-            <a
-              key={idx}
-              href={`mailto:${email}`}
-              className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
-            >
-              {email}
-            </a>
-          ))}
+        {/* Bottom Bar: Divider & Copyright */}
+        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="font-caption text-xs text-white/50 text-center sm:text-left">
+            {copyright}
+          </p>
+          <p className="font-caption text-xs text-white/40 text-center sm:text-right">
+            Cairo, Egypt • International Operations
+          </p>
         </div>
       </div>
     </footer>

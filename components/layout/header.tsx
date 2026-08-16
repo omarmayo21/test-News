@@ -88,18 +88,18 @@ export function Header({ locale, data, navTree, themeSettings }: HeaderProps) {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-300 bg-primary-navy text-white border-b border-white/10 ${
+        className={`sticky top-0 z-50 w-full transition-all duration-300 bg-primary-navy/95 backdrop-blur-md text-white border-b border-white/10 ${
           scrolled
-            ? "h-[70px] lg:h-[76px] shadow-xl"
-            : "h-[76px] lg:h-[84px]"
+            ? "h-[70px] lg:h-[74px] shadow-2xl bg-primary-navy"
+            : "h-[76px] lg:h-[82px]"
         }`}
       >
-        <div className="flex justify-between items-center px-4 md:px-10 lg:px-16 w-full h-full max-w-[1536px] mx-auto">
+        <div className="flex justify-between items-center px-4 md:px-8 lg:px-12 w-full h-full max-w-[1536px] mx-auto">
           {/* Clickable Corporate Vector Logo */}
           <Logo href={`/${locale}`} size="header" variant="dark" themeSettings={themeSettings} headerLogo={data?.logo} />
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center space-x-4 xl:space-x-8">
+          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8" aria-label="Main Navigation">
             {menuTree.map((item: any) => {
               const itemPath = resolvePath(item);
               const isActive = pathname === itemPath || (pathname.startsWith(itemPath) && itemPath !== `/${locale}`);
@@ -109,11 +109,11 @@ export function Header({ locale, data, navTree, themeSettings }: HeaderProps) {
               if (item.children && item.children.length > 0) {
                 return (
                   <div key={item._id} className="relative group">
-                    <button className="relative py-2 font-label text-[15px] lg:text-[12px] font-medium uppercase tracking-wider text-white/90 hover:text-primary-gold transition-colors duration-200 flex items-center space-x-1">
+                    <button className="relative py-2 font-label text-[13px] font-semibold uppercase tracking-[0.1em] text-white/85 hover:text-primary-gold transition-colors duration-200 flex items-center space-x-1.5">
                       <span className={isActive ? "text-primary-gold font-bold" : ""}>{itemLabel}</span>
-                      <ChevronDown className="w-3 h-3 opacity-60" />
+                      <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover:rotate-180 transition-transform duration-200" />
                     </button>
-                    <div className="absolute top-full left-0 mt-2 w-56 bg-primary-navy shadow-xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
+                    <div className="absolute top-full left-0 mt-2 w-56 bg-primary-navy-dark shadow-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2 rounded-sm">
                       {item.children.map((child: any) => {
                         const childPath = resolvePath(child);
                         const childLabel = child.navigation?.navTitle?.[locale] || child.navigation?.navTitle?.en || child.title?.[locale] || child.title?.en;
@@ -123,7 +123,7 @@ export function Header({ locale, data, navTree, themeSettings }: HeaderProps) {
                             key={child._id}
                             href={childPath}
                             target={childTarget}
-                            className="block px-6 py-2.5 font-label text-[12px] uppercase tracking-wider text-white/90 hover:bg-white/5 hover:text-primary-gold transition-colors"
+                            className="block px-6 py-2.5 font-label text-[12px] uppercase tracking-wider text-white/80 hover:bg-white/5 hover:text-primary-gold transition-colors"
                           >
                             {childLabel}
                           </Link>
@@ -139,34 +139,34 @@ export function Header({ locale, data, navTree, themeSettings }: HeaderProps) {
                   key={item._id}
                   href={itemPath}
                   target={target}
-                  className="relative py-2 font-label text-[15px] lg:text-[12px] font-medium uppercase tracking-wider text-white/90 hover:text-primary-gold transition-colors duration-200 group whitespace-nowrap"
+                  className="relative py-2 font-label text-[13px] font-semibold uppercase tracking-[0.1em] text-white/85 hover:text-primary-gold transition-colors duration-200 group whitespace-nowrap"
                 >
                   <span className={isActive ? "text-primary-gold font-bold" : ""}>
                     {itemLabel}
                   </span>
                   {isActive && (
                     <span
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary-gold"
+                      className="absolute -bottom-1 left-0 right-0 h-[2px] bg-primary-gold rounded-full"
                     />
                   )}
                   {!isActive && (
-                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary-gold group-hover:w-full transition-all duration-300" />
+                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-primary-gold group-hover:w-full transition-all duration-300 rounded-full" />
                   )}
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
           {/* Header Right Actions */}
-          <div className="flex items-center space-x-1 sm:space-x-3 lg:space-x-5">
+          <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
             {/* Global Search Button */}
             <button
               onClick={() => setSearchOpen(true)}
               type="button"
-              className="text-white hover:text-primary-gold transition-colors p-2 sm:p-2.5 rounded-full hover:bg-white/10"
+              className="text-white/80 hover:text-primary-gold transition-colors p-2 sm:p-2.5 rounded-full hover:bg-white/5"
               aria-label="Search site"
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
             {/* LinkedIn Icon */}
@@ -175,37 +175,37 @@ export function Header({ locale, data, navTree, themeSettings }: HeaderProps) {
                 href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-primary-gold transition-colors p-2 sm:p-2.5 rounded-full hover:bg-white/10"
+                className="text-white/80 hover:text-primary-gold transition-colors p-2 sm:p-2.5 rounded-full hover:bg-white/5"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
             )}
 
             {/* Language Switcher */}
-            <div className="flex items-center space-x-2 border-l border-white/20 pl-2 sm:pl-4">
+            <div className="flex items-center space-x-2 border-l border-white/20 pl-2 sm:pl-3">
               <button
                 onClick={() => handleLanguageSwitch("en")}
                 type="button"
                 disabled={isSwitchingLang}
                 aria-pressed={locale === "en"}
-                className={`font-label text-[14px] sm:text-[15px] uppercase transition-all duration-200 ${
+                className={`font-label text-[13px] uppercase tracking-wider transition-all duration-200 ${
                   locale === "en"
-                    ? "text-primary-gold font-bold underline underline-offset-4"
+                    ? "text-primary-gold font-bold border-b border-primary-gold pb-0.5"
                     : "text-white/60 hover:text-white"
                 }`}
               >
                 EN
               </button>
-              <span className="text-white/20">|</span>
+              <span className="text-white/20 text-xs">|</span>
               <button
                 onClick={() => handleLanguageSwitch("fr")}
                 type="button"
                 disabled={isSwitchingLang}
                 aria-pressed={locale === "fr"}
-                className={`font-label text-[14px] sm:text-[15px] uppercase transition-all duration-200 ${
+                className={`font-label text-[13px] uppercase tracking-wider transition-all duration-200 ${
                   locale === "fr"
-                    ? "text-primary-gold font-bold underline underline-offset-4"
+                    ? "text-primary-gold font-bold border-b border-primary-gold pb-0.5"
                     : "text-white/60 hover:text-white"
                 }`}
               >
@@ -213,7 +213,7 @@ export function Header({ locale, data, navTree, themeSettings }: HeaderProps) {
               </button>
             </div>
 
-            {/* Mobile / Laptop Drawer Menu Trigger */}
+            {/* Mobile Drawer Trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
@@ -222,7 +222,7 @@ export function Header({ locale, data, navTree, themeSettings }: HeaderProps) {
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
             >
-              {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>

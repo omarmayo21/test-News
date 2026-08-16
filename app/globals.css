@@ -4,12 +4,51 @@
 
 @layer base {
   :root {
-    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-serif: 'Source Serif 4', 'Libre Caslon Text', Georgia, serif;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  ::selection {
+    background-color: #C5A059;
+    color: #0B132B;
+  }
+
   body {
-    background-color: #FDF9F2;
+    background-color: #FDFBF7;
     color: #1C1C18;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #E2BF7D 0%, #C5A059 50%, #A37F38 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .bg-navy-gradient {
+    background: linear-gradient(135deg, #0B132B 0%, #070D1F 100%);
+  }
+  .bg-gold-gradient {
+    background: linear-gradient(135deg, #E2BF7D 0%, #C5A059 100%);
   }
 }

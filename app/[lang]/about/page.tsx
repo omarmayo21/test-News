@@ -2,6 +2,17 @@ import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { 
+  ArrowRight, 
+  Compass, 
+  Mountain, 
+  ShieldCheck, 
+  Settings, 
+  TrendingUp, 
+  Handshake, 
+  Leaf, 
+  Users 
+} from "lucide-react";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -27,6 +38,18 @@ export async function generateMetadata({
   });
 }
 
+function getValueIcon(title: string, index: number) {
+  const t = title.toLowerCase();
+  if (t.includes("integ")) return ShieldCheck;
+  if (t.includes("tech") || t.includes("excel")) return Settings;
+  if (t.includes("exec")) return TrendingUp;
+  if (t.includes("part")) return Handshake;
+  if (t.includes("resp") || t.includes("sustain")) return Leaf;
+  
+  const fallbacks = [ShieldCheck, Settings, TrendingUp, Handshake, Leaf];
+  return fallbacks[index % fallbacks.length];
+}
+
 export default async function AboutPage({
   params,
 }: {
@@ -39,172 +62,184 @@ export default async function AboutPage({
 
   const title = data?.title?.[locale] || data?.title?.en || dict.about.title;
   const subtitle = data?.subtitle?.[locale] || data?.subtitle?.en || dict.about.subtitle;
-  const overviewTitle = data?.overviewTitle?.[locale] || data?.overviewTitle?.en || "Company Overview";
-  const overviewHeadline = data?.overviewHeadline?.[locale] || data?.overviewHeadline?.en || "";
+  const overviewTitle = data?.overviewTitle?.[locale] || data?.overviewTitle?.en || "About Nexus";
+  const overviewHeadline = data?.overviewHeadline?.[locale] || data?.overviewHeadline?.en || "A Mining Company Built to Turn Potential into Progress.";
   const overviewDesc = data?.overviewDesc?.[locale] || data?.overviewDesc?.en || "";
-  const visionTitle = data?.visionTitle?.[locale] || data?.visionTitle?.en || "Vision";
-  const visionDesc = data?.visionDesc?.[locale] || data?.visionDesc?.en || "";
-  const missionTitle = data?.missionTitle?.[locale] || data?.missionTitle?.en || dict.about.missionTitle;
-  const missionHeadline = data?.missionHeadline?.[locale] || data?.missionHeadline?.en || dict.about.missionHeadline;
-  const missionDesc = data?.missionDesc?.[locale] || data?.missionDesc?.en || dict.about.missionDesc;
-  const principlesTitle = data?.principlesTitle?.[locale] || data?.principlesTitle?.en || dict.about.principlesTitle;
+  const visionTitle = data?.visionTitle?.[locale] || data?.visionTitle?.en || "OUR VISION";
+  const visionDesc = data?.visionDesc?.[locale] || data?.visionDesc?.en || "To Build a Leading Egyptian Mining and Resources Company with International Reach.";
+  const missionTitle = data?.missionTitle?.[locale] || data?.missionTitle?.en || "OUR MISSION";
+  const missionHeadline = data?.missionHeadline?.[locale] || data?.missionHeadline?.en || "To Turn Mineral Potential into Lasting Value.";
+  const missionDesc = data?.missionDesc?.[locale] || data?.missionDesc?.en || "By identifying, advancing, and developing viable mineral opportunities.";
+  const principlesTitle = data?.principlesTitle?.[locale] || data?.principlesTitle?.en || "OUR VALUES";
   
-  const ctaTitle = data?.ctaTitle?.[locale] || data?.ctaTitle?.en || "Interested in Partnering with Nexus?";
-  const ctaSubtitle = data?.ctaSubtitle?.[locale] || data?.ctaSubtitle?.en || "Connect with our executive management team to explore joint ventures and concessions across the Arabian-Nubian shield.";
-  const ctaButtonLabel = data?.ctaButtonLabel?.[locale] || data?.ctaButtonLabel?.en || dict.nav.contact;
-  const ctaButtonLink = data?.ctaButtonLink || `/${locale}/contact`;
-  const heroImageUrl = data?.heroImage ? urlForImage(data.heroImage)?.url() : "/logo/Original.svg";
+  const ctaTitle = data?.ctaTitle?.[locale] || data?.ctaTitle?.en || "Meet the People Behind Nexus";
+  const ctaSubtitle = data?.ctaSubtitle?.[locale] || data?.ctaSubtitle?.en || "Leadership, technical expertise, and specialist experience supporting Nexus Resources.";
+  const ctaButtonLabel = data?.ctaButtonLabel?.[locale] || data?.ctaButtonLabel?.en || "EXPLORE CORPORATE →";
+  const ctaButtonLink = data?.ctaButtonLink || `/${locale}/corporate`;
+  const heroImageUrl = data?.heroImage ? urlForImage(data.heroImage)?.url() : "/logo/mining-hero.jpg";
+
+  const principles = data?.principles || [
+    { title: { en: "Integrity" }, description: { en: "We operate with transparency, accountability, and honesty in our relationships with partners, investors, authorities, and stakeholders." } },
+    { title: { en: "Technical Excellence" }, description: { en: "We rely on sound engineering, geological understanding, data, and disciplined technical analysis to support informed decisions." } },
+    { title: { en: "Execution" }, description: { en: "We believe expertise creates value when it is translated into practical action, measurable progress, and effective project delivery." } },
+    { title: { en: "Partnership" }, description: { en: "We build long term around trust, aligned interests, shared objectives, and common value." } },
+    { title: { en: "Responsible Development" }, description: { en: "We pursue mineral development with consideration for people, communities, the environment, and the long-term value of Egypt's mineral resources." } }
+  ];
 
   return (
-    <div className="w-full">
-      {/* Hero: Legacy & Vision */}
-      <section className="relative pt-16 pb-24 px-margin-mobile md:px-section-padding max-w-container-max mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
-          <div className="lg:col-span-5 z-10">
-            <h1 className="font-headline font-headline-lg text-display-lg text-primary-navy mb-6">
-              {title}
-            </h1>
-            <p className="font-body text-body-lg text-on-surface opacity-80 mb-10 max-w-md">
-              {subtitle}
-            </p>
-          </div>
-          <div className="lg:col-span-7 mt-8 lg:mt-0">
-            <div className="aspect-[4/3] w-full relative">
-              <div className="absolute inset-4 bg-surface-container-low translate-x-4 translate-y-4"></div>
-              <div className="absolute inset-0 overflow-hidden bg-primary-navy/10 border border-surface-container-high">
-                <Image
-                  src={heroImageUrl!}
-                  alt={title}
-                  fill
-                  className="object-cover grayscale contrast-125 p-8"
-                  priority
-                  sizes="(max-width: 1023px) 100vw, 58vw"
-                />
-              </div>
+    <div className="w-full bg-background">
+      {/* 1. Hero: Cinematic Dark Navy Split Banner */}
+      <section className="relative min-h-[580px] lg:min-h-[660px] bg-primary-navy-dark text-white flex items-center overflow-hidden border-b border-primary-gold/20">
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <Image
+            src={heroImageUrl!}
+            alt={title}
+            fill
+            className="object-cover object-right md:object-center opacity-45 lg:opacity-75 scale-105 transition-transform duration-1000"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-navy-dark via-primary-navy-dark/90 lg:via-primary-navy-dark/75 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-navy-dark via-transparent to-primary-navy-dark/40" />
+        </div>
+
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 py-20 lg:py-24">
+          <div className="max-w-2xl lg:max-w-3xl space-y-6">
+            <div className="inline-flex items-center space-x-2">
+              <span className="font-label text-xs uppercase tracking-[0.2em] text-primary-gold font-bold">
+                {overviewTitle}
+              </span>
+              <span className="h-[1px] w-8 bg-primary-gold" />
             </div>
+
+            <h1 className="font-headline text-[36px] sm:text-[48px] lg:text-[56px] leading-[1.12] tracking-tight text-white font-bold">
+              A Mining Company <br />
+              <span className="text-primary-gold">Built to Turn Potential into Progress.</span>
+            </h1>
+
+            {overviewDesc ? (
+              <div className="font-body text-body-md sm:text-body-lg text-white/85 leading-relaxed space-y-4 max-w-2xl whitespace-pre-wrap">
+                {overviewDesc}
+              </div>
+            ) : subtitle ? (
+              <p className="font-body text-body-md sm:text-body-lg text-white/85 leading-relaxed max-w-2xl">
+                {subtitle}
+              </p>
+            ) : null}
           </div>
         </div>
       </section>
 
-      {/* Overview / Vision */}
-      {(overviewTitle || visionTitle) && (
-        <section className="bg-white py-section-padding px-margin-mobile md:px-section-padding border-t border-surface-container-high">
-          <div className="max-w-container-max mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter lg:gap-24">
-              {/* Overview */}
-              <div>
-                <span className="font-label text-label-md text-primary-gold uppercase tracking-widest block mb-4">
-                  {overviewTitle}
-                </span>
-                {overviewHeadline && (
-                  <h2 className="font-headline text-headline-lg text-primary-navy mb-6">
-                    {overviewHeadline}
-                  </h2>
-                )}
-                <div className="font-body text-body-md text-on-surface opacity-80 leading-relaxed whitespace-pre-wrap space-y-4">
-                  {overviewDesc.split('\n').map((para: string, i: number) => (
-                    <p key={i}>{para}</p>
-                  ))}
-                </div>
-              </div>
+      {/* 2. Vision & Mission: 2-Column Cards side by side from scr pag */}
+      <section className="py-20 lg:py-24 px-6 sm:px-10 lg:px-16 bg-white border-b border-surface-container-high">
+        <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          {/* Vision Card */}
+          <div className="p-8 sm:p-12 bg-surface-container-low/60 border border-surface-container-high rounded-sm shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col items-center text-center space-y-4">
+            <div className="w-16 h-16 rounded-full bg-primary-navy border-2 border-primary-gold flex items-center justify-center text-primary-gold mb-2 shadow-md">
+              <Compass className="w-7 h-7 stroke-[1.75]" />
+            </div>
+            <span className="font-label text-xs uppercase tracking-[0.2em] text-primary-gold font-bold">
+              {visionTitle}
+            </span>
+            <h2 className="font-headline text-2xl sm:text-[28px] text-primary-navy font-bold leading-snug">
+              To Build a Leading Egyptian Mining and Resources Company with International Reach.
+            </h2>
+            {visionDesc && !visionDesc.includes("To Build a Leading") && (
+              <p className="font-body text-body-md text-on-surface/80 leading-relaxed max-w-lg">
+                {visionDesc}
+              </p>
+            )}
+          </div>
 
-              {/* Vision */}
-              <div>
-                <span className="font-label text-label-md text-primary-gold uppercase tracking-widest block mb-4">
-                  {visionTitle}
-                </span>
-                <p className="font-body text-body-md text-on-surface opacity-80 leading-relaxed whitespace-pre-wrap">
-                  {visionDesc}
+          {/* Mission Card */}
+          <div className="p-8 sm:p-12 bg-surface-container-low/60 border border-surface-container-high rounded-sm shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col items-center text-center space-y-4">
+            <div className="w-16 h-16 rounded-full bg-primary-navy border-2 border-primary-gold flex items-center justify-center text-primary-gold mb-2 shadow-md">
+              <Mountain className="w-7 h-7 stroke-[1.75]" />
+            </div>
+            <span className="font-label text-xs uppercase tracking-[0.2em] text-primary-gold font-bold">
+              {missionTitle}
+            </span>
+            <h2 className="font-headline text-2xl sm:text-[28px] text-primary-navy font-bold leading-snug">
+              {missionHeadline}
+            </h2>
+            {missionDesc && (
+              <p className="font-body text-body-md text-on-surface/80 leading-relaxed max-w-lg">
+                {missionDesc}
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Our Values: 5 Cards Grid */}
+      <section className="py-20 lg:py-28 px-6 sm:px-10 lg:px-16 bg-surface-container-low/40 border-b border-surface-container-high">
+        <div className="max-w-[1440px] mx-auto space-y-16">
+          <div className="text-center space-y-3">
+            <div className="inline-flex items-center space-x-3">
+              <span className="h-[1px] w-6 bg-primary-gold" />
+              <span className="font-label text-xs uppercase tracking-[0.2em] text-primary-gold font-bold">
+                {principlesTitle}
+              </span>
+              <span className="h-[1px] w-6 bg-primary-gold" />
+            </div>
+            <h2 className="font-headline text-[32px] sm:text-[40px] font-bold text-primary-navy tracking-tight">
+              Principles Driving Responsible Mining
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {principles.map((p: any, idx: number) => {
+              const pTitle = p.title?.[locale] || p.title?.en || `Value ${idx + 1}`;
+              const pDesc = p.description?.[locale] || p.description?.en || "";
+              const IconComponent = getValueIcon(pTitle, idx);
+
+              return (
+                <div
+                  key={idx}
+                  className="p-8 bg-white border border-surface-container-high hover:border-primary-gold/40 rounded-sm shadow-card hover:shadow-card-hover transition-all duration-300 group flex flex-col items-center text-center space-y-4"
+                >
+                  <div className="w-14 h-14 rounded-full border-2 border-primary-gold/40 bg-surface-container-low group-hover:bg-primary-gold/10 group-hover:border-primary-gold flex items-center justify-center text-primary-gold transition-all duration-300 group-hover:scale-105 shadow-sm">
+                    <IconComponent className="w-6 h-6 stroke-[1.75]" />
+                  </div>
+                  <h3 className="font-label text-[14px] font-bold text-primary-navy uppercase tracking-[0.1em] group-hover:text-primary-gold transition-colors">
+                    {pTitle}
+                  </h3>
+                  <p className="font-body text-body-md text-on-surface/75 leading-relaxed">
+                    {pDesc}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Inset Corporate CTA Card from scr pag */}
+      <section className="py-16 px-6 sm:px-10 lg:px-16 bg-white">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="p-8 sm:p-12 bg-primary-navy-dark text-white rounded-sm border border-primary-gold/30 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="flex items-center space-x-6 text-center lg:text-left">
+              <div className="hidden sm:flex w-16 h-16 rounded-full border-2 border-primary-gold/50 bg-white/5 items-center justify-center text-primary-gold flex-shrink-0">
+                <Users className="w-8 h-8 stroke-[1.75]" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="font-headline text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  {ctaTitle}
+                </h3>
+                <p className="font-body text-body-md text-white/80 max-w-xl">
+                  {ctaSubtitle}
                 </p>
               </div>
             </div>
+
+            <Link
+              href={ctaButtonLink}
+              className="inline-flex items-center justify-center px-8 py-4 bg-primary-gold hover:bg-primary-gold-light text-primary-navy font-label text-[13px] uppercase tracking-[0.12em] font-bold rounded-sm shadow-gold-glow transition-all duration-300 group flex-shrink-0"
+            >
+              <span>{ctaButtonLabel}</span>
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
           </div>
-        </section>
-      )}
-
-      {/* Mission / Core Principles */}
-      <section className="bg-surface-container-low py-section-padding px-margin-mobile md:px-section-padding border-t border-surface-container-high">
-        <div className="max-w-container-max mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter lg:gap-24">
-            {/* Our Mission */}
-            <div>
-              <span className="font-label text-label-md text-primary-gold uppercase tracking-widest block mb-4">
-                {missionTitle}
-              </span>
-              <h2 className="font-headline text-headline-lg text-primary-navy mb-6">
-                {missionHeadline}
-              </h2>
-              <p className="font-body text-body-md text-on-surface opacity-80 leading-relaxed">
-                {missionDesc}
-              </p>
-            </div>
-
-            {/* Core Principles */}
-            <div>
-              <span className="font-label text-label-md text-primary-gold uppercase tracking-widest block mb-4">
-                {principlesTitle}
-              </span>
-              <ul className="space-y-8">
-                {data?.principles ? (
-                  data.principles.map((p: any, idx: number) => (
-                    <li key={idx} className="pl-4 border-l-2 border-primary-gold">
-                      <h3 className="font-headline text-headline-sm text-primary-navy mb-2">
-                        {p.title?.[locale] || p.title?.en}
-                      </h3>
-                      <p className="font-body text-body-md text-on-surface opacity-75">
-                        {p.description?.[locale] || p.description?.en}
-                      </p>
-                    </li>
-                  ))
-                ) : (
-                  <>
-                    <li className="pl-4 border-l-2 border-primary-gold">
-                      <h3 className="font-headline text-headline-sm text-primary-navy mb-2">
-                        {dict.about.principle1Title}
-                      </h3>
-                      <p className="font-body text-body-md text-on-surface opacity-75">
-                        {dict.about.principle1Desc}
-                      </p>
-                    </li>
-                    <li className="pl-4 border-l-2 border-primary-gold">
-                      <h3 className="font-headline text-headline-sm text-primary-navy mb-2">
-                        {dict.about.principle2Title}
-                      </h3>
-                      <p className="font-body text-body-md text-on-surface opacity-75">
-                        {dict.about.principle2Desc}
-                      </p>
-                    </li>
-                    <li className="pl-4 border-l-2 border-primary-gold">
-                      <h3 className="font-headline text-headline-sm text-primary-navy mb-2">
-                        {dict.about.principle3Title}
-                      </h3>
-                      <p className="font-body text-body-md text-on-surface opacity-75">
-                        {dict.about.principle3Desc}
-                      </p>
-                    </li>
-                  </>
-                )}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-primary-navy text-white py-20 px-margin-mobile md:px-section-padding text-center">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="font-headline text-headline-md text-white mb-6">
-            {ctaTitle}
-          </h2>
-          <p className="font-body text-body-lg opacity-80 mb-8">
-            {ctaSubtitle}
-          </p>
-          <Link
-            href={ctaButtonLink}
-            className="inline-block px-8 py-4 bg-primary-gold text-white font-label text-label-md uppercase tracking-widest hover:bg-white hover:text-primary-navy transition-colors"
-          >
-            {ctaButtonLabel}
-          </Link>
         </div>
       </section>
     </div>

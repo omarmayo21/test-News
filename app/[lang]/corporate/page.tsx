@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, Compass, Users } from "lucide-react";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -49,12 +50,12 @@ export default async function TeamPage({
     data?.subtitle?.en ||
     "Leadership. Expertise. Execution.\n\nNexus Resources brings together experienced leadership and specialist expertise across mining, geology, engineering, mineral processing, business development, technology, finance, and stakeholder relations.\n\nOur corporate structure combines executive management, experienced advisors, and specialist consultants to support the evaluation, development, and operation of mining projects.";
 
-  const ctaTitle = data?.ctaTitle?.[locale] || data?.ctaTitle?.en || "Discover the Opportunity";
+  const ctaTitle = data?.ctaTitle?.[locale] || data?.ctaTitle?.en || "Learn more about Egypt's potential and our long-term vision.";
   const ctaSubtitle =
     data?.ctaSubtitle?.[locale] ||
     data?.ctaSubtitle?.en ||
     "Explore why Egypt is emerging as a significant destination for mineral exploration, development, and mining investment.";
-  const ctaButtonLabel = data?.ctaButtonLabel?.[locale] || data?.ctaButtonLabel?.en || "Explore Why Egypt →";
+  const ctaButtonLabel = data?.ctaButtonLabel?.[locale] || data?.ctaButtonLabel?.en || "EXPLORE WHY EGYPT →";
   const ctaButtonLink = data?.ctaButtonLink || `/${locale}/why-egypt`;
 
   const managementTeam = data?.managementTeam || [];
@@ -64,7 +65,7 @@ export default async function TeamPage({
   const renderTeamGrid = (teamMembers: any[]) => {
     if (!teamMembers || teamMembers.length === 0) return null;
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamMembers.map((member: any, idx: number) => {
           const name = member.name || "Team Member";
           const role = member.role?.[locale] || member.role?.en || member.role || "";
@@ -74,43 +75,42 @@ export default async function TeamPage({
           return (
             <div
               key={idx}
-              className="bg-surface-container-low border-b-2 border-primary-gold overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col group"
+              className="p-8 bg-white border border-surface-container-high hover:border-primary-gold/40 rounded-sm shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col items-center text-center group"
             >
-              {avatarUrl ? (
-                <div className="relative h-72 w-full bg-surface-container-high">
-                  <Image
-                    src={avatarUrl}
-                    alt={name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500 grayscale-[20%]"
-                    sizes="(max-width: 767px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-              ) : (
-                <div className="h-44 w-full bg-gradient-to-br from-primary-navy via-primary-navy/90 to-primary-navy/80 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:16px_16px]" />
-                  <div className="w-20 h-20 rounded-full border-2 border-primary-gold/40 flex items-center justify-center text-primary-gold font-headline text-headline-md tracking-wider shadow-inner">
+              {/* Circular Avatar */}
+              <div className="mb-6 relative">
+                {avatarUrl ? (
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary-gold shadow-md relative">
+                    <Image
+                      src={avatarUrl}
+                      alt={name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="96px"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-24 h-24 rounded-full border-2 border-primary-gold/50 bg-surface-container-low flex items-center justify-center text-primary-gold font-headline font-bold text-2xl shadow-inner group-hover:border-primary-gold transition-colors">
                     {getInitials(name)}
                   </div>
-                </div>
-              )}
-              <div className="p-8 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-headline text-headline-sm text-primary-navy mb-1">
-                    {name}
-                  </h3>
-                  {role && (
-                    <p className="font-label text-xs uppercase tracking-wider text-primary-gold font-bold mb-4">
-                      {role}
-                    </p>
-                  )}
-                  {bio && (
-                    <p className="font-body text-body-md opacity-75 leading-relaxed whitespace-pre-wrap">
-                      {bio}
-                    </p>
-                  )}
-                </div>
+                )}
               </div>
+
+              <h3 className="font-headline text-xl text-primary-navy font-bold mb-1.5 group-hover:text-primary-gold transition-colors">
+                {name}
+              </h3>
+              
+              {role && (
+                <p className="font-label text-xs uppercase tracking-[0.1em] text-primary-gold font-bold mb-4">
+                  {role}
+                </p>
+              )}
+
+              {bio && (
+                <p className="font-body text-xs sm:text-[13px] text-on-surface/75 leading-relaxed whitespace-pre-wrap flex-1">
+                  {bio}
+                </p>
+              )}
             </div>
           );
         })}
@@ -119,96 +119,156 @@ export default async function TeamPage({
   };
 
   return (
-    <div className="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto">
-      {/* Header */}
-      <div className="max-w-3xl mb-16">
-        <h1 className="font-headline font-headline-lg text-headline-lg text-primary-navy mb-6">
-          {title}
-        </h1>
-        <p className="font-body text-body-lg text-on-surface opacity-80 leading-relaxed whitespace-pre-wrap">
-          {subtitle}
-        </p>
-      </div>
+    <div className="w-full bg-background">
+      {/* 1. Hero: Cinematic Dark Navy Split Banner */}
+      <section className="relative min-h-[560px] lg:min-h-[640px] bg-primary-navy-dark text-white flex items-center overflow-hidden border-b border-primary-gold/20">
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <Image
+            src="/logo/desert-landscape.jpg"
+            alt={title}
+            fill
+            className="object-cover object-right md:object-center opacity-40 lg:opacity-70 scale-105 transition-transform duration-1000"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-navy-dark via-primary-navy-dark/90 lg:via-primary-navy-dark/75 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-navy-dark via-transparent to-primary-navy-dark/40" />
+        </div>
 
-      {/* Management Team Grid */}
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 py-20 lg:py-24">
+          <div className="max-w-2xl lg:max-w-3xl space-y-6">
+            <div className="inline-flex items-center space-x-2">
+              <span className="font-label text-xs uppercase tracking-[0.2em] text-primary-gold font-bold">
+                CORPORATE
+              </span>
+              <span className="h-[1px] w-8 bg-primary-gold" />
+            </div>
+
+            <h1 className="font-headline text-[36px] sm:text-[48px] lg:text-[56px] leading-[1.12] tracking-tight text-white font-bold">
+              {title}
+            </h1>
+
+            {subtitle && (
+              <div className="font-body text-body-md sm:text-body-lg text-white/85 leading-relaxed space-y-4 max-w-2xl whitespace-pre-wrap">
+                {subtitle}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Management Team */}
       {managementTeam.length > 0 && (
-        <div id="leadership-team" className="mb-16 scroll-mt-24">
-          <h2 className="font-headline text-headline-md text-primary-navy mb-3 border-b-2 border-primary-gold inline-block pb-2">
-            MANAGEMENT TEAM
-          </h2>
-          <p className="font-body text-body-lg text-primary-gold font-bold mb-8">
-            {data?.managementTeamSubtitle?.[locale] || data?.managementTeamSubtitle?.en || "Building the Company. Leading the Projects."}
-          </p>
+        <section id="leadership-team" className="py-20 px-6 sm:px-10 lg:px-16 max-w-[1440px] mx-auto space-y-12 scroll-mt-24">
+          <div className="text-center space-y-3">
+            <div className="inline-flex items-center justify-center space-x-4">
+              <span className="h-[1px] w-12 bg-primary-gold" />
+              <h2 className="font-headline text-2xl sm:text-3xl text-primary-navy font-bold uppercase tracking-wider">
+                MANAGEMENT TEAM
+              </h2>
+              <span className="h-[1px] w-12 bg-primary-gold" />
+            </div>
+            <p className="font-body text-body-md sm:text-body-lg text-primary-gold font-semibold">
+              {data?.managementTeamSubtitle?.[locale] || data?.managementTeamSubtitle?.en || "Building the Company. Leading the Projects."}
+            </p>
+          </div>
           {renderTeamGrid(managementTeam)}
-        </div>
+        </section>
       )}
 
-      {/* Advisory Board Grid */}
+      {/* 3. Advisory Board */}
       {advisoryBoard.length > 0 && (
-        <div id="advisory-board" className="mb-16 scroll-mt-24">
-          <h2 className="font-headline text-headline-md text-primary-navy mb-3 border-b-2 border-primary-gold inline-block pb-2">
-            ADVISORY BOARD
-          </h2>
-          <p className="font-body text-body-lg text-primary-gold font-bold mb-3">
-            {data?.advisoryBoardSubtitle?.[locale] || data?.advisoryBoardSubtitle?.en || "Specialist Expertise Supporting Project Development"}
-          </p>
-          <p className="font-body text-body-md text-on-surface opacity-80 mb-8 max-w-3xl leading-relaxed">
-            {data?.advisoryBoardDescription?.[locale] || data?.advisoryBoardDescription?.en || "Nexus Resources is supported by experienced professionals across the technical, operational, technological, and stakeholder disciplines required to advance mining projects."}
-          </p>
+        <section id="advisory-board" className="py-20 px-6 sm:px-10 lg:px-16 max-w-[1440px] mx-auto space-y-12 border-t border-surface-container-high scroll-mt-24">
+          <div className="text-center space-y-3 max-w-3xl mx-auto">
+            <div className="inline-flex items-center justify-center space-x-4">
+              <span className="h-[1px] w-12 bg-primary-gold" />
+              <h2 className="font-headline text-2xl sm:text-3xl text-primary-navy font-bold uppercase tracking-wider">
+                ADVISORY BOARD
+              </h2>
+              <span className="h-[1px] w-12 bg-primary-gold" />
+            </div>
+            <p className="font-body text-body-md sm:text-body-lg text-primary-gold font-semibold">
+              {data?.advisoryBoardSubtitle?.[locale] || data?.advisoryBoardSubtitle?.en || "Specialist Expertise Supporting Project Development"}
+            </p>
+            {data?.advisoryBoardDescription && (
+              <p className="font-body text-body-md text-on-surface/75 leading-relaxed">
+                {data.advisoryBoardDescription?.[locale] || data.advisoryBoardDescription?.en}
+              </p>
+            )}
+          </div>
           {renderTeamGrid(advisoryBoard)}
-        </div>
+        </section>
       )}
 
-      {/* Specialist Consultants Grid */}
+      {/* 4. Specialist Consultants */}
       {specialistConsultants.length > 0 && (
-        <div className="mb-16 scroll-mt-24">
-          <h2 className="font-headline text-headline-md text-primary-navy mb-3 border-b-2 border-primary-gold inline-block pb-2">
-            SPECIALIST CONSULTANTS
-          </h2>
-          <p className="font-body text-body-lg text-primary-gold font-bold mb-3">
-            {data?.specialistConsultantsSubtitle?.[locale] || data?.specialistConsultantsSubtitle?.en || "Specialist Expertise. Independent Capability."}
-          </p>
-          <p className="font-body text-body-md text-on-surface opacity-80 mb-8 max-w-3xl leading-relaxed">
-            {data?.specialistConsultantsDescription?.[locale] || data?.specialistConsultantsDescription?.en || "Nexus Resources engages specialist consulting firms and independent professionals where additional technical expertise, independent assessment, or specialized project support is required."}
-          </p>
+        <section className="py-20 px-6 sm:px-10 lg:px-16 max-w-[1440px] mx-auto space-y-12 border-t border-surface-container-high scroll-mt-24">
+          <div className="text-center space-y-3 max-w-3xl mx-auto">
+            <div className="inline-flex items-center justify-center space-x-4">
+              <span className="h-[1px] w-12 bg-primary-gold" />
+              <h2 className="font-headline text-2xl sm:text-3xl text-primary-navy font-bold uppercase tracking-wider">
+                SPECIALIST CONSULTANTS
+              </h2>
+              <span className="h-[1px] w-12 bg-primary-gold" />
+            </div>
+            <p className="font-body text-body-md sm:text-body-lg text-primary-gold font-semibold">
+              {data?.specialistConsultantsSubtitle?.[locale] || data?.specialistConsultantsSubtitle?.en || "Specialist Expertise. Independent Capability."}
+            </p>
+            {data?.specialistConsultantsDescription && (
+              <p className="font-body text-body-md text-on-surface/75 leading-relaxed">
+                {data.specialistConsultantsDescription?.[locale] || data.specialistConsultantsDescription?.en}
+              </p>
+            )}
+          </div>
           {renderTeamGrid(specialistConsultants)}
-        </div>
+        </section>
       )}
 
-      {/* Integrated Expertise Section */}
-      {data?.integratedExpertiseTitle && (
-        <div className="mb-16 text-center max-w-4xl mx-auto py-12 border-y border-surface-container-high">
-          <h2 className="font-headline text-headline-md text-primary-navy mb-4 uppercase">
-            {data.integratedExpertiseTitle?.[locale] || data.integratedExpertiseTitle?.en}
-          </h2>
-          {data.integratedExpertiseSubtitle && (
-            <p className="font-body text-body-lg text-primary-gold font-bold uppercase tracking-wider mb-6">
-              {data.integratedExpertiseSubtitle?.[locale] || data.integratedExpertiseSubtitle?.en}
+      {/* 5. Integrated Expertise Bar from scr pag */}
+      <section className="py-12 px-6 sm:px-10 lg:px-16 max-w-[1440px] mx-auto">
+        <div className="p-8 sm:p-10 bg-surface-container-low/70 border border-surface-container-high rounded-sm shadow-card flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
+          <div className="w-16 h-16 rounded-full border-2 border-primary-gold/40 bg-white flex items-center justify-center text-primary-gold flex-shrink-0 shadow-sm">
+            <Users className="w-8 h-8 stroke-[1.75]" />
+          </div>
+          <div className="space-y-2 flex-1">
+            <h3 className="font-headline text-xl sm:text-2xl text-primary-navy font-bold">
+              {data?.integratedExpertiseTitle?.[locale] || data?.integratedExpertiseTitle?.en || "One Team. Multiple Disciplines."}
+            </h3>
+            <p className="font-body text-sm sm:text-base text-on-surface/80 leading-relaxed font-medium">
+              {data?.integratedExpertiseDisciplines?.[locale] || data?.integratedExpertiseDisciplines?.en || "Leadership • Mining • Geology • Mineral Processing • Engineering • Technology • Business Development • Stakeholder Relations"}
             </p>
-          )}
-          {data.integratedExpertiseDisciplines && (
-            <p className="font-body text-body-md text-on-surface opacity-80 leading-relaxed font-medium">
-              {data.integratedExpertiseDisciplines?.[locale] || data.integratedExpertiseDisciplines?.en}
-            </p>
-          )}
+          </div>
         </div>
-      )}
+      </section>
 
-      {/* Advisory CTA */}
-      <div className="text-center p-12 bg-white border border-surface-container-high">
-        <h3 className="font-headline text-headline-md text-primary-navy mb-4">
-          {ctaTitle}
-        </h3>
-        <p className="font-body text-body-md opacity-80 mb-6 max-w-xl mx-auto whitespace-pre-wrap">
-          {ctaSubtitle}
-        </p>
-        <Link
-          href={ctaButtonLink}
-          className="inline-block px-8 py-4 bg-primary-navy text-white font-label text-label-md uppercase tracking-widest hover:bg-primary-gold transition-colors"
-        >
-          {ctaButtonLabel}
-        </Link>
-      </div>
+      {/* 6. Closing Inset CTA Banner from scr pag */}
+      <section className="py-16 px-6 sm:px-10 lg:px-16 bg-white border-t border-surface-container-high">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="p-8 sm:p-12 bg-primary-navy-dark text-white rounded-sm border border-primary-gold/30 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="flex items-center space-x-6 text-center lg:text-left">
+              <div className="hidden sm:flex w-16 h-16 rounded-full border-2 border-primary-gold/50 bg-white/5 items-center justify-center text-primary-gold flex-shrink-0">
+                <Compass className="w-8 h-8 stroke-[1.75]" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="font-headline text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  {ctaTitle}
+                </h3>
+                <p className="font-body text-body-md text-white/80 max-w-xl">
+                  {ctaSubtitle}
+                </p>
+              </div>
+            </div>
+
+            <Link
+              href={ctaButtonLink}
+              className="inline-flex items-center justify-center px-8 py-4 bg-primary-gold hover:bg-primary-gold-light text-primary-navy font-label text-[13px] uppercase tracking-[0.12em] font-bold rounded-sm shadow-gold-glow transition-all duration-300 group flex-shrink-0"
+            >
+              <span>{ctaButtonLabel}</span>
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
