@@ -176,9 +176,54 @@ export default async function WhyEgyptPage({
                           sizes="(max-width: 1023px) 100vw, 50vw"
                         />
                       </div>
+                    ) : block.statValue ? (
+                      <div className="bg-primary-navy-dark text-white border border-primary-gold/30 rounded-sm p-10 sm:p-12 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[340px]">
+                        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:20px_20px]" />
+                        <div className="relative z-10 flex items-center justify-between">
+                          <span className="font-label text-xs uppercase tracking-[0.2em] text-primary-gold font-bold">
+                            {block.statLabel?.[locale] || block.statLabel?.en || "KEY BENCHMARK"}
+                          </span>
+                          <div className="w-10 h-10 rounded-full bg-primary-gold/10 border border-primary-gold/30 flex items-center justify-center text-primary-gold">
+                            <IconComponent className="w-5 h-5" />
+                          </div>
+                        </div>
+
+                        <div className="relative z-10 my-8">
+                          <div className="font-headline text-5xl sm:text-6xl font-bold text-white tracking-tight">
+                            {block.statValue}
+                          </div>
+                          <div className="h-[2px] w-16 bg-primary-gold mt-4" />
+                        </div>
+
+                        {block.statDisclaimer && (
+                          <div className="relative z-10 font-body text-xs text-white/60 italic leading-relaxed">
+                            {block.statDisclaimer?.[locale] || block.statDisclaimer?.en}
+                          </div>
+                        )}
+                      </div>
                     ) : (
-                      <div className="h-[340px] w-full bg-surface-container-low border border-surface-container-high rounded-sm flex items-center justify-center p-8 text-center text-on-surface/40 font-label uppercase tracking-widest text-sm">
-                        Geological Diagram
+                      <div className="bg-gradient-to-br from-surface-container-low via-surface-container-high/40 to-white border border-surface-container-high rounded-sm p-10 sm:p-12 shadow-card relative overflow-hidden flex flex-col justify-between min-h-[320px]">
+                        <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#050A15_1px,transparent_1px)] [background-size:24px_24px]" />
+                        <div className="relative z-10 flex items-center justify-between">
+                          <span className="font-label text-xs uppercase tracking-[0.2em] text-primary-gold font-bold">
+                            EGYPTIAN MINING SECTOR
+                          </span>
+                          <div className="w-10 h-10 rounded-full bg-primary-gold/10 border border-primary-gold/30 flex items-center justify-center text-primary-gold">
+                            <IconComponent className="w-5 h-5" />
+                          </div>
+                        </div>
+
+                        <div className="relative z-10 my-6 space-y-2">
+                          <h3 className="font-headline text-2xl font-bold text-primary-navy">
+                            {blockTitle}
+                          </h3>
+                          <div className="h-[2px] w-12 bg-primary-gold" />
+                        </div>
+
+                        <div className="relative z-10 flex items-center justify-between font-label text-xs text-on-surface/60 uppercase tracking-widest pt-4 border-t border-surface-container-high">
+                          <span>Nexus Resources</span>
+                          <span className="text-primary-gold font-bold">Strategic Context</span>
+                        </div>
                       </div>
                     )}
                   </div>

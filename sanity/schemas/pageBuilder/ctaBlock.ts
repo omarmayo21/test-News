@@ -26,6 +26,25 @@ export const ctaBlock = defineType({
       type: "string",
       initialValue: "/contact",
     }),
+    defineField({
+      name: "image",
+      title: "Side Visual / Landscape Image",
+      type: "image",
+      options: { hotspot: true },
+      description: "Visual displayed on the side of split banner sections.",
+    }),
+    defineField({
+      name: "sideImage",
+      title: "Side Image (Alternative)",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "backgroundImage",
+      title: "Background Image",
+      type: "image",
+      options: { hotspot: true },
+    }),
   ],
   preview: {
     select: { title: "title.en" },

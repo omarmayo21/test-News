@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowRight, Mountain, ShieldCheck, Users, Globe } from "lucide-react";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { urlForImage } from "@/lib/sanity/image";
 
 interface CtaBannerProps {
   locale: Locale;
@@ -12,6 +13,9 @@ interface CtaBannerProps {
     subtitle?: { en?: string; fr?: string };
     buttonText?: { en?: string; fr?: string };
     buttonLink?: string;
+    image?: any;
+    sideImage?: any;
+    backgroundImage?: any;
   };
 }
 
@@ -26,6 +30,14 @@ export function CtaBanner({ locale, data }: CtaBannerProps) {
   const isWhyEgyptBanner = rawTitle.toUpperCase().includes("WHY NOW") || rawTitle.toUpperCase().includes("WHY EGYPT");
   const isBuiltForEgyptBanner = rawTitle.toUpperCase().includes("BUILT FOR EGYPT");
   const isDiscoverNexusBanner = rawTitle.toUpperCase().includes("DISCOVER NEXUS");
+
+  const sideImageUrl = data?.image
+    ? urlForImage(data.image)?.url()
+    : (data?.sideImage
+      ? urlForImage(data.sideImage)?.url()
+      : (data?.backgroundImage
+        ? urlForImage(data.backgroundImage)?.url()
+        : "https://cdn.sanity.io/images/28z8ff6f/production/fab85f5ba4fab214ca00774ab7db269dabf918dc-1280x682.jpg"));
 
   // Variant 1: Dark Cinematic Split Banner (Why Egypt / Why Now)
   if (isWhyEgyptBanner) {
@@ -62,14 +74,27 @@ export function CtaBanner({ locale, data }: CtaBannerProps) {
             )}
           </div>
 
-          {/* Cinematic Desert Gradient Column */}
-          <div className="lg:col-span-6 relative min-h-[300px] lg:min-h-full bg-gradient-to-br from-primary-navy via-primary-navy-dark to-[#050A15] flex items-center justify-center p-8 overflow-hidden">
-            <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px]" />
-            <div className="relative z-10 w-32 h-32 rounded-full border-2 border-primary-gold/30 bg-white/5 flex items-center justify-center text-primary-gold shadow-2xl">
-              <Mountain className="w-16 h-16 stroke-[1.5]" />
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-navy-dark via-transparent to-transparent hidden lg:block" />
+          {/* Cinematic Desert Landscape Image Column */}
+          <div className="lg:col-span-6 relative min-h-[340px] lg:min-h-full bg-[#050A15] overflow-hidden flex items-center justify-center">
+            {sideImageUrl ? (
+              <Image
+                src={sideImageUrl}
+                alt={rawTitle}
+                fill
+                className="object-cover object-center opacity-85 hover:scale-105 transition-transform duration-1000"
+                sizes="(max-width: 1023px) 100vw, 50vw"
+              />
+            ) : (
+              <div className="relative w-full h-full min-h-[300px] bg-gradient-to-br from-primary-navy via-primary-navy-dark to-[#050A15] flex items-center justify-center p-8 overflow-hidden">
+                <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px]" />
+                <div className="relative z-10 w-32 h-32 rounded-full border-2 border-primary-gold/30 bg-white/5 flex items-center justify-center text-primary-gold shadow-2xl">
+                  <Mountain className="w-16 h-16 stroke-[1.5]" />
+                </div>
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-navy-dark via-primary-navy-dark/35 to-transparent hidden lg:block" />
             <div className="absolute inset-0 bg-gradient-to-t from-primary-navy-dark via-transparent to-transparent lg:hidden" />
+            <div className="absolute inset-0 border-l border-primary-gold/10 hidden lg:block" />
           </div>
         </div>
       </section>

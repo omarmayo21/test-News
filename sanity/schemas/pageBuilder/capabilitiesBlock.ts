@@ -25,6 +25,7 @@ export const capabilitiesBlock = defineType({
           fields: [
             { name: "icon", type: "string", title: "Material Symbol Icon Name (e.g. architecture, terrain, precision_manufacturing)" },
             { name: "title", type: "localeString", title: "Card Title" },
+            { name: "subtitle", type: "localeString", title: "Card Subtitle / Tagline" },
             { name: "description", type: "localeText", title: "Card Description" },
             { name: "link", type: "string", title: "Card Link (Optional)" },
           ],
