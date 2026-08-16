@@ -11,6 +11,8 @@ import { PortableText } from "@portabletext/react";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {

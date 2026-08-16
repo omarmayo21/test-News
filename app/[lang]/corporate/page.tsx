@@ -8,6 +8,8 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getTeamPageData } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {

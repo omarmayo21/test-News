@@ -1,17 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Hero } from "@/components/sections/hero";
-import dynamic from "next/dynamic";
+import { PageBuilderRenderer } from "@/components/sections/page-builder-renderer";
 import { getPage, getAllPages } from "@/lib/sanity/queries";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { Locale } from "@/i18n-config";
 
-const CapabilitiesGrid = dynamic(() => import("@/components/sections/capabilities-grid").then((mod) => mod.CapabilitiesGrid));
-const WhyEgyptTeaser = dynamic(() => import("@/components/sections/why-egypt-teaser").then((mod) => mod.WhyEgyptTeaser));
-const CtaBanner = dynamic(() => import("@/components/sections/cta-banner").then((mod) => mod.CtaBanner));
-
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   const pages = await getAllPages();
@@ -65,20 +60,7 @@ export default async function DynamicPage({
 
   return (
     <div className="w-full">
-      {pageData.pageBuilder?.map((block: any, index: number) => {
-        switch (block._type) {
-          case "heroBlock":
-            return <Hero key={index} locale={locale} data={block} />;
-          case "capabilitiesBlock":
-            return <CapabilitiesGrid key={index} locale={locale} data={block} />;
-          case "statsBlock":
-            return <WhyEgyptTeaser key={index} locale={locale} data={block} />;
-          case "ctaBlock":
-            return <CtaBanner key={index} locale={locale} data={block} />;
-          default:
-            return null;
-        }
-      })}
+      <PageBuilderRenderer locale={locale} blocks={pageData.pageBuilder} />
     </div>
   );
 }

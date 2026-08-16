@@ -5,11 +5,12 @@ export const whyNexusPage = defineType({
   title: "Why Nexus Page",
   type: "document",
   groups: [
-    { name: "navigation", title: "Navigation" },
-    { name: "header", title: "Header" },
-    { name: "content", title: "Content Sections" },
-    { name: "cta", title: "Call to Action" },
-    { name: "seo", title: "SEO" },
+    { name: "header", title: "1. Header Section" },
+    { name: "content", title: "2. Strategic Approach Content" },
+    { name: "pageBuilder", title: "3. Flexible Page Builder" },
+    { name: "cta", title: "4. Call to Action" },
+    { name: "navigation", title: "Navigation Settings" },
+    { name: "seo", title: "SEO Settings" },
   ],
   fields: [
     defineField({
@@ -47,7 +48,30 @@ export const whyNexusPage = defineType({
             defineField({ name: "content", title: "Rich Text Content / Bullets", type: "array", of: [{ type: "block" }] }),
             defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
           ],
+          preview: {
+            select: { title: "title.en" },
+            prepare(sel) {
+              return { title: sel.title || "Content Block" };
+            },
+          },
         },
+      ],
+    }),
+
+    // Flexible Page Builder
+    defineField({
+      name: "pageBuilder",
+      title: "Flexible Page Builder Sections",
+      type: "array",
+      group: "pageBuilder",
+      description: "Add, remove, or reorder dynamic custom sections on this page.",
+      of: [
+        { type: "splitBlock" },
+        { type: "twoColumnBlock" },
+        { type: "capabilitiesBlock" },
+        { type: "ctaBlock" },
+        { type: "heroBlock" },
+        { type: "statsBlock" },
       ],
     }),
 
@@ -79,7 +103,7 @@ export const whyNexusPage = defineType({
 
     defineField({
       name: "seo",
-      title: "SEO",
+      title: "SEO Metadata",
       type: "seo",
       group: "seo",
     }),

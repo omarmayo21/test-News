@@ -33,6 +33,8 @@ import { heroBlock } from "./pageBuilder/heroBlock";
 import { capabilitiesBlock } from "./pageBuilder/capabilitiesBlock";
 import { statsBlock } from "./pageBuilder/statsBlock";
 import { ctaBlock } from "./pageBuilder/ctaBlock";
+import { twoColumnBlock } from "./pageBuilder/twoColumnBlock";
+import { splitBlock } from "./pageBuilder/splitBlock";
 
 export const schemaTypes = [
   // Objects
@@ -75,4 +77,6 @@ export const schemaTypes = [
   capabilitiesBlock,
   statsBlock,
   ctaBlock,
+  twoColumnBlock,
+  splitBlock,
 ];

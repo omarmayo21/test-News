@@ -5,12 +5,13 @@ export const whyEgyptPage = defineType({
   title: "Why Egypt Page",
   type: "document",
   groups: [
-    { name: "navigation", title: "Navigation" },
-    { name: "header", title: "Header" },
-    { name: "stats", title: "Stats Counters" },
-    { name: "deepDive", title: "Deep Dive Grid" },
-    { name: "cta", title: "Call to Action" },
-    { name: "seo", title: "SEO" },
+    { name: "header", title: "1. Header Section" },
+    { name: "stats", title: "2. Key Statistics" },
+    { name: "deepDive", title: "3. Strategic Deep-Dive Content" },
+    { name: "pageBuilder", title: "4. Flexible Page Builder" },
+    { name: "cta", title: "5. Call to Action" },
+    { name: "navigation", title: "Navigation Settings" },
+    { name: "seo", title: "SEO Settings" },
   ],
   fields: [
     defineField({
@@ -48,7 +49,7 @@ export const whyEgyptPage = defineType({
         {
           type: "object",
           fields: [
-            defineField({ name: "number", title: "Number (e.g. 1.2M)", type: "string" }),
+            defineField({ name: "number", title: "Number (e.g. 500,000 oz)", type: "string" }),
             defineField({ name: "label", title: "Label", type: "localeString" }),
           ],
         },
@@ -74,7 +75,33 @@ export const whyEgyptPage = defineType({
             defineField({ name: "statLabel", title: "Stat Label", type: "localeString" }),
             defineField({ name: "statDisclaimer", title: "Stat Disclaimer", type: "localeString" }),
           ],
+          preview: {
+            select: { title: "title.en", subtitle: "statValue" },
+            prepare(sel) {
+              return {
+                title: sel.title || "Section",
+                subtitle: sel.subtitle ? `Stat: ${sel.subtitle}` : "",
+              };
+            },
+          },
         },
+      ],
+    }),
+
+    // Flexible Page Builder
+    defineField({
+      name: "pageBuilder",
+      title: "Flexible Page Builder Sections",
+      type: "array",
+      group: "pageBuilder",
+      description: "Add, remove, or reorder dynamic custom sections on this page.",
+      of: [
+        { type: "splitBlock" },
+        { type: "twoColumnBlock" },
+        { type: "statsBlock" },
+        { type: "capabilitiesBlock" },
+        { type: "ctaBlock" },
+        { type: "heroBlock" },
       ],
     }),
 
@@ -106,7 +133,7 @@ export const whyEgyptPage = defineType({
 
     defineField({
       name: "seo",
-      title: "SEO",
+      title: "SEO Metadata",
       type: "seo",
       group: "seo",
     }),

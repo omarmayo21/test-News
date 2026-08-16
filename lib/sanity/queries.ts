@@ -1,5 +1,7 @@
 import { client } from "./client";
 
+const fetchOptions = { next: { tags: ["sanity"], revalidate: 60 } };
+
 export async function getSiteSettings() {
   if (!client) return null;
   try {
@@ -25,11 +27,10 @@ export async function getSiteSettings() {
         defaultSeo
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      fetchOptions
     );
     return data;
   } catch {
-    // Return null silently if Sanity project/dataset is not yet populated
     return null;
   }
 }
@@ -48,7 +49,7 @@ export async function getThemeSettings() {
         socialLinks
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      fetchOptions
     );
     return data;
   } catch {
@@ -67,12 +68,14 @@ export async function getHomePageData() {
           _type == "heroBlock" => { headline, subtitle, ctaLabel, ctaLink, backgroundImage },
           _type == "capabilitiesBlock" => { sectionTitle, sectionDescription, cards },
           _type == "statsBlock" => { title, subtitle, stats, sideImage },
-          _type == "ctaBlock" => { title, subtitle, buttonText, buttonLink }
+          _type == "ctaBlock" => { title, subtitle, buttonText, buttonLink },
+          _type == "twoColumnBlock" => { theme, leftColumn, rightColumn },
+          _type == "splitBlock" => { title, subtitle, layout, image, content, statValue, statLabel, statDisclaimer }
         },
         seo
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      fetchOptions
     );
     return data;
   } catch {
@@ -96,7 +99,7 @@ export async function getNewsArticles() {
         author->{ name, role, avatar }
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      fetchOptions
     );
     return data || [];
   } catch {
@@ -126,7 +129,7 @@ export async function getSingleNewsArticle(slug: string) {
         relatedNews[]->{ _id, title, slug, coverImage, publishDate }
       }`,
       { slug },
-      { next: { tags: ["sanity"] } }
+      fetchOptions
     );
     return data;
   } catch {
@@ -141,13 +144,15 @@ export async function getGlobalSearchResults(query: string) {
       `*[_type == "news" && (title.en match $q || title.fr match $q || excerpt.en match $q || excerpt.fr match $q)][0..5]{
         _id, title, slug, excerpt, publishDate
       }`,
-      { q: `*${query}*` }
+      { q: `*${query}*` },
+      fetchOptions
     );
     const pages = await client.fetch(
       `*[_type == "page" && (title.en match $q || title.fr match $q)][0..5]{
         _id, title, slug
       }`,
-      { q: `*${query}*` }
+      { q: `*${query}*` },
+      fetchOptions
     );
     return { news: news || [], pages: pages || [] };
   } catch {
@@ -157,84 +162,124 @@ export async function getGlobalSearchResults(query: string) {
 
 export async function getAboutPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "aboutPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  try {
+    return await client.fetch(`*[_type == "aboutPage"][0]`, {}, fetchOptions);
+  } catch {
+    return null;
+  }
 }
 
 export async function getServicesPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "servicesPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  try {
+    return await client.fetch(`*[_type == "servicesPage"][0]`, {}, fetchOptions);
+  } catch {
+    return null;
+  }
 }
 
 export async function getTeamPageData() {
   if (!client) return null;
-  return client.fetch(
-    `*[_type == "teamPage"][0]{
-      ...,
-      managementTeam[]->{ name, role, bio, avatar },
-      advisoryBoard[]->{ name, role, bio, avatar },
-      specialistConsultants[]->{ name, role, bio, avatar }
-    }`,
-    {},
-    { next: { tags: ["sanity"] } }
-  );
+  try {
+    return await client.fetch(
+      `*[_type == "teamPage"][0]{
+        ...,
+        managementTeam[]->{ name, role, bio, avatar },
+        advisoryBoard[]->{ name, role, bio, avatar },
+        specialistConsultants[]->{ name, role, bio, avatar }
+      }`,
+      {},
+      fetchOptions
+    );
+  } catch {
+    return null;
+  }
 }
 
 export async function getWhyEgyptPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "whyEgyptPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  try {
+    return await client.fetch(`*[_type == "whyEgyptPage"][0]`, {}, fetchOptions);
+  } catch {
+    return null;
+  }
 }
 
 export async function getWhyNexusPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "whyNexusPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  try {
+    return await client.fetch(`*[_type == "whyNexusPage"][0]`, {}, fetchOptions);
+  } catch {
+    return null;
+  }
 }
 
 export async function getNewsPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "newsPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  try {
+    return await client.fetch(`*[_type == "newsPage"][0]`, {}, fetchOptions);
+  } catch {
+    return null;
+  }
 }
 
 export async function getContactPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "contactPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  try {
+    return await client.fetch(`*[_type == "contactPage"][0]`, {}, fetchOptions);
+  } catch {
+    return null;
+  }
 }
 
 export async function getInvestmentPageData() {
   if (!client) return null;
-  return client.fetch(`*[_type == "investmentPage"][0]`, {}, { next: { tags: ["sanity"] } });
+  try {
+    return await client.fetch(`*[_type == "investmentPage"][0]`, {}, fetchOptions);
+  } catch {
+    return null;
+  }
 }
 
 export async function getInvestmentCategories() {
   if (!client) return [];
-  return client.fetch(
-    `*[_type == "investmentCategory"] | order(title.en asc){ title, slug }`,
-    {},
-    { next: { tags: ["sanity"] } }
-  );
+  try {
+    return await client.fetch(
+      `*[_type == "investmentCategory"] | order(title.en asc){ title, slug }`,
+      {},
+      fetchOptions
+    );
+  } catch {
+    return [];
+  }
 }
 
 export async function getInvestmentOpportunities() {
   if (!client) return [];
-  return client.fetch(
-    `*[_type == "investmentOpportunity"] | order(_createdAt desc){
-      _id,
-      title,
-      location,
-      minerals,
-      stage,
-      description,
-      image,
-      category->{ title, slug }
-    }`,
-    {},
-    { next: { tags: ["sanity"] } }
-  );
+  try {
+    return await client.fetch(
+      `*[_type == "investmentOpportunity"] | order(_createdAt desc){
+        _id,
+        title,
+        location,
+        minerals,
+        stage,
+        description,
+        image,
+        category->{ title, slug }
+      }`,
+      {},
+      fetchOptions
+    );
+  } catch {
+    return [];
+  }
 }
 
 export async function getPage(slug: string) {
   if (!client || !slug) return null;
   try {
-    return client.fetch(
+    return await client.fetch(
       `*[_type == "page" && (slug.en.current == $slug || slug.fr.current == $slug)][0]{
         title,
         slug,
@@ -244,11 +289,13 @@ export async function getPage(slug: string) {
           _type == "heroBlock" => { headline, subtitle, ctaLabel, ctaLink, backgroundImage },
           _type == "capabilitiesBlock" => { sectionTitle, sectionDescription, cards },
           _type == "statsBlock" => { title, subtitle, stats, sideImage },
-          _type == "ctaBlock" => { title, subtitle, buttonText, buttonLink }
+          _type == "ctaBlock" => { title, subtitle, buttonText, buttonLink },
+          _type == "twoColumnBlock" => { theme, leftColumn, rightColumn },
+          _type == "splitBlock" => { title, subtitle, layout, image, content, statValue, statLabel, statDisclaimer }
         }
       }`,
       { slug },
-      { next: { tags: ["sanity"] } }
+      fetchOptions
     );
   } catch {
     return null;
@@ -258,13 +305,13 @@ export async function getPage(slug: string) {
 export async function getAllPages() {
   if (!client) return [];
   try {
-    return client.fetch(
+    return await client.fetch(
       `*[_type == "page"]{
         "slugEn": slug.en.current,
         "slugFr": slug.fr.current
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      fetchOptions
     );
   } catch {
     return [];
@@ -274,7 +321,7 @@ export async function getAllPages() {
 export async function getHeaderData() {
   if (!client) return null;
   try {
-    return client.fetch(
+    return await client.fetch(
       `*[_type == "header"][0]{
         logo,
         linkedinUrl,
@@ -283,7 +330,7 @@ export async function getHeaderData() {
         externalLinks
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      fetchOptions
     );
   } catch {
     return null;
@@ -316,7 +363,7 @@ export async function getNavigationTree() {
         }
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      fetchOptions
     );
     return pages;
   } catch (err) {
@@ -328,7 +375,7 @@ export async function getNavigationTree() {
 export async function getFooterData() {
   if (!client) return null;
   try {
-    return client.fetch(
+    return await client.fetch(
       `*[_type == "footer"][0]{
         aboutText,
         contactEmails,
@@ -341,7 +388,7 @@ export async function getFooterData() {
         copyright
       }`,
       {},
-      { next: { tags: ["sanity"] } }
+      fetchOptions
     );
   } catch {
     return null;

@@ -4,11 +4,10 @@ export const footer = defineType({
   name: "footer",
   title: "Footer Section",
   type: "document",
-  
   fields: [
     defineField({
       name: "aboutText",
-      title: "Footer About Text",
+      title: "Footer Brand / About Summary",
       type: "localeText",
     }),
     defineField({
@@ -18,29 +17,42 @@ export const footer = defineType({
       of: [{ type: "string" }],
     }),
     defineField({
-      name: "resourceLinks",
-      title: "Resource Links Column",
+      name: "offices",
+      title: "Office Locations (Footer)",
       type: "array",
       of: [
         {
           type: "object",
           fields: [
-            { name: "label", type: "localeString", title: "Link Label" },
-            { name: "path", type: "string", title: "Path" },
+            defineField({ name: "title", title: "Office Title", type: "localeString" }),
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: "resourceLinks",
+      title: "Resource Navigation Links",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "label", type: "localeString", title: "Link Label" }),
+            defineField({ name: "path", type: "string", title: "Path" }),
           ],
         },
       ],
     }),
     defineField({
       name: "complianceLinks",
-      title: "Compliance Links Column",
+      title: "Legal & Compliance Links",
       type: "array",
       of: [
         {
           type: "object",
           fields: [
-            { name: "label", type: "localeString", title: "Link Label" },
-            { name: "path", type: "string", title: "Path" },
+            defineField({ name: "label", type: "localeString", title: "Link Label" }),
+            defineField({ name: "path", type: "string", title: "Path" }),
           ],
         },
       ],
@@ -51,4 +63,9 @@ export const footer = defineType({
       type: "localeString",
     }),
   ],
+  preview: {
+    prepare() {
+      return { title: "Footer Section" };
+    },
+  },
 });

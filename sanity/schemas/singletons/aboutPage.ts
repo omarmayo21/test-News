@@ -5,11 +5,12 @@ export const aboutPage = defineType({
   title: "About Page",
   type: "document",
   groups: [
-    { name: "navigation", title: "Navigation" },
-    { name: "hero", title: "Hero Section" },
-    { name: "mission", title: "Mission & Principles" },
-    { name: "cta", title: "Call to Action" },
-    { name: "seo", title: "SEO" },
+    { name: "hero", title: "1. Hero Section" },
+    { name: "mission", title: "2. Core Content & Values" },
+    { name: "pageBuilder", title: "3. Flexible Page Builder" },
+    { name: "cta", title: "4. Call to Action" },
+    { name: "navigation", title: "Navigation Settings" },
+    { name: "seo", title: "SEO Settings" },
   ],
   fields: [
     defineField({
@@ -23,12 +24,14 @@ export const aboutPage = defineType({
       title: "Hero Title",
       type: "localeString",
       group: "hero",
+      description: "Main headline displayed at the top of the About page.",
     }),
     defineField({
       name: "subtitle",
       title: "Hero Subtitle",
       type: "localeText",
       group: "hero",
+      description: "Introductory text accompanying the hero title.",
     }),
     defineField({
       name: "heroImage",
@@ -41,7 +44,7 @@ export const aboutPage = defineType({
     // Overview
     defineField({
       name: "overviewTitle",
-      title: "Overview Title",
+      title: "Overview Kicker",
       type: "localeString",
       group: "mission",
     }),
@@ -92,39 +95,56 @@ export const aboutPage = defineType({
       group: "mission",
     }),
     
-    // Principles
+    // Principles / Values
     defineField({
       name: "principlesTitle",
-      title: "Principles Title",
+      title: "Values Section Title",
       type: "localeString",
       group: "mission",
     }),
     defineField({
       name: "principles",
-      title: "Core Principles",
+      title: "Core Values List",
       type: "array",
       group: "mission",
       of: [
         {
           type: "object",
           fields: [
-            defineField({ name: "title", title: "Title", type: "localeString" }),
-            defineField({ name: "description", title: "Description", type: "localeText" }),
+            defineField({ name: "title", title: "Value Title", type: "localeString" }),
+            defineField({ name: "description", title: "Value Description", type: "localeText" }),
           ],
         },
+      ],
+    }),
+
+    // Flexible Page Builder
+    defineField({
+      name: "pageBuilder",
+      title: "Flexible Page Builder Sections",
+      type: "array",
+      group: "pageBuilder",
+      description: "Add, remove, or reorder dynamic custom sections on this page.",
+      of: [
+        { type: "twoColumnBlock" },
+        { type: "splitBlock" },
+        { type: "heroBlock" },
+        { type: "capabilitiesBlock" },
+        { type: "statsBlock" },
+        { type: "ctaBlock" },
       ],
     }),
 
     // CTA
     defineField({
       name: "ctaTitle",
-      title: "CTA Title",
+      title: "Closing CTA Title",
       type: "localeString",
       group: "cta",
     }),
     defineField({
       name: "ctaSubtitle",
-      title: "CTA Subtitle",
+      title: "Closing CTA Subtitle",
       type: "localeText",
       group: "cta",
     }),
@@ -143,7 +163,7 @@ export const aboutPage = defineType({
 
     defineField({
       name: "seo",
-      title: "SEO",
+      title: "SEO Metadata",
       type: "seo",
       group: "seo",
     }),

@@ -9,6 +9,8 @@ import { PortableText } from "@portabletext/react";
 import { getWhyEgyptPageData } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {

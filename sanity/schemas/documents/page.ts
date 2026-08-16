@@ -2,39 +2,23 @@ import { defineType, defineField } from "sanity";
 
 export const page = defineType({
   name: "page",
-  title: "Dynamic Pages",
+  title: "Dynamic Content Page",
   type: "document",
   groups: [
-    { name: "content", title: "Content" },
-    { name: "seo", title: "SEO" },
+    { name: "content", title: "1. Page Builder" },
     { name: "navigation", title: "Navigation Settings" },
+    { name: "seo", title: "SEO Settings" },
   ],
   fields: [
     defineField({
       name: "title",
       title: "Page Title",
       type: "localeString",
-      group: "content",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
-      title: "Slug",
+      title: "Page URL Slug",
       type: "localeSlug",
-      group: "content",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "pageBuilder",
-      title: "Page Builder Sections",
-      type: "array",
-      of: [
-        { type: "heroBlock" },
-        { type: "capabilitiesBlock" },
-        { type: "statsBlock" },
-        { type: "ctaBlock" },
-      ],
-      group: "content",
     }),
     defineField({
       name: "navigation",
@@ -43,13 +27,36 @@ export const page = defineType({
       group: "navigation",
     }),
     defineField({
+      name: "pageBuilder",
+      title: "Page Layout Sections",
+      type: "array",
+      group: "content",
+      of: [
+        { type: "heroBlock" },
+        { type: "capabilitiesBlock" },
+        { type: "statsBlock" },
+        { type: "ctaBlock" },
+        { type: "twoColumnBlock" },
+        { type: "splitBlock" },
+      ],
+    }),
+    defineField({
       name: "seo",
-      title: "SEO Configuration",
+      title: "SEO Metadata",
       type: "seo",
       group: "seo",
     }),
   ],
   preview: {
-    select: { title: "title.en", subtitle: "slug.en.current" },
+    select: {
+      title: "title.en",
+      subtitle: "slug.en.current",
+    },
+    prepare(selection) {
+      return {
+        title: selection.title || "Untitled Page",
+        subtitle: `/${selection.subtitle || ""}`,
+      };
+    },
   },
 });

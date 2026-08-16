@@ -5,10 +5,12 @@ export const contactPage = defineType({
   title: "Contact Page",
   type: "document",
   groups: [
-    { name: "navigation", title: "Navigation" },
-    { name: "header", title: "Header" },
-    { name: "offices", title: "Office Locations" },
-    { name: "seo", title: "SEO" },
+    { name: "header", title: "1. Header" },
+    { name: "directContact", title: "2. Direct Contact & HQ" },
+    { name: "offices", title: "3. Offices & Inquiries Grid" },
+    { name: "cta", title: "4. Closing Message & Consent" },
+    { name: "navigation", title: "Navigation Settings" },
+    { name: "seo", title: "SEO Settings" },
   ],
   fields: [
     defineField({
@@ -36,23 +38,64 @@ export const contactPage = defineType({
       group: "header",
     }),
     
-    // Offices
+    // Direct Contact Info (top-level fields present in production data)
+    defineField({
+      name: "generalEmail",
+      title: "General Inquiries Email",
+      type: "string",
+      group: "directContact",
+      description: "e.g. info@nexusmines.com",
+    }),
+    defineField({
+      name: "pressEmail",
+      title: "Investors & Press Email",
+      type: "string",
+      group: "directContact",
+      description: "e.g. invest@nexusmines.com",
+    }),
+    defineField({
+      name: "phone",
+      title: "Direct Phone Number",
+      type: "string",
+      group: "directContact",
+      description: "e.g. +20 2 3745 9141",
+    }),
+    defineField({
+      name: "address",
+      title: "Headquarters Address",
+      type: "localeText",
+      group: "directContact",
+    }),
+    defineField({
+      name: "mapUrl",
+      title: "Google Maps URL",
+      type: "string",
+      group: "directContact",
+    }),
+
+    // Offices & Inquiry Blocks
     defineField({
       name: "offices",
-      title: "Office Locations",
+      title: "Inquiry Categories & Office Locations",
       type: "array",
       group: "offices",
       of: [
         {
           type: "object",
           fields: [
-            defineField({ name: "name", title: "Office Name", type: "string" }),
+            defineField({ name: "name", title: "Inquiry / Office Name", type: "string" }),
             defineField({ name: "isPrimary", title: "Is Primary Headquarters?", type: "boolean", initialValue: false }),
-            defineField({ name: "address", title: "Address", type: "string" }),
-            defineField({ name: "phone", title: "Phone", type: "string" }),
+            defineField({ name: "address", title: "Address / Description", type: "string" }),
+            defineField({ name: "phone", title: "Phone / Label", type: "string" }),
             defineField({ name: "email", title: "Email", type: "string" }),
             defineField({ name: "hours", title: "Working Hours", type: "string" }),
           ],
+          preview: {
+            select: { title: "name", subtitle: "email" },
+            prepare(sel) {
+              return { title: sel.title || "Office Block", subtitle: sel.subtitle || "" };
+            },
+          },
         },
       ],
     }),
@@ -60,31 +103,31 @@ export const contactPage = defineType({
     // Closing CTA & Form Consent
     defineField({
       name: "consentText",
-      title: "Form Consent Text",
+      title: "Form Consent Notice",
       type: "localeText",
-      group: "header",
+      group: "cta",
     }),
     defineField({
       name: "closingTitle",
-      title: "Closing CTA Title",
+      title: "Closing Message Title",
       type: "localeString",
-      group: "header",
+      group: "cta",
     }),
     defineField({
       name: "closingSubtitle",
-      title: "Closing CTA Subtitle",
+      title: "Closing Message Subtitle",
       type: "localeText",
-      group: "header",
+      group: "cta",
     }),
     defineField({
       name: "closingButtonLabel",
       title: "Closing CTA Button Label",
       type: "localeString",
-      group: "header",
+      group: "cta",
     }),
     defineField({
       name: "seo",
-      title: "SEO",
+      title: "SEO Metadata",
       type: "seo",
       group: "seo",
     }),

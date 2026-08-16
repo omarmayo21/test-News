@@ -8,7 +8,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getAboutPageData } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,

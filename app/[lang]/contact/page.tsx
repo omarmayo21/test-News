@@ -8,6 +8,8 @@ import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getContactPageData } from "@/lib/sanity/queries";
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {

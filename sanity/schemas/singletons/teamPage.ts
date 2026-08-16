@@ -2,14 +2,16 @@ import { defineType, defineField } from "sanity";
 
 export const teamPage = defineType({
   name: "teamPage",
-  title: "Team Page",
+  title: "Corporate & Team Page",
   type: "document",
   groups: [
-    { name: "navigation", title: "Navigation" },
-    { name: "header", title: "Header" },
-    { name: "team", title: "Team Grid" },
-    { name: "cta", title: "Call to Action" },
-    { name: "seo", title: "SEO" },
+    { name: "header", title: "1. Header Section" },
+    { name: "team", title: "2. Leadership & Advisory Members" },
+    { name: "expertise", title: "3. Integrated Expertise" },
+    { name: "pageBuilder", title: "4. Flexible Page Builder" },
+    { name: "cta", title: "5. Call to Action" },
+    { name: "navigation", title: "Navigation Settings" },
+    { name: "seo", title: "SEO Settings" },
   ],
   fields: [
     defineField({
@@ -63,19 +65,36 @@ export const teamPage = defineType({
       name: "integratedExpertiseTitle",
       title: "Integrated Expertise Title",
       type: "localeString",
-      group: "team",
+      group: "expertise",
     }),
     defineField({
       name: "integratedExpertiseSubtitle",
       title: "Integrated Expertise Subtitle",
       type: "localeText",
-      group: "team",
+      group: "expertise",
     }),
     defineField({
       name: "integratedExpertiseDisciplines",
       title: "Integrated Expertise Disciplines",
       type: "localeText",
-      group: "team",
+      group: "expertise",
+    }),
+
+    // Flexible Page Builder
+    defineField({
+      name: "pageBuilder",
+      title: "Flexible Page Builder Sections",
+      type: "array",
+      group: "pageBuilder",
+      description: "Add, remove, or reorder dynamic custom sections on this page.",
+      of: [
+        { type: "twoColumnBlock" },
+        { type: "splitBlock" },
+        { type: "capabilitiesBlock" },
+        { type: "ctaBlock" },
+        { type: "heroBlock" },
+        { type: "statsBlock" },
+      ],
     }),
 
     // CTA
@@ -106,14 +125,14 @@ export const teamPage = defineType({
 
     defineField({
       name: "seo",
-      title: "SEO",
+      title: "SEO Metadata",
       type: "seo",
       group: "seo",
     }),
   ],
   preview: {
     prepare() {
-      return { title: "Team Page" };
+      return { title: "Corporate / Team Page" };
     },
   },
 });
