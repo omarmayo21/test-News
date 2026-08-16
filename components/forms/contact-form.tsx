@@ -108,7 +108,7 @@ export function ContactForm({ locale, formType = "contact" }: ContactFormProps) 
         {/* Phone Number */}
         <div>
           <label htmlFor="phone" className="block font-label text-label-md text-primary-navy uppercase tracking-wider mb-2">
-            {dict.contact.phone}
+            Phone / WhatsApp
           </label>
           <input
             type="tel"

@@ -72,33 +72,22 @@ export function Footer({ locale, data, navTree, themeSettings }: FooterProps) {
 
         {/* Column 2: Main Navigation */}
         <div className="col-span-1 flex flex-col space-y-4">
-          {dynamicFooterLinks.length > 0 ? (
-            dynamicFooterLinks.map((link: any, idx: number) => {
-              const itemPath = resolvePath(link);
-              const itemLabel = link.navigation?.navTitle?.[locale] || link.navigation?.navTitle?.en || link.title?.[locale] || link.title?.en;
-              const target = link.navigation?.openInNewTab ? "_blank" : undefined;
-              return (
-                <Link
-                  key={idx}
-                  href={itemPath}
-                  target={target}
-                  className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
-                >
-                  {itemLabel}
-                </Link>
-              );
-            })
-          ) : (
-            resourceLinks.map((link: any, idx: number) => (
-              <Link
-                key={idx}
-                href={link.path || "#"}
-                className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
-              >
-                {link.label?.[locale] || link.label?.en}
-              </Link>
-            ))
-          )}
+          {[
+            { label: "Home", path: `/${locale}` },
+            { label: "About", path: `/${locale}/about` },
+            { label: "Corporate", path: `/${locale}/corporate` },
+            { label: "Why Egypt", path: `/${locale}/why-egypt` },
+            { label: "Why Nexus", path: `/${locale}/why-nexus` },
+            { label: "Contact", path: `/${locale}/contact` },
+          ].map((link: any, idx: number) => (
+            <Link
+              key={idx}
+              href={link.path}
+              className="font-label text-label-md opacity-70 hover:opacity-100 hover:text-primary-gold transition-all"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
 
         {/* Column 3: Legal & Compliance */}

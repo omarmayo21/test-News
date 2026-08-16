@@ -43,6 +43,7 @@ export const whyNexusPage = defineType({
           type: "object",
           title: "Content Block",
           fields: [
+            defineField({ name: "kicker", title: "Kicker / Section Tag", type: "localeString" }),
             defineField({ name: "title", title: "Title", type: "localeString" }),
             defineField({ name: "description", title: "Description", type: "localeText" }),
             defineField({ name: "content", title: "Rich Text Content / Bullets", type: "array", of: [{ type: "block" }] }),

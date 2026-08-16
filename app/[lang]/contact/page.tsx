@@ -78,9 +78,12 @@ export default async function ContactPage({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         {/* Contact Form Component */}
         <div className="bg-white p-8 md:p-10 border border-surface-container-high shadow-ambient">
-          <h3 className="font-headline text-2xl text-primary-navy mb-6">
-            Let&apos;s Work Together
+          <h3 className="font-headline text-2xl text-primary-navy mb-2 uppercase tracking-wide">
+            {data?.formHeading?.[locale] || data?.formHeading?.en || "SEND US A MESSAGE"}
           </h3>
+          <p className="font-body text-body-md text-on-surface opacity-80 mb-6">
+            {data?.formSubtitle?.[locale] || data?.formSubtitle?.en || "Use the contact form below and our team will respond to your inquiry."}
+          </p>
           <ContactForm locale={locale} formType="contact" />
           
           {data?.consentText && (

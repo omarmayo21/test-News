@@ -41,6 +41,13 @@ export const teamPage = defineType({
     
     // Management Team
     defineField({
+      name: "managementTeamSubtitle",
+      title: "Management Team Subtitle / Tagline",
+      type: "localeString",
+      group: "team",
+      description: 'e.g. "Building the Company. Leading the Projects."',
+    }),
+    defineField({
       name: "managementTeam",
       title: "Management Team",
       type: "array",
@@ -50,6 +57,20 @@ export const teamPage = defineType({
     
     // Advisory Board
     defineField({
+      name: "advisoryBoardSubtitle",
+      title: "Advisory Board Subtitle / Tagline",
+      type: "localeString",
+      group: "team",
+      description: 'e.g. "Specialist Expertise Supporting Project Development"',
+    }),
+    defineField({
+      name: "advisoryBoardDescription",
+      title: "Advisory Board Description",
+      type: "localeText",
+      group: "team",
+      description: 'e.g. "Nexus Resources is supported by experienced professionals..."',
+    }),
+    defineField({
       name: "advisoryBoard",
       title: "Advisory Board",
       type: "array",
@@ -58,6 +79,20 @@ export const teamPage = defineType({
     }),
 
     // Specialist Consultants
+    defineField({
+      name: "specialistConsultantsSubtitle",
+      title: "Specialist Consultants Subtitle / Tagline",
+      type: "localeString",
+      group: "team",
+      description: 'e.g. "Specialist Expertise. Independent Capability."',
+    }),
+    defineField({
+      name: "specialistConsultantsDescription",
+      title: "Specialist Consultants Description",
+      type: "localeText",
+      group: "team",
+      description: 'e.g. "Nexus Resources engages specialist consulting firms..."',
+    }),
     defineField({
       name: "specialistConsultants",
       title: "Specialist Consultants",

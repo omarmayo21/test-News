@@ -132,30 +132,45 @@ export default async function TeamPage({
 
       {/* Management Team Grid */}
       {managementTeam.length > 0 && (
-        <div id="leadership-team" className="mb-12 scroll-mt-24">
-          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">
+        <div id="leadership-team" className="mb-16 scroll-mt-24">
+          <h2 className="font-headline text-headline-md text-primary-navy mb-3 border-b-2 border-primary-gold inline-block pb-2">
             MANAGEMENT TEAM
           </h2>
+          <p className="font-body text-body-lg text-primary-gold font-bold mb-8">
+            {data?.managementTeamSubtitle?.[locale] || data?.managementTeamSubtitle?.en || "Building the Company. Leading the Projects."}
+          </p>
           {renderTeamGrid(managementTeam)}
         </div>
       )}
 
       {/* Advisory Board Grid */}
       {advisoryBoard.length > 0 && (
-        <div id="advisory-board" className="mb-12 scroll-mt-24">
-          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">
+        <div id="advisory-board" className="mb-16 scroll-mt-24">
+          <h2 className="font-headline text-headline-md text-primary-navy mb-3 border-b-2 border-primary-gold inline-block pb-2">
             ADVISORY BOARD
           </h2>
+          <p className="font-body text-body-lg text-primary-gold font-bold mb-3">
+            {data?.advisoryBoardSubtitle?.[locale] || data?.advisoryBoardSubtitle?.en || "Specialist Expertise Supporting Project Development"}
+          </p>
+          <p className="font-body text-body-md text-on-surface opacity-80 mb-8 max-w-3xl leading-relaxed">
+            {data?.advisoryBoardDescription?.[locale] || data?.advisoryBoardDescription?.en || "Nexus Resources is supported by experienced professionals across the technical, operational, technological, and stakeholder disciplines required to advance mining projects."}
+          </p>
           {renderTeamGrid(advisoryBoard)}
         </div>
       )}
 
       {/* Specialist Consultants Grid */}
       {specialistConsultants.length > 0 && (
-        <div className="mb-12 scroll-mt-24">
-          <h2 className="font-headline text-headline-md text-primary-navy mb-8 border-b-2 border-primary-gold inline-block pb-2">
+        <div className="mb-16 scroll-mt-24">
+          <h2 className="font-headline text-headline-md text-primary-navy mb-3 border-b-2 border-primary-gold inline-block pb-2">
             SPECIALIST CONSULTANTS
           </h2>
+          <p className="font-body text-body-lg text-primary-gold font-bold mb-3">
+            {data?.specialistConsultantsSubtitle?.[locale] || data?.specialistConsultantsSubtitle?.en || "Specialist Expertise. Independent Capability."}
+          </p>
+          <p className="font-body text-body-md text-on-surface opacity-80 mb-8 max-w-3xl leading-relaxed">
+            {data?.specialistConsultantsDescription?.[locale] || data?.specialistConsultantsDescription?.en || "Nexus Resources engages specialist consulting firms and independent professionals where additional technical expertise, independent assessment, or specialized project support is required."}
+          </p>
           {renderTeamGrid(specialistConsultants)}
         </div>
       )}

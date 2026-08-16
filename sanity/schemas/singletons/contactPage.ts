@@ -37,6 +37,20 @@ export const contactPage = defineType({
       type: "localeText",
       group: "header",
     }),
+    defineField({
+      name: "formHeading",
+      title: "Form Section Heading",
+      type: "localeString",
+      group: "directContact",
+      description: 'e.g. "SEND US A MESSAGE"',
+    }),
+    defineField({
+      name: "formSubtitle",
+      title: "Form Section Subtitle",
+      type: "localeText",
+      group: "directContact",
+      description: 'e.g. "Use the contact form below and our team will respond to your inquiry."',
+    }),
     
     // Direct Contact Info (top-level fields present in production data)
     defineField({

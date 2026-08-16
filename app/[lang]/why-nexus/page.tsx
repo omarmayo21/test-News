@@ -68,6 +68,11 @@ export default async function WhyNexusPage({
             return (
               <div key={idx} className={`grid grid-cols-1 ${block.image ? 'md:grid-cols-2 gap-16' : ''} items-center ${block.image && !isEven ? 'md:flex-row-reverse' : ''}`}>
                 <div className={`space-y-6 ${block.image && !isEven ? 'md:order-2' : 'md:order-1'}`}>
+                  {block.kicker && (
+                    <span className="font-label text-label-md text-primary-gold uppercase tracking-widest block font-bold">
+                      {block.kicker?.[locale] || block.kicker?.en}
+                    </span>
+                  )}
                   {block.title && (
                     <h2 className="font-headline text-headline-lg text-primary-navy">
                       {block.title?.[locale] || block.title?.en}
