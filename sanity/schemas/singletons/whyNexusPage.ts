@@ -31,6 +31,21 @@ export const whyNexusPage = defineType({
       type: "localeText",
       group: "header",
     }),
+    defineField({
+      name: "heroImage",
+      title: "Hero Background Image",
+      type: "image",
+      options: { hotspot: true },
+      group: "header",
+      description: "Background image displayed in the hero banner of the Why Nexus page.",
+    }),
+    defineField({
+      name: "backgroundImage",
+      title: "Background Image (Alternative)",
+      type: "image",
+      options: { hotspot: true },
+      group: "header",
+    }),
     
     // Content Sections
     defineField({

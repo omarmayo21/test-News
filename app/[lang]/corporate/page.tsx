@@ -118,7 +118,9 @@ export default async function TeamPage({
     );
   };
 
-  const heroImageUrl = data?.heroImage ? urlForImage(data.heroImage)?.url() : null;
+  const heroImageUrl = data?.heroImage 
+    ? urlForImage(data.heroImage)?.url() 
+    : (data?.backgroundImage ? urlForImage(data.backgroundImage)?.url() : null);
 
   return (
     <div className="w-full bg-background">

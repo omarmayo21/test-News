@@ -43,7 +43,9 @@ export default async function NewsPage({
 
   const articles = sanityNews;
 
-  const heroImageUrl = pageData?.heroImage ? urlForImage(pageData.heroImage)?.url() : null;
+  const heroImageUrl = pageData?.heroImage 
+    ? urlForImage(pageData.heroImage)?.url() 
+    : (pageData?.backgroundImage ? urlForImage(pageData.backgroundImage)?.url() : null);
 
   return (
     <div className="w-full bg-background">

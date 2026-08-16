@@ -11,6 +11,11 @@ export const heroBlock = defineType({
       type: "localeString",
     }),
     defineField({
+      name: "title",
+      title: "Title (Alternative Headline)",
+      type: "localeString",
+    }),
+    defineField({
       name: "subtitle",
       title: "Subtitle / Paragraph",
       type: "localeText",

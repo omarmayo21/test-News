@@ -28,6 +28,14 @@ export const newsPage = defineType({
       type: "image",
       options: { hotspot: true },
       group: "hero",
+      description: "Background image displayed in the hero banner of the News Listing page.",
+    }),
+    defineField({
+      name: "heroImage",
+      title: "Hero Background Image (Alternative)",
+      type: "image",
+      options: { hotspot: true },
+      group: "hero",
     }),
     defineField({
       name: "navigation",

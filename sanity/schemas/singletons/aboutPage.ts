@@ -35,7 +35,15 @@ export const aboutPage = defineType({
     }),
     defineField({
       name: "heroImage",
-      title: "Hero Image",
+      title: "Hero Background Image",
+      type: "image",
+      options: { hotspot: true },
+      group: "hero",
+      description: "Background image displayed in the hero banner of the About page.",
+    }),
+    defineField({
+      name: "backgroundImage",
+      title: "Background Image (Alternative)",
       type: "image",
       options: { hotspot: true },
       group: "hero",

@@ -69,7 +69,9 @@ export default async function WhyEgyptPage({
   const ctaButtonLabel = data?.ctaButtonLabel?.[locale] || data?.ctaButtonLabel?.en || "Why Nexus →";
   const ctaButtonLink = data?.ctaButtonLink || `/${locale}/why-nexus`;
 
-  const heroImageUrl = data?.heroImage ? urlForImage(data.heroImage)?.url() : null;
+  const heroImageUrl = data?.heroImage 
+    ? urlForImage(data.heroImage)?.url() 
+    : (data?.backgroundImage ? urlForImage(data.backgroundImage)?.url() : null);
 
   return (
     <div className="w-full bg-background">

@@ -76,7 +76,9 @@ export default async function AboutPage({
   const ctaSubtitle = data?.ctaSubtitle?.[locale] || data?.ctaSubtitle?.en || "Leadership, technical expertise, and specialist experience supporting Nexus Resources.";
   const ctaButtonLabel = data?.ctaButtonLabel?.[locale] || data?.ctaButtonLabel?.en || "EXPLORE CORPORATE →";
   const ctaButtonLink = data?.ctaButtonLink || `/${locale}/corporate`;
-  const heroImageUrl = data?.heroImage ? urlForImage(data.heroImage)?.url() : null;
+  const heroImageUrl = data?.heroImage 
+    ? urlForImage(data.heroImage)?.url() 
+    : (data?.backgroundImage ? urlForImage(data.backgroundImage)?.url() : null);
 
   const principles = data?.principles || [
     { title: { en: "Integrity" }, description: { en: "We operate with transparency, accountability, and honesty in our relationships with partners, investors, authorities, and stakeholders." } },
