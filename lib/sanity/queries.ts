@@ -378,14 +378,27 @@ export async function getFooterData() {
     return await client.fetch(
       `*[_type == "footer"][0]{
         aboutText,
+        tagline,
+        navHeading,
+        inquiriesHeading,
+        legalHeading,
+        generalEmailLabel,
+        generalEmail,
+        investorEmailLabel,
+        investorEmail,
+        contactPhoneLabel,
+        contactPhone,
+        contactWhatsapp,
         contactEmails,
+        offices,
         resourceLinks[]{
           label, path
         },
         complianceLinks[]{
           label, path
         },
-        copyright
+        copyright,
+        footerNote
       }`,
       {},
       fetchOptions

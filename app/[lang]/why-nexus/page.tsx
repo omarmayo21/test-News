@@ -17,6 +17,7 @@ import {
   Target, 
   Truck 
 } from "lucide-react";
+import { getLucideIcon } from "@/components/ui/icon-resolver";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -51,6 +52,37 @@ const lifecycleSteps = [
   { name: "PRODUCE", icon: Award },
 ];
 
+const defaultDifferentiators = [
+  {
+    title: { en: "Local Execution.\nNot Just Local Presence." },
+    description: {
+      en: "On-the-ground understanding of Egypt's mining environment, regulatory landscape, stakeholders, contractors, supply chains, and operating realities.",
+    },
+    icon: "MapPin",
+  },
+  {
+    title: { en: "Technical Judgment." },
+    description: {
+      en: "Mining opportunities are evaluated through geology, engineering, processing, development potential, and operational practicality — not relationships alone.",
+    },
+    icon: "Mountain",
+  },
+  {
+    title: { en: "Partnerships Built\nAround the Project." },
+    description: {
+      en: "We work with mining companies, investors, license holders, project owners, and technical partners through structures built around project economics, aligned interests, and long-term value.",
+    },
+    icon: "Users",
+  },
+  {
+    title: { en: "A Production Mindset\nfrom the Start." },
+    description: {
+      en: "We look beyond whether an opportunity can be explored. We ask whether it can be developed, financed, built, operated, and ultimately brought into production.",
+    },
+    icon: "Target",
+  },
+];
+
 export default async function WhyNexusPage({
   params,
 }: {
@@ -65,6 +97,16 @@ export default async function WhyNexusPage({
   const subtitle = data?.subtitle?.[locale] || data?.subtitle?.en || "";
   
   const contentBlocks = data?.contentBlocks || [];
+
+  const differentiatorsTitle =
+    data?.differentiatorsTitle?.[locale] ||
+    data?.differentiatorsTitle?.en ||
+    "WHAT SETS NEXUS APART";
+
+  const differentiators =
+    data?.differentiators && data.differentiators.length > 0
+      ? data.differentiators
+      : defaultDifferentiators;
 
   const ctaTitle = data?.ctaTitle?.[locale] || data?.ctaTitle?.en || "Egypt Has the Potential.\nNexus Is Built to Advance It.";
   const ctaSubtitle = data?.ctaSubtitle?.[locale] || data?.ctaSubtitle?.en || "Whether you are a mining company evaluating Egypt, an investor seeking project exposure, or a license holder looking to advance an asset, Nexus is ready to explore what we can build together.";
@@ -169,71 +211,56 @@ export default async function WhyNexusPage({
         </div>
       </section>
 
-      {/* 3. What Sets Nexus Apart: 4-Pillar Differentiators from scr pag */}
+      {/* 3. What Sets Nexus Apart: 4-Pillar Differentiators */}
       <section className="py-20 lg:py-24 px-6 sm:px-10 lg:px-16 bg-surface-container-low/40 border-b border-surface-container-high">
         <div className="max-w-[1440px] mx-auto space-y-12">
           <div className="flex items-center space-x-3">
             <span className="h-6 w-1.5 bg-primary-gold rounded-full" />
             <h2 className="font-label text-sm uppercase tracking-[0.15em] text-primary-navy font-bold">
-              WHAT SETS NEXUS APART
+              {differentiatorsTitle}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Pillar 1 */}
-            <div className="p-8 bg-white border border-surface-container-high rounded-sm shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col items-start space-y-4 group">
-              <div className="w-14 h-14 rounded-full border-2 border-primary-gold/40 bg-surface-container-low group-hover:bg-primary-gold/10 group-hover:border-primary-gold flex items-center justify-center text-primary-gold transition-all duration-300 shadow-sm">
-                <MapPin className="w-6 h-6 stroke-[1.75]" />
-              </div>
-              <h3 className="font-headline text-lg sm:text-xl font-bold text-primary-navy leading-snug">
-                Local Execution. <br />
-                <span className="text-on-surface/70 font-medium text-base">Not Just Local Presence.</span>
-              </h3>
-              <p className="font-body text-xs sm:text-[13px] text-on-surface/75 leading-relaxed flex-1">
-                On-the-ground understanding of Egypt&apos;s mining environment, regulatory landscape, stakeholders, contractors, supply chains, and operating realities.
-              </p>
-            </div>
+            {differentiators.map((card: any, idx: number) => {
+              const cardTitle = card.title?.[locale] || card.title?.en || `Pillar ${idx + 1}`;
+              const cardDesc = card.description?.[locale] || card.description?.en || "";
+              
+              const defaultIcons = [MapPin, Mountain, Users, Target];
+              const defaultFallbackIcon = defaultIcons[idx % defaultIcons.length];
+              const IconComponent = getLucideIcon(card.icon, defaultFallbackIcon);
 
-            {/* Pillar 2 */}
-            <div className="p-8 bg-white border border-surface-container-high rounded-sm shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col items-start space-y-4 group">
-              <div className="w-14 h-14 rounded-full border-2 border-primary-gold/40 bg-surface-container-low group-hover:bg-primary-gold/10 group-hover:border-primary-gold flex items-center justify-center text-primary-gold transition-all duration-300 shadow-sm">
-                <Mountain className="w-6 h-6 stroke-[1.75]" />
-              </div>
-              <h3 className="font-headline text-lg sm:text-xl font-bold text-primary-navy leading-snug">
-                Technical Judgment.
-              </h3>
-              <p className="font-body text-xs sm:text-[13px] text-on-surface/75 leading-relaxed flex-1">
-                Mining opportunities are evaluated through geology, engineering, processing, development potential, and operational practicality — not relationships alone.
-              </p>
-            </div>
+              // Split on newline to render the subtle secondary line if present
+              const titleLines = typeof cardTitle === "string" ? cardTitle.split("\n") : [cardTitle];
+              const mainTitle = titleLines[0];
+              const subTitle = titleLines.slice(1).join(" ");
 
-            {/* Pillar 3 */}
-            <div className="p-8 bg-white border border-surface-container-high rounded-sm shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col items-start space-y-4 group">
-              <div className="w-14 h-14 rounded-full border-2 border-primary-gold/40 bg-surface-container-low group-hover:bg-primary-gold/10 group-hover:border-primary-gold flex items-center justify-center text-primary-gold transition-all duration-300 shadow-sm">
-                <Users className="w-6 h-6 stroke-[1.75]" />
-              </div>
-              <h3 className="font-headline text-lg sm:text-xl font-bold text-primary-navy leading-snug">
-                Partnerships Built <br />
-                <span className="text-on-surface/70 font-medium text-base">Around the Project.</span>
-              </h3>
-              <p className="font-body text-xs sm:text-[13px] text-on-surface/75 leading-relaxed flex-1">
-                We work with mining companies, investors, license holders, project owners, and technical partners through structures built around project economics, aligned interests, and long-term value.
-              </p>
-            </div>
-
-            {/* Pillar 4 */}
-            <div className="p-8 bg-white border border-surface-container-high rounded-sm shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col items-start space-y-4 group">
-              <div className="w-14 h-14 rounded-full border-2 border-primary-gold/40 bg-surface-container-low group-hover:bg-primary-gold/10 group-hover:border-primary-gold flex items-center justify-center text-primary-gold transition-all duration-300 shadow-sm">
-                <Target className="w-6 h-6 stroke-[1.75]" />
-              </div>
-              <h3 className="font-headline text-lg sm:text-xl font-bold text-primary-navy leading-snug">
-                A Production Mindset <br />
-                <span className="text-on-surface/70 font-medium text-base">from the Start.</span>
-              </h3>
-              <p className="font-body text-xs sm:text-[13px] text-on-surface/75 leading-relaxed flex-1">
-                We look beyond whether an opportunity can be explored. We ask whether it can be developed, financed, built, operated, and ultimately brought into production.
-              </p>
-            </div>
+              return (
+                <div
+                  key={idx}
+                  className="p-8 bg-white border border-surface-container-high rounded-sm shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col items-start space-y-4 group"
+                >
+                  <div className="w-14 h-14 rounded-full border-2 border-primary-gold/40 bg-surface-container-low group-hover:bg-primary-gold/10 group-hover:border-primary-gold flex items-center justify-center text-primary-gold transition-all duration-300 shadow-sm">
+                    <IconComponent className="w-6 h-6 stroke-[1.75]" />
+                  </div>
+                  <h3 className="font-headline text-lg sm:text-xl font-bold text-primary-navy leading-snug">
+                    {mainTitle}
+                    {subTitle && (
+                      <>
+                        {" "}
+                        <br />
+                        <span className="text-on-surface/70 font-medium text-base">
+                          {subTitle}
+                        </span>
+                      </>
+                    )}
+                  </h3>
+                  <p className="font-body text-xs sm:text-[13px] text-on-surface/75 leading-relaxed flex-1">
+                    {cardDesc}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

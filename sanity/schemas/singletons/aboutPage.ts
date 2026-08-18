@@ -121,7 +121,51 @@ export const aboutPage = defineType({
           fields: [
             defineField({ name: "title", title: "Value Title", type: "localeString" }),
             defineField({ name: "description", title: "Value Description", type: "localeText" }),
+            defineField({
+              name: "icon",
+              title: "Card Icon",
+              type: "string",
+              description: "Select an icon for this value card (e.g. ShieldCheck, Settings, TrendingUp, Handshake, Leaf, HeartPulse)",
+              options: {
+                list: [
+                  { title: "Shield Check (Integrity / Compliance)", value: "ShieldCheck" },
+                  { title: "Settings / Gear (Technical Excellence / Engineering)", value: "Settings" },
+                  { title: "Trending Up (Execution / Progress)", value: "TrendingUp" },
+                  { title: "Handshake (Partnership / Trust)", value: "Handshake" },
+                  { title: "Leaf (Responsible Development / ESG)", value: "Leaf" },
+                  { title: "Heart Pulse (Health, Safety & Environment)", value: "HeartPulse" },
+                  { title: "Hard Hat (Safety / Operations)", value: "HardHat" },
+                  { title: "Compass (Vision / Exploration)", value: "Compass" },
+                  { title: "Mountain (Mining / Geology)", value: "Mountain" },
+                  { title: "Target (Precision / Goals)", value: "Target" },
+                  { title: "Users (Team / Stakeholders)", value: "Users" },
+                  { title: "Award (Quality / Standards)", value: "Award" },
+                  { title: "Hammer / Pickaxe (Operations / Development)", value: "Hammer" },
+                  { title: "Search / Magnifier (Evaluation)", value: "Search" },
+                  { title: "Bar Chart (Performance / Analytics)", value: "BarChart3" },
+                  { title: "Globe (International Reach)", value: "Globe" },
+                  { title: "Building (Corporate / Facilities)", value: "Building2" },
+                  { title: "Cpu (Technology / Systems)", value: "Cpu" },
+                  { title: "Wrench (Engineering / Execution)", value: "Wrench" },
+                  { title: "Factory (Mineral Processing)", value: "Factory" },
+                  { title: "Lightbulb (Innovation)", value: "Lightbulb" },
+                  { title: "Scale (Governance / Ethics)", value: "Scale" },
+                ],
+              },
+            }),
           ],
+          preview: {
+            select: {
+              title: "title.en",
+              subtitle: "icon",
+            },
+            prepare(sel) {
+              return {
+                title: sel.title || "Value Card",
+                subtitle: sel.subtitle ? `Icon: ${sel.subtitle}` : "Default Icon",
+              };
+            },
+          },
         },
       ],
     }),

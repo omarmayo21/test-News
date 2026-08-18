@@ -13,6 +13,7 @@ import {
   Leaf, 
   Users 
 } from "lucide-react";
+import { getLucideIcon } from "@/components/ui/icon-resolver";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -199,7 +200,8 @@ export default async function AboutPage({
             {principles.map((p: any, idx: number) => {
               const pTitle = p.title?.[locale] || p.title?.en || `Value ${idx + 1}`;
               const pDesc = p.description?.[locale] || p.description?.en || "";
-              const IconComponent = getValueIcon(pTitle, idx);
+              const defaultIcon = getValueIcon(pTitle, idx);
+              const IconComponent = getLucideIcon(p.icon, defaultIcon);
 
               return (
                 <div
