@@ -392,7 +392,7 @@ export async function getFooterData() {
         contactEmails,
         offices,
         resourceLinks[]{
-          label, path
+          label, path, enabled
         },
         complianceLinks[]{
           label, path

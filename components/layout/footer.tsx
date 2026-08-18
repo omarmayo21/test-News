@@ -11,6 +11,27 @@ interface FooterProps {
   themeSettings?: any;
 }
 
+function formatNavPath(rawPath?: string, locale: string = "en"): string {
+  if (!rawPath || rawPath === "#") return "#";
+  if (
+    rawPath.startsWith("http://") ||
+    rawPath.startsWith("https://") ||
+    rawPath.startsWith("mailto:") ||
+    rawPath.startsWith("tel:")
+  ) {
+    return rawPath;
+  }
+  const clean = rawPath.replace(/^\/+/, "");
+  if (!clean || clean === "en" || clean === "fr") {
+    return `/${locale}`;
+  }
+  if (clean.startsWith("en/") || clean.startsWith("fr/")) {
+    const withoutLang = clean.replace(/^(en|fr)\//, "");
+    return `/${locale}/${withoutLang}`;
+  }
+  return `/${locale}/${clean}`;
+}
+
 export function Footer({ locale, data, navTree, themeSettings }: FooterProps) {
   const dict = getDictionary(locale);
 
@@ -42,11 +63,13 @@ export function Footer({ locale, data, navTree, themeSettings }: FooterProps) {
   ];
 
   const navLinks =
-    data?.resourceLinks && data.resourceLinks.length > 0
-      ? data.resourceLinks.map((l: any) => ({
-          label: l.label?.[locale] || l.label?.en || l.path,
-          path: l.path || "#",
-        }))
+    data?.resourceLinks && Array.isArray(data.resourceLinks) && data.resourceLinks.length > 0
+      ? data.resourceLinks
+          .filter((l: any) => l && l.enabled !== false)
+          .map((l: any) => ({
+            label: l.label?.[locale] || l.label?.en || l.path || "",
+            path: formatNavPath(l.path, locale),
+          }))
       : defaultNavLinks;
 
   // Column 3: Direct Inquiries

@@ -37,21 +37,59 @@ export const footer = defineType({
     }),
     defineField({
       name: "resourceLinks",
-      title: "Navigation Links Override",
+      title: "Footer Navigation Links",
       type: "array",
       group: "navigation",
-      description: "Optional custom navigation links. If left empty, default canonical site links are displayed.",
+      description: "Manage which website pages appear in the footer navigation. Reorder items by dragging. Turn items on/off without deleting them. If left empty, default canonical site links are displayed.",
       of: [
         {
           type: "object",
+          title: "Navigation Item",
           fields: [
-            defineField({ name: "label", type: "localeString", title: "Link Label" }),
-            defineField({ name: "path", type: "string", title: "Path" }),
+            defineField({
+              name: "enabled",
+              title: "Enabled (Visible in Footer)",
+              type: "boolean",
+              initialValue: true,
+              description: "Turn ON to show in footer navigation. Turn OFF to hide without deleting.",
+            }),
+            defineField({
+              name: "label",
+              type: "localeString",
+              title: "Display Label",
+              description: "Localized title (e.g. 'Home', 'About Nexus', 'Corporate & Team').",
+            }),
+            defineField({
+              name: "path",
+              type: "string",
+              title: "Destination Page / Route",
+              description: "Select an existing canonical page route or enter a custom path.",
+              options: {
+                list: [
+                  { title: "Home (/)", value: "/" },
+                  { title: "About Nexus (/about)", value: "/about" },
+                  { title: "Corporate & Team (/corporate)", value: "/corporate" },
+                  { title: "Why Egypt (/why-egypt)", value: "/why-egypt" },
+                  { title: "Why Nexus (/why-nexus)", value: "/why-nexus" },
+                  { title: "News & Insights (/news)", value: "/news" },
+                  { title: "Contact Us (/contact)", value: "/contact" },
+                ],
+              },
+            }),
           ],
           preview: {
-            select: { title: "label.en", subtitle: "path" },
+            select: {
+              title: "label.en",
+              path: "path",
+              enabled: "enabled",
+            },
             prepare(sel) {
-              return { title: sel.title || "Nav Link", subtitle: sel.subtitle || "" };
+              const isEnabled = sel.enabled !== false;
+              const statusTag = isEnabled ? "🟢 Visible" : "🔴 Hidden";
+              return {
+                title: sel.title || sel.path || "Untitled Link",
+                subtitle: `${statusTag} • ${sel.path || "No route"}`,
+              };
             },
           },
         },
